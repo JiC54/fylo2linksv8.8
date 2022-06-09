@@ -31,8 +31,8 @@ async def maintainers(b,m):
             
          
  
-@StreamBot.on_message(filters.command("follow") | filters.regex("follow❤️"))
-async def follow_user(b,m):
+@StreamBot.on_message(filters.command("maintainers") | filters.regex("maintainers😎"))
+async def maintainers(b,m):
     try:
        await b.send_message(chat_id=m.chat.id,text="HELLO",quote=True)
     except Exception:
