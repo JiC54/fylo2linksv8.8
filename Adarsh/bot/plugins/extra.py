@@ -38,9 +38,9 @@ async def maintainers(b,m):
     except Exception:
                 await b.send_message(
                     chat_id=m.chat.id,
-                    text="**v8.8 Changelog**\n●Fixed link buttons in channels:\n There was an issue where the bot could not create valid links in channels, this has now been fixed\n
+                    text="v8.8 Changelog\n\n●Fixed link buttons in channels:\n There was an issue where the bot could not create valid links in channels, this has now been fixed\n
                     ●Standard keyboard rearranged to suit small screens\n●Fixed streaming page for small screens\n●Added changelog command\n●All bugs in previous version fixed\n
-                    \n**v8.6 Changelog**\n
+                    \n v8.6 Changelog\n
                     •Superfast download and stream links. Download speeds up to 20mbps depending on your internet bandwidth.\n
                     •No ads in generated links.\n
                     •Superfast interface.\n
