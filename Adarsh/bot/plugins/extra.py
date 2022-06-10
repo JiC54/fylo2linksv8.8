@@ -111,7 +111,7 @@ async def stats(bot, update):
             f'<b>Disk:</b> {disk}%'
   await update.reply_text(botstats)
     
-    @StreamBot.on_message(filters.command("listt"))
+    @StreamBot.on_message(filters.command("list"))
 async def list(l, m):
     LIST_MSG = "**Hi! {} Here is a list of all my commands** \n \n **1.** `start⚡️` \n **2.** `help📚` \n **3.** `login🔑` \n **4.** `follow❤️` \n **5.** `ping📡` \n **6.** `status📊` check bot status \n **7.** `DC` this tells your telegram data center \n **8.** `maintainers😎` "
     await l.send_message(chat_id = m.chat.id,
