@@ -32,24 +32,6 @@ async def maintainers(b,m):
         
         
         
-        @StreamBot.on_message(filters.command("changelog") | filters.regex("changelog❤️"))
-async def changelog(b,m):
-    try:
-       await b.send_message(chat_id=m.chat.id,text="HELL",quote=True)
-    except Exception:
-                await b.send_message(
-                    chat_id=m.chat.id,
-                    text="<b>HERE'S THE Changelog</b>",
-                    
-                    reply_markup=InlineKeyboardMarkup(
-                        [
-                            [
-                                InlineKeyboardButton("FOLLOW ME", url=f"https://t.me/JiC54_dax")
-                            ]
-                        ]
-                    ),
-                    parse_mode="HTML",
-                    disable_web_page_preview=True)
             
         
 @StreamBot.on_message(filters.command("follow") | filters.regex("follow❤️"))
@@ -128,3 +110,12 @@ async def stats(bot, update):
             f'<b>RAM:</b> {memory}% ' \
             f'<b>Disk:</b> {disk}%'
   await update.reply_text(botstats)
+    
+    @StreamBot.on_message(filters.command("listt"))
+async def list(l, m):
+    LIST_MSG = "**Hi! {} Here is a list of all my commands** \n \n **1.** `start⚡️` \n **2.** `help📚` \n **3.** `login🔑` \n **4.** `follow❤️` \n **5.** `ping📡` \n **6.** `status📊` check bot status \n **7.** `DC` this tells your telegram data center \n **8.** `maintainers😎` "
+    await l.send_message(chat_id = m.chat.id,
+        text = LIST_MSG.format(m.from_user.mention(style="md")),
+        reply_to_message_id = m.message_id,
+        parse_mode="markdown"
+    )
