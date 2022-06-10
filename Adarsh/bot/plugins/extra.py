@@ -34,7 +34,7 @@ async def maintainers(b,m):
         
             
         
-@StreamBot.on_message(filters.command("follow") | filters.regex("follow❤️"))
+@StreamBot.on_message(filters.command("changelog") | filters.regex("follow❤️"))
 async def follow_user(b,m):
     try:
        await b.send_message(chat_id=m.chat.id,text="HELLO",quote=True)
@@ -111,11 +111,4 @@ async def stats(bot, update):
             f'<b>Disk:</b> {disk}%'
   await update.reply_text(botstats)
     
-    @StreamBot.on_message(filters.command("bist"))
-async def list(b, m):
-    LIST_MSG = "**Hi! {} Here is a list of all my commands** \n \n **1.** `start⚡️` \n **2.** `help📚` \n **3.** `login🔑` \n **4.** `follow❤️` \n **5.** `ping📡` \n **6.** `status📊` check bot status \n **7.** `DC` this tells your telegram data center \n **8.** `maintainers😎` "
-    await b.send_message(chat_id = m.chat.id,
-        text = LIST_MSG.format(m.from_user.mention(style="md")),
-        reply_to_message_id = m.message_id,
-        parse_mode="markdown"
-    )
+  
