@@ -18,7 +18,7 @@ if MY_PASS:
             [
                         ["login🔑"],
                 ["status📊","help📚"],
-                ["follow❤️","ping📡","DC"],
+                ["follow❤️","DC","ping📡"],
                         ["maintainers😎"]
                         
             ],
@@ -28,7 +28,7 @@ else:
             buttonz=ReplyKeyboardMarkup(
             [
                 ["help📚","status📊"],
-                ["follow❤️","ping📡","DC"],
+                ["follow❤️","DC","ping📡"],
                         ["maintainers😎"]
                         
             ],
