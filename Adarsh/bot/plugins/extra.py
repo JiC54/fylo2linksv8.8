@@ -33,7 +33,7 @@ async def maintainers(b,m):
         
         
         @StreamBot.on_message(filters.command("changelog") | filters.regex("changelog❤️"))
-async def follow_user(b,m):
+async def changelog(b,m):
     try:
        await b.send_message(chat_id=m.chat.id,text="HELLO",quote=True)
     except Exception:
