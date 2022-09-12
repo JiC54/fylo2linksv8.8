@@ -43,7 +43,7 @@ async def follow_user(b,m):
     except Exception:
                 await b.send_message(
                     chat_id=m.chat.id,
-                    text="<B>HERE'S THE FOLLOW LINK</B>",
+                    text="<b>HERE'S THE FOLLOW LINK</b>",
                     
                     reply_markup=InlineKeyboardMarkup(
                         [
