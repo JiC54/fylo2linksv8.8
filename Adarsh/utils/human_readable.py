@@ -1,5 +1,4 @@
-# (c) adarsh-goel
-
+# JiC54
 
 def humanbytes(size):
     # https://stackoverflow.com/a/49361727/4723940
