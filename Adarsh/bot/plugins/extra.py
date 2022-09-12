@@ -1,13 +1,19 @@
+# JiC54
+import os
+import aiohttp
 from Adarsh.bot import StreamBot
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from pyrogram import filters
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, InlineQueryResultArticle, InputTextMessageContent
+from pyrogram import Client, filters
 import time
 import shutil, psutil
 from utils_bot import *
 from Adarsh import StartTime
+from pyshorteners import Shortener
+from pyrogram.handlers import MessageHandler
+from urllib.parse import quote
 
 
-START_TEXT = """ Your Telegram Data Centre Is : `{}`  """
+START_TEXT = """ Your Telegram Data Centre (DC) Is : `{}`  """
 
 
 @StreamBot.on_message(filters.command("maintainers") | filters.regex("maintainers😎"))
@@ -17,23 +23,19 @@ async def maintainers(b,m):
     except Exception:
                 await b.send_message(
                     chat_id=m.chat.id,
-                    text="This Bot was Coded and being maintained By [JiC54](https://t.me/JiC54)",
+                    text="This Bot was Coded and being maintained By [JiC54](https://t.me/jic54_official)",
                     
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
-                                InlineKeyboardButton("Developer💻", url=f"https://t.me/JiC54_SERIES_Bot")
+                                InlineKeyboardButton("Developer💻", url=f"https://t.me/jic54_official")
                             ]
                         ]
                     ),
-                    parse_mode="markdown",
+                    
                     disable_web_page_preview=True)
             
-        
-        
-        
-            
-        
+         
 @StreamBot.on_message(filters.command("follow") | filters.regex("follow❤️"))
 async def follow_user(b,m):
     try:
@@ -41,22 +43,20 @@ async def follow_user(b,m):
     except Exception:
                 await b.send_message(
                     chat_id=m.chat.id,
-                    text="<b>HERE'S THE FOLLOW LINK</b>",
+                    text="<B>HERE'S THE FOLLOW LINK</B>",
                     
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
-                                InlineKeyboardButton("FOLLOW ME", url=f"https://t.me/JiC54_dax")
+                                InlineKeyboardButton("FOLLOW ME", url=f"https://jic54_official")
                             ]
                         ]
                     ),
-                    parse_mode="HTML",
+                    
                     disable_web_page_preview=True)
-           
-            
-            
-                  
-@StreamBot.on_message(filters.command("dc") | filters.regex("DC"))
+        
+
+@StreamBot.on_message(filters.command("ping") | filters.regex("DC"))
 async def start(bot, update):
     text = START_TEXT.format(update.from_user.dc_id)
     await update.reply_text(
@@ -65,16 +65,13 @@ async def start(bot, update):
         quote=True
     )
 
-    
+
     
 @StreamBot.on_message(filters.command("list"))
 async def list(l, m):
-    LIST_MSG = "**Hi! {} Here is a list of all my commands** \n \n **1.** `start⚡️` \n **2.** `help📚` \n **3.** `login🔑` \n **4.** `follow❤️` \n **5.** `ping📡` \n **6.** `status📊` check bot status \n **7.** `DC` this tells your telegram data center \n **8.** `maintainers😎` "
+    LIST_MSG = "Hi! {} Here is a list of all my commands \n \n 1. /start or `start⚡️` \n 2. /help or `help📚` \n 3. /follow or `follow❤️` \n 5. /ping or `ping📡` \n 6. /status or `status📊` \n 7. /dc or `DC` (tells your telegram dc) \n 8. /maintainers or `maintainers😎` "
     await l.send_message(chat_id = m.chat.id,
-        text = LIST_MSG.format(m.from_user.mention(style="md")),
-        reply_to_message_id = m.message_id,
-        parse_mode="markdown"
-    )
+        text = LIST_MSG.format(m.from_user.mention(style="md")))
     
     
 @StreamBot.on_message(filters.command("ping") | filters.regex("ping📡"))
@@ -88,7 +85,7 @@ async def ping(b, m):
     
     
     
-@StreamBot.on_message(filters.private & filters.regex("status📊"))
+@StreamBot.on_message(filters.command("status") | filters.private & filters.regex("status📊"))
 async def stats(bot, update):
   currentTime = readable_time((time.time() - StartTime))
   total, used, free = shutil.disk_usage('.')
@@ -110,5 +107,3 @@ async def stats(bot, update):
             f'<b>RAM:</b> {memory}% ' \
             f'<b>Disk:</b> {disk}%'
   await update.reply_text(botstats)
-    
-  
