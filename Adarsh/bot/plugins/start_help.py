@@ -113,7 +113,7 @@ async def help_handler(bot, message):
                             InlineKeyboardButton("🤖 Jᴏɪɴ Uᴘᴅᴀᴛᴇs Cʜᴀɴɴᴇʟ", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
                         ]
                     ]
-                ), disable_web_page_preview=True
+                )
             )
             return
         except Exception:
