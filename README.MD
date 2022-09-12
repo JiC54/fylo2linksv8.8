@@ -162,5 +162,5 @@ Bot also Supported with Channels. Just add bot Channel as Admin. If any new file
 
 ### Credits : 
 
-- [Adarsh Goel_(me)](https://github.com/JiC54) 
+- [JiC54(me)](https://github.com/JiC54) 
 - Everyone In This Journey !
