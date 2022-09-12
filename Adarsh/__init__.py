@@ -1,4 +1,4 @@
-# (c) adarsh-goel
+# JiC54
 
 
 import time
