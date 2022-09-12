@@ -1,3 +1,5 @@
+# JiC54
+
 from pyrogram import Client
 from typing import Any, Optional
 from pyrogram.types import Message
@@ -16,8 +18,8 @@ async def parse_file_unique_id(message: "Messages") -> Optional[str]:
     if media:
         return media.file_unique_id
 
-async def get_file_ids(client: Client, chat_id: int, message_id: int) -> Optional[FileId]:
-    message = await client.get_messages(chat_id, message_id)
+async def get_file_ids(client: Client, chat_id: int, id: int) -> Optional[FileId]:
+    message = await client.get_messages(chat_id, id)
     if message.empty:
         raise FIleNotFound
     media = get_media_from_message(message)
