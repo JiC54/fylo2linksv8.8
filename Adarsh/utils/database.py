@@ -1,4 +1,4 @@
-#(c) Adarsh-Goel
+# JiC54
 import datetime
 import motor.motor_asyncio
 
