@@ -1,3 +1,4 @@
+# JiC54
 
 class InvalidHash(Exception):
     message = "Invalid hash"
