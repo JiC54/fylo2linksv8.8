@@ -126,12 +126,15 @@ async def maintainers(b,m):
          
 @StreamBot.on_message(filters.command("donate") | filters.regex("DONATE❤️"))
 async def follow_user(b,m):
+    try:
+       await b.send_message(chat_id=m.chat.id,text="HELLO",quote=True)
+    except Exception:
                 donate = DONATE_TEXT.format(m.from_user.mention)
-                    await b.send_message(
-                        chat_id=m.chat.id,
-                        text=donate,   
-                        reply_markup=DONATE_BUTTONS, 
-                        disable_web_page_preview=True)
+                await b.send_message(
+                    chat_id=m.chat.id,
+                    text=donate,   
+                    reply_markup=DONATE_BUTTONS, 
+                    disable_web_page_preview=True)
         
 
 @StreamBot.on_message(filters.command("dc") | filters.regex("DC"))
