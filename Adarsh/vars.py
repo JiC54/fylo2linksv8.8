@@ -14,7 +14,7 @@ class Var(object):
     BOT_TOKEN = str(getenv('BOT_TOKEN'))
     name = str(getenv('name', 'JiC54'))
     SLEEP_THRESHOLD = int(getenv('SLEEP_THRESHOLD', '60'))
-    WORKERS = int(getenv('WORKERS', '1'))
+    WORKERS = int(getenv('WORKERS', '3'))
     BIN_CHANNEL = int(getenv('BIN_CHANNEL'))
     PORT = int(getenv('PORT', 8080))
     BIND_ADRESS = str(getenv('WEB_SERVER_BIND_ADDRESS', '0.0.0.0'))
