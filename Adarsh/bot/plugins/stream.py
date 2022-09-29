@@ -95,18 +95,22 @@ async def private_receive_handler(c: Client, m: Message):
                 disable_web_page_preview=True)
             return
     try:
+        await asyncio.sleep(10)
         gy = await m.reply_text("**Uploading**\n\n[▱▱▱▱▱▱▱▱▱▱] 0%</u>\n\n**EAT: -/-s**")
-        await asyncio.sleep(3)
-        gy1 = await gy.edit("**Uploading**\n\n[▰▱▱▱▱▱▱▱▱▱] 10%\n\n**EAT:** `15s`")
-        await asyncio.sleep(3)
-        gy2 = await gy1.edit("**Uploading**\n\n[▰▰▱▱▱▱▱▱▱▱] 20%\n\n**EAT:** `12s`")
-        gy11 = await gy2.edit("**Uploading**\n\n[▰▰▰▱▱▱▱▱▱▱] 30%\n\n**EAT:** `11s`")
+        await asyncio.sleep(2)
+        gy1 = await gy.edit("**Uploading**\n\n[▰▱▱▱▱▱▱▱▱▱] 10%\n\n**EAT:** `20s`")
+        await asyncio.sleep(2)
+        gy2 = await gy1.edit("**Uploading**\n\n[▰▰▱▱▱▱▱▱▱▱] 20%\n\n**EAT:** `18s`")
+        await asyncio.sleep(2)
+        gy11 = await gy2.edit("**Uploading**\n\n[▰▰▰▱▱▱▱▱▱▱] 30%\n\n**EAT:** `16s`")
         await asyncio.sleep(2)
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
-        gy12 = await gy11.edit("**Uploading**\n\n[▰▰▰▰▱▱▱▱▱▱] 40%\n\n**EAT:** `10s`")
-        gy13 = await gy12.edit("**Uploading**\n\n[▰▰▰▰▰▱▱▱▱▱] 50%\n\n**EAT:** `9s`")
-        gy14 = await gy13.edit("**Uploading**\n\n[▰▰▰▰▰▰▱▱▱▱] 60%\n\n**EAT:** `8s`")
-        gy15 = await gy14.edit("**Uploading**\n\n[▰▰▰▰▰▰▰▱▱▱] 70%\n\n**EAT:** `7s`")
+        await asyncio.sleep(2)
+        gy12 = await gy11.edit("**Uploading**\n\n[▰▰▰▰▱▱▱▱▱▱] 40%\n\n**EAT:** `14s`")
+        await asyncio.sleep(2)
+        gy13 = await gy12.edit("**Uploading**\n\n[▰▰▰▰▰▱▱▱▱▱] 50%\n\n**EAT:** `12s`")
+        gy14 = await gy13.edit("**Uploading**\n\n[▰▰▰▰▰▰▱▱▱▱] 60%\n\n**EAT:** `10s`")
+        gy15 = await gy14.edit("**Uploading**\n\n[▰▰▰▰▰▰▰▱▱▱] 70%\n\n**EAT:** `8s`")
         gy16 = await gy15.edit("**Uploading**\n\n[▰▰▰▰▰▰▰▰▱▱] 80%\n\n**EAT:** `6s`")
         await asyncio.sleep(2)
         gy17 = await gy16.edit("**Uploading**\n\n[▰▰▰▰▰▰▰▰▰▱] 90%\n\n**EAT:** `4s`")
@@ -139,7 +143,7 @@ async def private_receive_handler(c: Client, m: Message):
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🖥STREAM", url=stream_link), #Stream Link
                                                 InlineKeyboardButton('DOWNLOAD📥', url=online_link)], #Download Link
-                                                [InlineKeyboardButton('SHARE STREAM LINK  ⌲', url=f"https://t.me/share/url?url={stream_link}")
+                                                [InlineKeyboardButton('SHARE STREAM LINK⌲', url=f"https://t.me/share/url?url={stream_link}")
                                                 ]]) 
         )
     except FloodWait as e:
