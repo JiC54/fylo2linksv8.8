@@ -12,8 +12,7 @@ from pyshorteners import Shortener
 from pyrogram.handlers import MessageHandler
 from urllib.parse import quote
 
-
-START_TEXT = """ Your Telegram Data Centre (DC) Is : `{}`  """
+START_TEXT = """ Your Telegram DC Is : `{}`  """
 HELP_TEXT = """Everything has fully been explained very well in our website including About the bot, Features, FAQ, Copyright, Terms of use, Child Abuse Policy, DMCA and many more.
 So, please consider visiting our website."""
 ABOUT_TEXT = """With this service, you may post files to the internet by simply uploading or forwarding files to this bot and receive both a direct download link and a streamable URL for the contents.
@@ -114,14 +113,24 @@ MENU_BUTTONS = InlineKeyboardMarkup(
 )
 
 
-@StreamBot.on_message(filters.command("menu") | filters.regex("🔳MENU"))
+@StreamBot.on_message(filters.command("maintainers") | filters.regex("maintainers😎"))
 async def maintainers(b,m):
     try:
        await b.send_message(chat_id=m.chat.id,text="HELLO",quote=True)
     except Exception:
                 await b.send_message(
-                    text=MENU_TEXT,
-                    reply_markup=MENU_BUTTONS)
+                    chat_id=m.chat.id,
+                    text="This Bot was Coded and being maintained By [JiC54](https://t.me/jic54_official)",
+                    
+                    reply_markup=InlineKeyboardMarkup(
+                        [
+                            [
+                                InlineKeyboardButton("Developer💻", url=f"https://t.me/jic54_official")
+                            ]
+                        ]
+                    ),
+                    
+                    disable_web_page_preview=True)
             
          
 @StreamBot.on_message(filters.command("donate") | filters.regex("DONATE❤️"))
@@ -137,7 +146,7 @@ async def follow_user(b,m):
                     disable_web_page_preview=True)
         
 
-@StreamBot.on_message(filters.command("dc") | filters.regex("DC"))
+@StreamBot.on_message(filters.regex("DC"))
 async def start(bot, update):
     text = START_TEXT.format(update.from_user.dc_id)
     await update.reply_text(
@@ -146,12 +155,12 @@ async def start(bot, update):
         quote=True
     )
 
+
     
-@StreamBot.on_message(filters.command("list"))
+@StreamBot.on_message(filters.command("menu") | filters.regex("MENU📊"))
 async def list(l, m):
-    LIST_MSG = "Hi! {} Here is a list of all my commands \n \n 1. /start or `start⚡️` \n 2. /help or `help📚` \n 3. /follow or `follow❤️` \n 5. /ping or `ping📡` \n 6. /status or `status📊` \n 7. /dc or `DC` (tells your telegram dc) \n 8. /maintainers or `maintainers😎` "
     await l.send_message(chat_id = m.chat.id,
-        text = LIST_MSG.format(m.from_user.mention(style="md")))
+        text = MENU_TEXT, reply_markup=MENU_BUTTONS)
     
     
 @StreamBot.on_message(filters.command("ping") | filters.regex("ping📡"))
@@ -160,10 +169,9 @@ async def ping(b, m):
     ag = await m.reply_text("....")
     end_t = time.time()
     time_taken_s = (end_t - start_t) * 1000
-    await ag.edit(f"Pong!\n{time_taken_s:.3f} ms")    
-    
-    
-@StreamBot.on_message(filters.command("status") | filters.private & filters.regex("status📊"))
+    await ag.edit(f"Pong!\n{time_taken_s:.3f} ms")
+  
+@StreamBot.on_message(filters.private & filters.regex("status📊"))
 async def stats(bot, update):
   currentTime = readable_time((time.time() - StartTime))
   total, used, free = shutil.disk_usage('.')
@@ -186,7 +194,15 @@ async def stats(bot, update):
             f'<b>Disk:</b> {disk}%'
   await update.reply_text(botstats)
 
-  @StreamBot.on_callback_query()
+@StreamBot.on_message(filters.command("gist"))
+async def gist(g, m):
+
+    LIST_MSG = "Hi! {} Here is a list of all my commands \n \n 1 . `start⚡️` \n 2. `help📚` \n 3. `login🔑` \n 4.`follow❤️` \n 5. `ping📡` \n 6. `status📊` \n 7. `DC` this tells your telegram dc \n 8. `maintainers😎` "
+    await g.send_message(chat_id = m.chat.id,
+        text = LIST_MSG.format(m.from_user.mention(style="md")),               
+                    reply_markup=HELP_BUTTONS)
+
+@StreamBot.on_callback_query()
 async def cb_data(bot, update):
     if update.data == "home":
         await update.message.edit_text(
