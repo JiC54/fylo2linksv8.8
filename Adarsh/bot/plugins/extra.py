@@ -103,12 +103,8 @@ MENU_BUTTONS = InlineKeyboardMarkup(
         InlineKeyboardButton("Help", callback_data="help"),
         InlineKeyboardButton("About", callback_data="about")
         ],[
-        InlineKeyboardButton("Status", callback_data="status"),
-        InlineKeyboardButton("DC", callback_data="dc"),
-        InlineKeyboardButton("Ping", callback_data="ping")
-        ],[
-        InlineKeyboardButton("Verified?", callback_data="verify"),
-        InlineKeyboardButton("Premium?", callback_data="premium")
+        InlineKeyboardButton("commands", callback_data="comands"),
+        InlineKeyboardButton("Close", callback_data="close")
         ]]
 )
 
