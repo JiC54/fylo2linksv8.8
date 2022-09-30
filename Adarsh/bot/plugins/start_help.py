@@ -31,7 +31,16 @@ else:
             ],
             resize_keyboard=True
         )
-
+HELP_TEXT = """Everything has fully been explained very well in our website including About the bot, Features, FAQ, Copyright, Terms of use, Child Abuse Policy, DMCA and many more.
+So, please consider visiting our website."""
+HELP_BUTTONS = InlineKeyboardMarkup(
+        [[
+        InlineKeyboardButton('VISIT WEBSITE', url='https://bit.ly/3DgxO6h')
+        ],[
+        InlineKeyboardButton('BACK', callback_data='menu'),
+        InlineKeyboardButton('CLOSE', callback_data='close')
+        ]]
+)
             
             
 @StreamBot.on_message((filters.command("start") | filters.regex('start⚡️')) & filters.private )
@@ -81,7 +90,7 @@ async def start(b, m):
         reply_markup=buttonz)
 
 
-@StreamBot.on_message((filters.command("help") | filters.regex('help📚')) & filters.private )
+@StreamBot.on_message((filters.command("help")) & filters.private )
 async def help_handler(bot, message):
     if not await db.is_user_exist(message.from_user.id):
         await db.add_user(message.from_user.id)
@@ -122,15 +131,8 @@ async def help_handler(bot, message):
                 disable_web_page_preview=True)
             return
     await message.reply_text(
-        text="""<b> Send me any file or video i will give you streamable link and download link.</b>\n
-<b> I also support Channels, add me to you Channel and send any media files and see miracle✨ also send /list to know all commands""",
-        
+        text=HELP_TEXT,
         disable_web_page_preview=True,
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [InlineKeyboardButton("💁‍♂️ DEVELOPERS", url="https://t.me/JiC54_SERIES_Bot")],
-                [InlineKeyboardButton("💥 FOLLOW US", url="https://t.me/movies_and_series_2022")]
-            ]
-        )
+        reply_markup=HELP_BUTTONS
     )
 
