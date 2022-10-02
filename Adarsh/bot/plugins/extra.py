@@ -224,10 +224,12 @@ async def verified(v, m):
         vjk = "are"
     await v.send_message(chat_id = m.chat.id,
         text = VERIFIED_TEXT.format(vjk))
-    else:
+    elif m.from_user.is_verified == False:
         vjk2 = "are not"
     await v.send_message(chat_id = m.chat.id,
         text = VERIFIED_TEXT.format(vjk2))
+else:
+    return
 
 @StreamBot.on_callback_query()
 async def cb_data(bot, update):
