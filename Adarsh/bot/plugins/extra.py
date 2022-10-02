@@ -250,10 +250,16 @@ async def feedback(f, m):
     feedback_text = """<b>How can we improve FilesToLinks so that it serves you the best?</b>
     <i>Regarding anything, we want your opinion.</i>
 
-    Dear {},
-    We never stop striving to create FilesToLinks exactly what you require for your professional or domestic use. We need your input today to help us make FilesToLinks the best it can be.  Your feedback helps us decide which features to add and what enhancements should be made to our platform. To provide feedback, please click below."""
+Dear {},
+We never stop striving to create FilesToLinks exactly what you require for your professional or domestic use. We need your input today to help us make FilesToLinks the best it can be.  Your feedback helps us decide which features to add and what enhancements should be made to our platform. To provide feedback, please click below."""
+    feedback_buttons = InlineKeyboardMarkup(
+        [[
+        InlineKeyboardButton("GIVE FEEDBACK", url="https://t.me/jic54feedback")
+        ]])
     await f.send_message(chat_id = m.chat.id,
-        text = feedback_text.format(m.from_user.mention))
+        text = feedback_text.format(m.from_user.mention),
+        reply_markup = feedback_buttons,
+        disable_web_page_preview=False)
 
 @StreamBot.on_callback_query()
 async def cb_data(bot, update):
