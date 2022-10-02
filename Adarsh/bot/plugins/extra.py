@@ -234,18 +234,9 @@ async def verified(v, m):
 
 @StreamBot.on_message(filters.command("premium"))
 async def is_premium(p, m):
-    premium = "You are a premium Telegram user"
-    pm = m.from_user.is_premium
-    if pm == False:
-        return  
+    premium = "You are a premium Telegram user: <b>{}</b>"
     await p.send_message(chat_id = m.chat.id,
-        text = premium)
-    notpremium = "You are not a premium Telegram user"
-    pmm = m.from_user.is_premium
-    if pmm == True:
-        return
-    await p.send_message(chat_id = m.chat.id,
-        text = notpremium)
+        text = premium.format(m.from_user.is_premium))
 
 @StreamBot.on_message(filters.command("feedback"))
 async def feedback(f, m):
