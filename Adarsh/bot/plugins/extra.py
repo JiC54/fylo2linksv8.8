@@ -32,8 +32,11 @@ FilesToLinks"""
 COMMAND_TEXT = """Here's a list of commands
 
 /id check your telegram ID
-/feedback check if you're a premium TG user
+/premium check if you're a premium TG user
 /ping Check connection speed
+/verified Check if you're a telegram verified user
+/info Check bot's information
+/feedback Send feedback to the developers
 """
 MENU_TEXT = """Here is a list of all my commands."""
 BITCOIN_TEXT = """<b>Use the following address to deposit ONLY Bitcoin (BTC):</b>
@@ -204,6 +207,12 @@ async def gist(g, m):
     await g.send_message(chat_id = m.chat.id,
         text = LIST_MSG.format(m.from_user.mention(style="md")),               
                     reply_markup=HELP_BUTTONS)
+@StreamBot.on_message(filters.command("id"))
+async def id(j, m):
+
+    ID_MSG = "Hey {}, Your Telegram Id is <code>{}</code>"
+    await j.send_message(chat_id = m.chat.id,
+        text = ID_MSG.format(m.from_user.mention, m.from_user.id))
 
 @StreamBot.on_callback_query()
 async def cb_data(bot, update):
