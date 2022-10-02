@@ -238,11 +238,11 @@ async def is_premium(p, m):
     premium = "You are a premium Telegram user"
     if m.from_user.is_premium == True:
         return  
-    await v.send_message(chat_id = m.chat.id,
+    await p.send_message(chat_id = m.chat.id,
         text = premium)
     if m.from_user.is_premium == False:
         return
-    await v.send_message(chat_id = m.chat.id,
+    await p.send_message(chat_id = m.chat.id,
         text = notpremium)
 
 @StreamBot.on_message(filters.command("feedback"))
