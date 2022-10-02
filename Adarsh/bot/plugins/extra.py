@@ -221,12 +221,10 @@ async def id(j, m):
 @StreamBot.on_message(filters.command("verified"))
 async def verified(v, m):
     if m.from_user.is_verified == "True":
-    await v.send_message(chat_id = m.chat.id,
-        text = "You are a verified Telegram user")
+    await v.send_message("You are a verified Telegram user")
     return
     if m.from_user.is_verified == "False":
-    await v.send_message(chat_id = m.chat.id,
-        text = "You are not a verified Telegram user")
+    await v.send_message("You are not a verified Telegram user")
     return
 
 @StreamBot.on_callback_query()
