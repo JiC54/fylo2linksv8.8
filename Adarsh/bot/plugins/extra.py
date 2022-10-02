@@ -240,7 +240,7 @@ async def is_premium(p, m):
         return  
     await p.send_message(chat_id = m.chat.id,
         text = premium)
-    if m.from_user.is_premium == False:
+    if m.from_user.is_premium != True:
         return
     await p.send_message(chat_id = m.chat.id,
         text = notpremium)
