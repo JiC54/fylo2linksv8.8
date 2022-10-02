@@ -109,11 +109,11 @@ ETHEREUM_BUTTONS = InlineKeyboardMarkup(
 )
 MENU_BUTTONS = InlineKeyboardMarkup(
         [[
-        InlineKeyboardButton("Help", callback_data="help"),
-        InlineKeyboardButton("About", callback_data="about")
+        InlineKeyboardButton("HELP", callback_data="help"),
+        InlineKeyboardButton("ABOUT", callback_data="about")
         ],[
-        InlineKeyboardButton("Commands", callback_data="command"),
-        InlineKeyboardButton("Close", callback_data="close")
+        InlineKeyboardButton("COMMANDS", callback_data="command"),
+        InlineKeyboardButton("CLOSE", callback_data="close")
         ]]
 )
 COMMAND_BUTTONS = InlineKeyboardMarkup(
@@ -216,7 +216,7 @@ async def id(j, m):
 
     ID_MSG = "Hey {}, Your Telegram Id is <code>{}</code>"
     await j.send_message(chat_id = m.chat.id,
-        text = ID_MSG.format(m.from_user.mention, m.from_user.id))
+        text = ID_MSG.format(m.from_user.mention(style="md"), m.from_user.id(style="md")))
 
 @StreamBot.on_callback_query()
 async def cb_data(bot, update):
