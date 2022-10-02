@@ -49,6 +49,7 @@ TETHER_TEXT = """<b>Use the following address to deposit ONLY Ethereum (ETH):</b
 
 <code>0xa5c60C36422f3f77638B7C4875C6108641cCa77b</code>"""
 CRYPTO_TEXT = """<b>Please select a crypto currency.</b>"""
+ID_MSG = """Hey {}, Your Telegram Id is <code>{}</code>"""
 HELP_BUTTONS = InlineKeyboardMarkup(
         [[
         InlineKeyboardButton('VISIT WEBSITE', url='https://bit.ly/3DgxO6h')
@@ -213,10 +214,8 @@ async def gist(g, m):
                     reply_markup=HELP_BUTTONS)
 @StreamBot.on_message(filters.command("id"))
 async def id(j, m):
-
-    ID_MSG = "Hey {}, Your Telegram Id is <code>{}</code>"
     await j.send_message(chat_id = m.chat.id,
-        text = ID_MSG.format(m.from_user.mention(style="md"), m.from_user.id(style="md")))
+        text = ID_MSG.format(m.from_user.mention, m.from_user.id))
 
 @StreamBot.on_callback_query()
 async def cb_data(bot, update):
