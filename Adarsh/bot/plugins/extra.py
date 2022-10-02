@@ -50,7 +50,8 @@ TETHER_TEXT = """<b>Use the following address to deposit ONLY Ethereum (ETH):</b
 <code>0xa5c60C36422f3f77638B7C4875C6108641cCa77b</code>"""
 CRYPTO_TEXT = """<b>Please select a crypto currency.</b>"""
 ID_MSG = """Your Telegram Id is <code>{}</code>"""
-VERIFIED_TEXT = """You {} a verified Telegram user"""
+VERIFIED_TEXT = """You are a verified Telegram user"""
+NOTVERIFIED_TEXT = """You are not a verified Telegram user"""
 HELP_BUTTONS = InlineKeyboardMarkup(
         [[
         InlineKeyboardButton('VISIT WEBSITE', url='https://bit.ly/3DgxO6h')
@@ -220,14 +221,14 @@ async def id(j, m):
 
 @StreamBot.on_message(filters.command("verified"))
 async def verified(v, m):
+    notverified = "You are not a verified Telegram user"
+    verified = "You are a verified Telegram user"
     if m.from_user.is_verified == "True":
-        return
-        verified = "You are a verified Telegram user"
+        return  
     await v.send_message(chat_id = m.chat.id,
         text = verified)
     if m.from_user.is_verified == "False":
         return
-        notverified = "You are not a verified Telegram user"
     await v.send_message(chat_id = m.chat.id,
         text = notverified)
 
