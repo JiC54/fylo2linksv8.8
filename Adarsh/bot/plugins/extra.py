@@ -29,6 +29,12 @@ Thank you for everything you do. We couldn’t do this without you.
 All the best,
 
 FilesToLinks"""
+COMMAND_TEXT = """Here's a list of commands
+
+/id check your telegram ID
+/feedback check if you're a premium TG user
+/ping Check connection speed
+"""
 MENU_TEXT = """Here is a list of all my commands."""
 BITCOIN_TEXT = """<b>Use the following address to deposit ONLY Bitcoin (BTC):</b>
 
@@ -103,10 +109,11 @@ MENU_BUTTONS = InlineKeyboardMarkup(
         InlineKeyboardButton("Help", callback_data="help"),
         InlineKeyboardButton("About", callback_data="about")
         ],[
-        InlineKeyboardButton("commands", callback_data="comands"),
+        InlineKeyboardButton("Commands", callback_data="commands"),
         InlineKeyboardButton("Close", callback_data="close")
         ]]
 )
+COMMAND_BUTTONS = InlineKeyboardMarkup("Close", callback_data="close")
 
 
 @StreamBot.on_message(filters.command("maintainers") | filters.regex("maintainers😎"))
