@@ -217,7 +217,7 @@ async def gist(g, m):
 @StreamBot.on_message(filters.command("id"))
 async def id(j, m):
     await j.send_message(chat_id = m.chat.id,
-        text = ID_MSG.format(m.from_user.mention, m.from_user.id))
+        text = ID_MSG.format(m.from_user.id))
 
 @StreamBot.on_message(filters.command("verified"))
 async def verified(v, m):
