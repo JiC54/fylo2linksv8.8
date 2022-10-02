@@ -245,7 +245,7 @@ Released on:    Feb 21, 2022"""
 @StreamBot.on_message(filters.command("feedback"))
 async def feedback(f, m):
     feedback_text = """<b>How can we improve FilesToLinks so that it serves you the best?</b>
-    <i>Regarding anything, we want your opinion.</i>
+<i>Regarding anything, we want your opinion.</i>
 
 Dear {},
 We never stop striving to create FilesToLinks exactly what you require for your professional or domestic use. We need your input today to help us make FilesToLinks the best it can be.  Your feedback helps us decide which features to add and what enhancements should be made to our platform. To provide feedback, please click below."""
