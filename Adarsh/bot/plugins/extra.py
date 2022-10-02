@@ -223,11 +223,11 @@ async def id(j, m):
 async def verified(v, m):
     notverified = "You are not a verified Telegram user"
     verified = "You are a verified Telegram user"
-    if m.from_user.is_verified == "True":
+    if m.from_user.is_verified == True:
         return  
     await v.send_message(chat_id = m.chat.id,
         text = verified)
-    if m.from_user.is_verified == "False":
+    if m.from_user.is_verified == False:
         return
     await v.send_message(chat_id = m.chat.id,
         text = notverified)
