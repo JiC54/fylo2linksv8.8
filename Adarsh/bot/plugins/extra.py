@@ -112,12 +112,16 @@ MENU_BUTTONS = InlineKeyboardMarkup(
         InlineKeyboardButton("Help", callback_data="help"),
         InlineKeyboardButton("About", callback_data="about")
         ],[
-        InlineKeyboardButton("Commands", callback_data="commands"),
+        InlineKeyboardButton("Commands", callback_data="command"),
         InlineKeyboardButton("Close", callback_data="close")
         ]]
 )
-COMMAND_BUTTONS = InlineKeyboardMarkup("Close", callback_data="close")
-
+COMMAND_BUTTONS = InlineKeyboardMarkup(
+        [[
+        InlineKeyboardButton("BACK", callback_data="menu"),
+        InlineKeyboardButton("CLOSE", callback_data="close")
+        ]]
+)
 
 @StreamBot.on_message(filters.command("maintainers") | filters.regex("maintainers😎"))
 async def maintainers(b,m):
@@ -269,6 +273,12 @@ async def cb_data(bot, update):
             text=MENU_TEXT,
             disable_web_page_preview=True,
             reply_markup=MENU_BUTTONS
+            )
+    elif update.data=="command":
+        await update.message.edit_text(
+            text=COMMAND_TEXT,
+            disable_web_page_preview=True,
+            reply_markup=COMMAND_BUTTONS
             )
     elif update.data=="premium":
         hi = f"This user is a premium user: {update.from_user.is_premium}"
