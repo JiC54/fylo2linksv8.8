@@ -236,7 +236,7 @@ async def verified(v, m):
 async def is_premium(p, m):
     notpremium = "You are not a premium Telegram user"
     premium = "You are a premium Telegram user"
-    if m.from_user.is_premium == False:
+    if m.from_user.is_premium != True:
         return  
     await p.send_message(chat_id = m.chat.id,
         text = notpremium)
