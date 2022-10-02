@@ -220,15 +220,15 @@ async def id(j, m):
 
 @StreamBot.on_message(filters.command("verified"))
 async def verified(v, m):
-    if m.from_user.is_verified == True:
+    if m.from_user.is_verified == "True":
         vjk = "are"
     await v.send_message(chat_id = m.chat.id,
         text = VERIFIED_TEXT.format(vjk))
-    elif m.from_user.is_verified == False:
-        vjk2 = "are not"
+    return
+    if m.from_user.is_verified == "False":
+        vjk = "are not"
     await v.send_message(chat_id = m.chat.id,
-        text = VERIFIED_TEXT.format(vjk2))
-else:
+        text = VERIFIED_TEXT.format(vjk))
     return
 
 @StreamBot.on_callback_query()
