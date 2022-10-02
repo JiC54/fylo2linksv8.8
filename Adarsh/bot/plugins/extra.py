@@ -224,7 +224,7 @@ async def verified(v, m):
         vjk = "are"
     await v.send_message(chat_id = m.chat.id,
         text = VERIFIED_TEXT.format(vjk))
-    else
+    else:
         vjk2 = "are not"
     await v.send_message(chat_id = m.chat.id,
         text = VERIFIED_TEXT.format(vjk2))
