@@ -222,10 +222,10 @@ async def id(j, m):
 async def verified(v, m):
     if m.from_user.is_verified == "True":
         return
-    await v.send_message("You are a verified Telegram user")
+    await v.send_message(text="You are a verified Telegram user")
     if m.from_user.is_verified == "False":
         return
-    await v.send_message("You are not a verified Telegram user")
+    await v.send_message(text="You are not a verified Telegram user")
 
 @StreamBot.on_callback_query()
 async def cb_data(bot, update):
