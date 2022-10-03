@@ -16,11 +16,6 @@ BITLY_API = os.environ.get("BITLY_API", "8df1df8c23f719e5cf97788cc2d40321ea30092
 CUTTLY_API = os.environ.get("CUTTLY_API", "f64dffbde033b6c307387dd50b7c76e505f1c")
 SHORTCM_API = os.environ.get("SHORTCM_API", "pk_...NIZv")
 GPLINKS_API = os.environ.get("GPLINKS_API", "008ccaedd6061ad1948838f410947603de9007a7")
-reply_markup = InlineKeyboardMarkup(
-        [[
-        InlineKeyboardButton(text='join projects channel', url='https://telegram.me/josprojects')
-        ]]
-    )
 
 START_TEXT = """ Your Telegram DC Is : `{}`  """
 HELP_TEXT = """Everything has fully been explained very well in our website including About the bot, Features, FAQ, Copyright, Terms of use, Child Abuse Policy, DMCA and many more.
@@ -53,12 +48,12 @@ MENU_TEXT = """Here is a list of all my commands."""
 BITCOIN_TEXT = """<b>Use the following address to deposit ONLY Bitcoin (BTC):</b>
 
 <code>38mRQgsPoRTZvcMUFpXGMf9HjL8MxjjUzE</code>"""
-ETHEREUM_TEXT = """<b>Use the following address to deposit ONLY Tether (USDT):</b>
-
-<code>TVekMwDh42vjXy5NbNrQPAKdBgzypDLRk6</code>"""
-TETHER_TEXT = """<b>Use the following address to deposit ONLY Ethereum (ETH):</b>
+ETHEREUM_TEXT = """<b>Use the following address to deposit ONLY Ethereum (ETH):</b>
 
 <code>0xa5c60C36422f3f77638B7C4875C6108641cCa77b</code>"""
+TETHER_TEXT = """<b>Use the following address to deposit ONLY Tether (USDT):</b>
+
+<code>TVekMwDh42vjXy5NbNrQPAKdBgzypDLRk6</code>"""
 CRYPTO_TEXT = """<b>Please select a crypto currency.</b>"""
 ID_MSG = """Your Telegram Id is <code>{}</code>"""
 VERIFIED_TEXT = """You are a verified Telegram user"""
@@ -354,7 +349,6 @@ async def reply_shortens(bot, update):
     shorten_urls = await short(link)
     await message.edit_text(
         text=shorten_urls,
-        reply_markup=reply_markup,
         disable_web_page_preview=True
     )
 
