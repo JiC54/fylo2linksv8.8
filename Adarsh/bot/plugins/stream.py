@@ -121,8 +121,7 @@ EAT: 8s
 EAT: 8s
         """
         gy2 = await gy1.edit(text=uploading_text2)
-        uploading_text3 = """🗂{}
-
+        uploading_text3 = """
 <b>Uploading</b>
 [▰▰▰▱▱▱▱▱▱▱] 30%
 EAT: 7s
