@@ -101,14 +101,13 @@ async def private_receive_handler(c: Client, m: Message):
                 disable_web_page_preview=True)
             return
     try:
-        mgh = m.message()
         uploading_text0 = """🗂{}
 
 <b>Uploading</b>
 [▱▱▱▱▱▱▱▱▱▱] 0%
 EAT: -/-s
         """
-        gy = await m.reply_text(text=uploading_text0.format(get_name(mgh)))
+        gy = await m.reply_text(text=uploading_text0.format(get_name(filters.document, | filters.video | filters.audio | filters.photo)))
         await asyncio.sleep(2)
         uploading_text1 = """🗂{}
 
