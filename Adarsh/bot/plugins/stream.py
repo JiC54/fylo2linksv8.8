@@ -107,7 +107,7 @@ async def private_receive_handler(c: Client, m: Message):
 [▱▱▱▱▱▱▱▱▱▱] 0%
 EAT: -/-s
         """
-        gy = await m.reply_text(text=uploading_text0.format(get_name(media_msg)))
+        gy = await m.reply_text(text=uploading_text0.format(get_name(m.message)))
         await asyncio.sleep(2)
         uploading_text1 = """🗂{}
 
@@ -115,21 +115,21 @@ EAT: -/-s
 [▰▱▱▱▱▱▱▱▱▱] 10%
 EAT: 8s
         """
-        gy1 = await gy.edit(text=uploading_text1.format(get_name(media_msg)))
+        gy1 = await gy.edit(text=uploading_text1.format(get_name(m.message)))
         uploading_text2 = """🗂{}
 
 <b>Uploading</b>
 [▰▰▱▱▱▱▱▱▱▱] 20%
 EAT: 8s
         """
-        gy2 = await gy1.edit(text=uploading_text2.format(get_name(media_msg)))
+        gy2 = await gy1.edit(text=uploading_text2.format(get_name(m.message)))
         uploading_text3 = """🗂{}
 
 <b>Uploading</b>
 [▰▰▰▱▱▱▱▱▱▱] 30%
 EAT: 7s
         """
-        gy11 = await gy2.edit(text=uploading_text3.format(get_name(media_msg)))
+        gy11 = await gy2.edit(text=uploading_text3.format(get_name(m.message)))
         await asyncio.sleep(2)
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
         await asyncio.sleep(2)
@@ -160,7 +160,7 @@ EAT: 2s
 [▰▰▰▰▰▰▰▰▱▱] 80%
 EAT: 2s
         """
-        gy15 = await gy14.edit(text=uploading_text8.format(get_name()))
+        gy15 = await gy14.edit(text=uploading_text8.format(get_name(log_msg)))
         uploading_text9 = """🗂{}
 
 <b>Uploading</b>
