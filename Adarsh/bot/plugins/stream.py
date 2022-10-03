@@ -130,54 +130,47 @@ EAT: 7s
         await asyncio.sleep(2)
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
         await asyncio.sleep(2)
-        uploading_text5 = """🗂{}
-
+        uploading_text5 = """
 <b>Uploading</b>
 [▰▰▰▰▰▱▱▱▱▱] 50%
 EAT: 3s
         """
-        gy12 = await gy11.edit(text=uploading_text5.format(get_name(log_msg)))
-        uploading_text6 = """🗂{}
-
+        gy12 = await gy11.edit(text=uploading_text5)
+        uploading_text6 = """
 <b>Uploading</b>
 [▰▰▰▰▰▰▱▱▱▱] 60%
 EAT: 3s
         """
-        gy13 = await gy12.edit(text=uploading_text6.format(get_name(log_msg)))
-        uploading_text7 = """🗂{}
-
+        gy13 = await gy12.edit(text=uploading_text6)
+        uploading_text7 = """
 <b>Uploading</b>
 [▰▰▰▰▰▰▰▱▱▱] 70%
 EAT: 2s
         """
-        gy14 = await gy13.edit(text=uploading_text7.format(get_name(log_msg)))
-        uploading_text8 = """🗂{}
-
+        gy14 = await gy13.edit(text=uploading_text7)
+        uploading_text8 = """
 <b>Uploading</b>
 [▰▰▰▰▰▰▰▰▱▱] 80%
 EAT: 2s
         """
-        gy15 = await gy14.edit(text=uploading_text8.format(get_name(log_msg)))
-        uploading_text9 = """🗂{}
-
+        gy15 = await gy14.edit(text=uploading_text8)
+        uploading_text9 = """
 <b>Uploading</b>
 [▰▰▰▰▰▰▰▰▰▱] 90%
 EAT: 1s
         """
-        gy16 = await gy15.edit(text=uploading_text9.format(get_name(log_msg)))
-        uploading_text10 = """🗂{}
-
+        gy16 = await gy15.edit(text=uploading_text9)
+        uploading_text10 = """
 <b>Uploading</b>
 [▰▰▰▰▰▰▰▰▰▰] 99%
 EAT: 1s
         """
-        gy17 = await gy16.edit(text=uploading_text10.format(get_name(log_msg)))
+        gy17 = await gy16.edit(text=uploading_text10)
         await asyncio.sleep(2)
-        uploading_textup = """🗂{}
-
+        uploading_textup = """
 <b>Sending...</b>
         """
-        gyy = await gy17.edit(text=uploading_textup.format(get_name(log_msg)))
+        gyy = await gy17.edit(text=uploading_textup)
         await asyncio.sleep(2)
         await gyy.delete()
         
