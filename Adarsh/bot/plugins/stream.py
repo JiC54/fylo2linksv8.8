@@ -114,20 +114,20 @@ EAT: -/-s
 [▰▱▱▱▱▱▱▱▱▱] 10%
 EAT: 8s
         """
-        gy1 = await gy.edit(text=uploading_text1, quote=True)
+        gy1 = await gy.edit(text=uploading_text1)
         uploading_text2 = """
 <b>Uploading</b>
 [▰▰▱▱▱▱▱▱▱▱] 20%
 EAT: 8s
         """
-        gy2 = await gy1.edit(text=uploading_text2, quote=True)
+        gy2 = await gy1.edit(text=uploading_text2)
         uploading_text3 = """🗂{}
 
 <b>Uploading</b>
 [▰▰▰▱▱▱▱▱▱▱] 30%
 EAT: 7s
         """
-        gy11 = await gy2.edit(text=uploading_text3, quote=True)
+        gy11 = await gy2.edit(text=uploading_text3)
         await asyncio.sleep(2)
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
         await asyncio.sleep(2)
