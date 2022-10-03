@@ -94,18 +94,16 @@ async def private_receive_handler(c: Client, m: Message):
                 
                 disable_web_page_preview=True)
             return
-            def get_name(media_msg: Message) -> str:
-    media = get_media_from_message(media_msg)
-    file_name=getattr(media, "file_name", "")
-    return file_name if file_name else ""
     try:
+        media = get_media_from_message(media_msg)
+        file_name=getattr(media, "file_name", "")
         uploading_text0 = """🗂{}
 
 <b>Uploading</b>
 [▱▱▱▱▱▱▱▱▱▱] 0%
 EAT: -/-s
         """
-        gy = await m.reply_text(text=uploading_text0.format(get_name(log_msg)))
+        gy = await m.reply_text(text=uploading_text0.format(file_name))
         await asyncio.sleep(2)
         uploading_text1 = """🗂{}
 
