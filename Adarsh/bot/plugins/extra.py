@@ -236,8 +236,8 @@ async def is_premium(p, m):
 async def info(i, m):
     info = """<b><u>Bot Info</u></b>
 
-Version:              9.6.0
-Updated on:      September 12, 2022
+Version:              9.8.0
+Updated on:      Oct 03, 2022
 Offered By:        JiC54
 Released on:     Feb 21, 2022"""
     await i.send_message(chat_id = m.chat.id,
