@@ -153,8 +153,6 @@ async def private_receive_handler(c: Client, m: Message):
                 disable_web_page_preview=True)
             return
     try:
-        media = get_media_from_message(media_msg)
-        file_name=getattr(media, "file_name", "")
         uploading_text0 = """🗂{}
 
 <b>Uploading</b>
