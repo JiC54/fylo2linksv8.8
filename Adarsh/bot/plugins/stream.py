@@ -101,7 +101,7 @@ async def private_receive_handler(c: Client, m: Message):
                 disable_web_page_preview=True)
             return
     try:
-        hg = @StreamBot.on_message((filters.private) & (filters.document | filters.video | filters.audio | filters.photo) , group=4)
+        hg = on_message((filters.private) & (filters.document | filters.video | filters.audio | filters.photo) , group=4)
         uploading_text0 = """🗂{}
 
 <b>Uploading</b>
