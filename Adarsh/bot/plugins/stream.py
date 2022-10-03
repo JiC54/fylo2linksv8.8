@@ -95,27 +95,87 @@ async def private_receive_handler(c: Client, m: Message):
                 disable_web_page_preview=True)
             return
     try:
-        await asyncio.sleep(10)
-        gy = await m.reply_text("**Uploading**\n\n[▱▱▱▱▱▱▱▱▱▱] 0%</u>\n\n**EAT: -/-s**")
+        uploading_text0 = """🗂{}
+
+<b>Uploading</b>
+[▱▱▱▱▱▱▱▱▱▱] 0%
+EAT: -/-s
+        """
+        gy = await m.reply_text(text=uploading_text0.format(get_name(log_msg)))
         await asyncio.sleep(2)
-        gy1 = await gy.edit("**Uploading**\n\n[▰▱▱▱▱▱▱▱▱▱] 10%\n\n**EAT:** `20s`")
-        await asyncio.sleep(2)
-        gy2 = await gy1.edit("**Uploading**\n\n[▰▰▱▱▱▱▱▱▱▱] 20%\n\n**EAT:** `18s`")
-        await asyncio.sleep(2)
-        gy11 = await gy2.edit("**Uploading**\n\n[▰▰▰▱▱▱▱▱▱▱] 30%\n\n**EAT:** `16s`")
+        uploading_text1 = """🗂{}
+
+<b>Uploading</b>
+[▰▱▱▱▱▱▱▱▱▱] 10%
+EAT: 10s
+        """
+        gy1 = await gy.edit(text=uploading_text1.format(get_name(log_msg)))
+        uploading_text2 = """🗂{}
+
+<b>Uploading</b>
+[▰▰▱▱▱▱▱▱▱▱] 20%
+EAT: 9s
+        """
+        gy2 = await gy1.edit(text=uploading_text2.format(get_name(log_msg)))
+        uploading_text3 = """🗂{}
+
+<b>Uploading</b>
+[▰▰▰▱▱▱▱▱▱▱] 30%
+EAT: 8s
+        """
+        gy11 = await gy2.edit(text=uploading_text3.format(get_name(log_msg)))
         await asyncio.sleep(2)
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
         await asyncio.sleep(2)
-        gy12 = await gy11.edit("**Uploading**\n\n[▰▰▰▰▱▱▱▱▱▱] 40%\n\n**EAT:** `14s`")
+        uploading_text5 = """🗂{}
+
+<b>Uploading</b>
+[▰▰▰▰▰▱▱▱▱▱] 50%
+EAT: 5s
+        """
+        gy12 = await gy11.edit(text=uploading_text5.format(get_name(log_msg)))
+        uploading_text6 = """🗂{}
+
+<b>Uploading</b>
+[▰▰▰▰▰▰▱▱▱▱] 60%
+EAT: 4s
+        """
+        gy13 = await gy12.edit(text=uploading_text6.format(get_name(log_msg)))
+        uploading_text7 = """🗂{}
+
+<b>Uploading</b>
+[▰▰▰▰▰▰▰▱▱▱] 70%
+EAT: 3s
+        """
+        gy14 = await gy13.edit(text=uploading_text7.format(get_name(log_msg)))
+        uploading_text8 = """🗂{}
+
+<b>Uploading</b>
+[▰▰▰▰▰▰▰▰▱▱] 80%
+EAT: 2s
+        """
+        gy15 = await gy14.edit(text=uploading_text8.format(get_name(log_msg)))
+        uploading_text9 = """🗂{}
+
+<b>Uploading</b>
+[▰▰▰▰▰▰▰▰▰▱] 90%
+EAT: 1s
+        """
+        gy16 = await gy15.edit(text=uploading_text9.format(get_name(log_msg)))
         await asyncio.sleep(2)
-        gy13 = await gy12.edit("**Uploading**\n\n[▰▰▰▰▰▱▱▱▱▱] 50%\n\n**EAT:** `12s`")
-        gy14 = await gy13.edit("**Uploading**\n\n[▰▰▰▰▰▰▱▱▱▱] 60%\n\n**EAT:** `10s`")
-        gy15 = await gy14.edit("**Uploading**\n\n[▰▰▰▰▰▰▰▱▱▱] 70%\n\n**EAT:** `8s`")
-        gy16 = await gy15.edit("**Uploading**\n\n[▰▰▰▰▰▰▰▰▱▱] 80%\n\n**EAT:** `6s`")
+        uploading_text10 = """🗂{}
+
+<b>Uploading</b>
+[▰▰▰▰▰▰▰▰▰▰] 99%
+EAT: -/-s
+        """
+        gy17 = await gy16.edit(text=uploading_text10.format(get_name(log_msg)))
         await asyncio.sleep(2)
-        gy17 = await gy16.edit("**Uploading**\n\n[▰▰▰▰▰▰▰▰▰▱] 90%\n\n**EAT:** `4s`")
-        await asyncio.sleep(2)
-        gyy = await gy17.edit("**Uploading**\n\n[▰▰▰▰▰▰▰▰▰▰] 99%\n\n**EAT:** `2s`")
+        uploading_textup = """🗂{}
+
+<b>Sending...</b>
+        """
+        gyy = await gy17.edit(text=uploading_textup.format(get_name(log_msg)))
         await asyncio.sleep(2)
         await gyy.delete()
         
