@@ -37,6 +37,7 @@ COMMAND_TEXT = """Here's a list of commands
 /verified Check if you're a telegram verified user
 /info Check bot's information
 /feedback Send feedback to the developers
+/dc Your Telegram Data Centre
 """
 MENU_TEXT = """Here is a list of all my commands."""
 BITCOIN_TEXT = """<b>Use the following address to deposit ONLY Bitcoin (BTC):</b>
