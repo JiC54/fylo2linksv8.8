@@ -101,36 +101,33 @@ async def private_receive_handler(c: Client, m: Message):
                 disable_web_page_preview=True)
             return
     try:
-        hg = m.media((filters.private) & (filters.document | filters.video | filters.audio | filters.photo) , group=4)
-        uploading_text0 = """🗂{}
-
+        
+        uploading_text0 = """
 <b>Uploading</b>
 [▱▱▱▱▱▱▱▱▱▱] 0%
 EAT: -/-s
         """
-        gy = await m.reply_text(text=uploading_text0.format(get_name(hg)))
+        gy = await m.reply_text(text=uploading_text0, quote=True)
         await asyncio.sleep(2)
-        uploading_text1 = """🗂{}
-
+        uploading_text1 = """
 <b>Uploading</b>
 [▰▱▱▱▱▱▱▱▱▱] 10%
 EAT: 8s
         """
-        gy1 = await gy.edit(text=uploading_text1.format(get_name(hg)))
-        uploading_text2 = """🗂{}
-
+        gy1 = await gy.edit(text=uploading_text1, quote=True)
+        uploading_text2 = """
 <b>Uploading</b>
 [▰▰▱▱▱▱▱▱▱▱] 20%
 EAT: 8s
         """
-        gy2 = await gy1.edit(text=uploading_text2.format(get_name(hg)))
+        gy2 = await gy1.edit(text=uploading_text2, quote=True)
         uploading_text3 = """🗂{}
 
 <b>Uploading</b>
 [▰▰▰▱▱▱▱▱▱▱] 30%
 EAT: 7s
         """
-        gy11 = await gy2.edit(text=uploading_text3.format(get_name(hg)))
+        gy11 = await gy2.edit(text=uploading_text3, quote=True)
         await asyncio.sleep(2)
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
         await asyncio.sleep(2)
