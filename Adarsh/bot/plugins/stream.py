@@ -18,7 +18,6 @@ from Adarsh.server.exceptions import FIleNotFound
 from Adarsh.utils.file_properties import get_name, get_hash, get_media_file_size
 
 
-
 db = Database(Var.DATABASE_URL, Var.name)
 
 
@@ -102,13 +101,14 @@ async def private_receive_handler(c: Client, m: Message):
                 disable_web_page_preview=True)
             return
     try:
+        mgh = m.message()
         uploading_text0 = """🗂{}
 
 <b>Uploading</b>
 [▱▱▱▱▱▱▱▱▱▱] 0%
 EAT: -/-s
         """
-        gy = await m.reply_text(text=uploading_text0.format(file_name))
+        gy = await m.reply_text(text=uploading_text0.format(get_name(mgh)))
         await asyncio.sleep(2)
         uploading_text1 = """🗂{}
 
@@ -116,7 +116,7 @@ EAT: -/-s
 [▰▱▱▱▱▱▱▱▱▱] 10%
 EAT: 8s
         """
-        gy1 = await gy.edit(text=uploading_text1.format(file_name))
+        gy1 = await gy.edit(text=uploading_text1.format(get_name(log_msg)))
         uploading_text2 = """🗂{}
 
 <b>Uploading</b>
