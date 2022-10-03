@@ -94,6 +94,10 @@ async def private_receive_handler(c: Client, m: Message):
                 
                 disable_web_page_preview=True)
             return
+            def get_name(media_msg: Message) -> str:
+    media = get_media_from_message(media_msg)
+    file_name=getattr(media, "file_name", "")
+    return file_name if file_name else ""
     try:
         uploading_text0 = """🗂{}
 
@@ -107,21 +111,21 @@ EAT: -/-s
 
 <b>Uploading</b>
 [▰▱▱▱▱▱▱▱▱▱] 10%
-EAT: 10s
+EAT: 8s
         """
         gy1 = await gy.edit(text=uploading_text1.format(get_name(log_msg)))
         uploading_text2 = """🗂{}
 
 <b>Uploading</b>
 [▰▰▱▱▱▱▱▱▱▱] 20%
-EAT: 9s
+EAT: 8s
         """
         gy2 = await gy1.edit(text=uploading_text2.format(get_name(log_msg)))
         uploading_text3 = """🗂{}
 
 <b>Uploading</b>
 [▰▰▰▱▱▱▱▱▱▱] 30%
-EAT: 8s
+EAT: 7s
         """
         gy11 = await gy2.edit(text=uploading_text3.format(get_name(log_msg)))
         await asyncio.sleep(2)
@@ -131,21 +135,21 @@ EAT: 8s
 
 <b>Uploading</b>
 [▰▰▰▰▰▱▱▱▱▱] 50%
-EAT: 5s
+EAT: 3s
         """
         gy12 = await gy11.edit(text=uploading_text5.format(get_name(log_msg)))
         uploading_text6 = """🗂{}
 
 <b>Uploading</b>
 [▰▰▰▰▰▰▱▱▱▱] 60%
-EAT: 4s
+EAT: 3s
         """
         gy13 = await gy12.edit(text=uploading_text6.format(get_name(log_msg)))
         uploading_text7 = """🗂{}
 
 <b>Uploading</b>
 [▰▰▰▰▰▰▰▱▱▱] 70%
-EAT: 3s
+EAT: 2s
         """
         gy14 = await gy13.edit(text=uploading_text7.format(get_name(log_msg)))
         uploading_text8 = """🗂{}
@@ -162,12 +166,11 @@ EAT: 2s
 EAT: 1s
         """
         gy16 = await gy15.edit(text=uploading_text9.format(get_name(log_msg)))
-        await asyncio.sleep(2)
         uploading_text10 = """🗂{}
 
 <b>Uploading</b>
 [▰▰▰▰▰▰▰▰▰▰] 99%
-EAT: -/-s
+EAT: 1s
         """
         gy17 = await gy16.edit(text=uploading_text10.format(get_name(log_msg)))
         await asyncio.sleep(2)
