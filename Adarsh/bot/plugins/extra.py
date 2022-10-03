@@ -258,6 +258,12 @@ We never stop striving to create FilesToLinks exactly what you require for your 
         reply_markup = feedback_buttons,
         disable_web_page_preview=False)
 
+@StreamBot.on_message(filters.command("dc"))
+async def dc(d, m):
+    dcid = """<b>Your Telegram data centre is:</b> <code>{}</code>"""
+    await d.send_message(chat_id = m.chat.id,
+        text = dcid.format(m.from_user.dc_id))
+
 @StreamBot.on_callback_query()
 async def cb_data(bot, update):
     if update.data == "home":
