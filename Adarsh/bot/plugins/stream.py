@@ -107,7 +107,7 @@ async def private_receive_handler(c: Client, m: Message):
 [▱▱▱▱▱▱▱▱▱▱] 0%
 EAT: -/-s
         """
-        gy = await m.reply_text(text=uploading_text0.format(get_name())
+        gy = await m.reply_text(text=uploading_text0.format(get_name()))
         await asyncio.sleep(2)
         uploading_text1 = """🗂{}
 
