@@ -189,7 +189,7 @@ EAT: 1s
 
 <b>🔗WATCH LINK:</b> <code>{}</code>
 
-<b>⚠️THESE LINKS WON'T EXPIRE IF YOU COMPLY WITH OUR <a href='http://bit.ly/3xgjGWf'>TERMS & CONDITIONS</a></b>"""
+<b>⚠️THESE LINKS WON'T EXPIRE IF YOU COMPLY WITH OUR <a href='https://bit.ly/3yaIvUw'>TERMS & CONDITIONS</a></b>"""
 
         await log_msg.reply_text(text=f"**RᴇQᴜᴇꜱᴛᴇᴅ ʙʏ :** [{m.from_user.first_name}](tg://user?id={m.from_user.id})\n**Uꜱᴇʀ ɪᴅ :** `{m.from_user.id}`\n**Stream ʟɪɴᴋ :** {stream_link}", disable_web_page_preview=True,  quote=True)
         await m.reply_text(
@@ -222,6 +222,7 @@ async def channel_receive_handler(bot, broadcast):
         await bot.leave_chat(broadcast.chat.id)
         return
     try:
+        await asyncio.sleep(5)
         log_msg = await broadcast.forward(chat_id=Var.BIN_CHANNEL)
         stream_link = f"{Var.URL}watch/{str(log_msg.id)}/{quote_plus(get_name(log_msg))}?hash={get_hash(log_msg)}"
         online_link = f"{Var.URL}{str(log_msg.id)}/{quote_plus(get_name(log_msg))}?hash={get_hash(log_msg)}"
@@ -229,6 +230,7 @@ async def channel_receive_handler(bot, broadcast):
             text=f"**Cʜᴀɴɴᴇʟ Nᴀᴍᴇ:** `{broadcast.chat.title}`\n**Cʜᴀɴɴᴇʟ ID:** `{broadcast.chat.id}`\n**Rᴇǫᴜᴇsᴛ ᴜʀʟ:** {stream_link}",
             quote=True
         )
+        await asyncio.sleep(5)
         await bot.edit_message_reply_markup(
             chat_id=broadcast.chat.id,
             message_id=broadcast.id,
