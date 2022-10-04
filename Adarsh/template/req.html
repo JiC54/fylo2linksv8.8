@@ -7,45 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>%s</title>
-    <style>
-      .loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #333333;
-    transition: opacity 0.75s, visibility 0.75s;
-  }
-  
-  .loader--hidden {
-    opacity: 0;
-    visibility: hidden;
-  }
-  
-  .loader::after {
-    content: "";
-    width: 75px;
-    height: 75px;
-    border: 15px solid #dddddd;
-    border-top-color: #009578;
-    border-radius: 50%;
-    animation: loading 0.75s ease infinite;
-  }
-  
-  @keyframes loading {
-    from {
-      transform: rotate(0turn);
-    }
-    to {
-      transform: rotate(1turn);
-    }
-  }
-  
-    </style>
     <link rel="stylesheet" type='text/css' href="https://drive.google.com/u/0/uc?id=13Fa1fgJVMTI5WMLiqnwAcVbTMEbZVMpK&export=download">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Delius">
@@ -105,7 +66,7 @@
         toogle.onclick = () => {
             body.classList.toggle('dark')
             footer.classList.toggle('dark')
-        };
+        }
     </script>
 </body>
 </html>
