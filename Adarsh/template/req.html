@@ -54,7 +54,6 @@
 </head>
 
 <body>
-    <div class="loader"></div> 
     <header>
         <div class="toogle"></div>
         <div id="file-name">
@@ -106,18 +105,7 @@
         toogle.onclick = () => {
             body.classList.toggle('dark')
             footer.classList.toggle('dark')
-        }
-    </script>
-            <script type="text/javascript">
-      window.addEventListener("load", () => {
-    const loader = document.querySelector(".loader");
-  
-    loader.classList.add("loader--hidden");
-  
-    loader.addEventListener("transitionend", () => {
-      document.body.removeChild(loader);
-    });
-  });
+        };
     </script>
 </body>
 </html>
