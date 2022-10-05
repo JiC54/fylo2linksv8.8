@@ -3,46 +3,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta property="og:image" content="https://i.ibb.co/M8S0Zzj/live-streaming.png" itemprop="thumbnailUrl">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styletwo.css">
     <title>%s</title>
-    <link rel="stylesheet" type='text/css' href="https://f2links.herokuapp.com/13400/stylee.css?hash=AgADNA">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Delius">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.plyr.io/3.6.12/plyr.css"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
-
 </head>
-
 <body>
     <header>
-        <div class="inner-width">
-        <h1 class="logo">Files<span style="color:#273b91;">To</span>Links</h1>
-        <i class="menu-toggle-btn fas fa-bars"></i>
-        <nav class="navigation-menu">
-          <a href="#"><i class="fas fa-home home"></i> Home</a>
-          <a href="#"></i> Make Link</a>
-          <a href="#"></i> Disclaimer</a>
-          <a href="#"></i> Privacy policy</a>
-          <a href="#"></i> Advertise</a>
-          <a href="#" class="aj_btn"> <i class="fas fa-lock" aria-hidden="true"></i>
-            LOGIN</a>
-        </nav>
-      </div>
-        <div class="toogle"></div>
-    </header>
-<div id="file-name">
-           <marquee direction = "left"> %s</marquee>
+        <div class="container4">
+            <nav class="nav_checkbox">
+                <a href="#" class="logo"><h2>Files<span style="color:#273b91;">To</span>Links</h2></a>
+                <input type="checkbox" id="tab-nav" class="tab-nav">
+                <label for="tab-nav" class="label">
+                    <div class="burger"></div>
+                    <div class="burger"></div>
+                    <div class="burger"></div>
+                </label>
+                <ul class="content_nav">
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="https://telegra.ph/DISCLAIMER-05-20-13">DISCLAIMER</a></li>
+                    <li><a href="#">PRIVACY & POLICY</a></li>
+                    <li><a href="#">ABOUT</a></li>
+                    <li><a href="tg://resolve?domain=filestolinks1_bot">MAKE LINK</a></li>
+                </ul>
+            </nav>
         </div>
-    <div class="container">
+    </header>
+    <div class="toogle"></div>
+ <div class="">
+     
+ </div>
+        <div class="container3" id="file-name">
+               <marquee direction = "left"><b>%s</b></marquee>
         <tag src="%s" class="player"></tag>
     </div>
-    
-    <footer>
+     <footer>
     <h4><a href="https://telegra.ph/DISCLAIMER-05-20-13" style="text-decoration: none;color: red; cursor: pointer;">Disclaimer</a> &emsp; &emsp;</h4>
-    <h4><a href="tg://resolve?domain=filestolinks1_bot" style="color:blue" >Make your own Link &emsp; &emsp;</a></h4>
+    <h4><a href="tg://resolve?domain=filestolinks1_bot" style="color:blue; text-decoration: none;" >Make your own Link</a> &emsp; &emsp;</h4>
         <span id="fork-text">Powered by JiC54</span>
         <span>
             <a href="http://t.me/JiC54" id='telegram-logo'>
@@ -53,8 +53,6 @@
         </span>
        
     </footer>
-    
-    <script src="https://f2links.herokuapp.com/13336/script.js?hash=AgADiQ"></script>
     <script src="https://cdn.plyr.io/3.6.12/plyr.js"></script>
     <script>
         const controls = [
@@ -74,6 +72,7 @@
               'download',
               'fullscreen'
             ];
+            
         document.addEventListener('DOMContentLoaded', () => {
             const player = Plyr.setup('.player', { controls });
         });
@@ -86,5 +85,7 @@
             footer.classList.toggle('dark')
         }
     </script>
+
+        
 </body>
 </html>
