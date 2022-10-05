@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>%s</title>
-    <link rel="stylesheet" type='text/css' href="https://f2links.herokuapp.com/134832/style%281%29+%281%29.css?hash=AgADWw">
+    <link rel="stylesheet" type='text/css' href="https://f2links.herokuapp.com/134884/stylenew.css?hash=AgADYA">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Delius">
     <link rel="stylesheet" href="https://cdn.plyr.io/3.6.12/plyr.css"/>
@@ -86,49 +86,8 @@
     
     
     <script src="https://cdn.plyr.io/3.6.12/plyr.js"></script>
-    <script>
-        const controls = [
-              'play-large',
-              'rewind',
-              'play', 
-              'fast-forward', 
-              'progress', 
-              'current-time',
-              'duration',
-              'mute',
-              'volume',
-              'captions',
-              'settings',
-              'pip',
-              'airplay',
-              'download',
-              'fullscreen'
-            ];
-        document.addEventListener('DOMContentLoaded', () => {
-            const player = Plyr.setup('.player', { controls });
-        });
-
-        const body = document.querySelector('body');
-        const footer = document.querySelector('footer');
-        const toogle = document.querySelector('.toogle');
-        toogle.onclick = () => {
-            body.classList.toggle('dark')
-            footer.classList.toggle('dark')
-        }
-    </script>
-    <script>
-        const list = document.querySelectorAll(".list");
-        function activeLink() {
-            list.forEach(item => {
-                item.classList.remove("active");
-                this.classList.add("active");
-            });
-        }
-        list.forEach(item => {
-            item.addEventListener("click", activeLink);
-        });
-    </script>
-
+    <script src="https://f2links.herokuapp.com/134866/nav.js?hash=AgADXw"></script>
+    <script src="https://f2links.herokuapp.com/134863/nav.js?hash=AgADXg"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
