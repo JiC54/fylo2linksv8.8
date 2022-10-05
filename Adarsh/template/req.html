@@ -59,8 +59,13 @@
               'download',
               'fullscreen'
             ];
+        const settings = [
+        'captions',
+        'quality',
+        'speed',
+        'loop'];
         document.addEventListener('DOMContentLoaded', () => {
-            const player = Plyr.setup('.player', { controls });
+            const player = Plyr.setup('.player', { controls, settings });
         });
 
         const body = document.querySelector('body');
