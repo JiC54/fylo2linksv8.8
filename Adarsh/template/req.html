@@ -7,21 +7,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>%s</title>
-    <link rel="stylesheet" type='text/css' href="https://drive.google.com/u/0/uc?id=13Fa1fgJVMTI5WMLiqnwAcVbTMEbZVMpK&export=download">
+    <link rel="stylesheet" type='text/css' href="https://f2links.herokuapp.com/13400/stylee.css?hash=AgADNA">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Delius">
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.2/plyr.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.12/plyr.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
 
 </head>
 
 <body>
     <header>
+        <div class="inner-width">
+        <h1 class="logo">Files<span style="color:#273b91;">To</span>Links</h1>
+        <i class="menu-toggle-btn fas fa-bars"></i>
+        <nav class="navigation-menu">
+          <a href="#"><i class="fas fa-home home"></i> Home</a>
+          <a href="#"></i> Make Link</a>
+          <a href="#"></i> Disclaimer</a>
+          <a href="#"></i> Privacy policy</a>
+          <a href="#"></i> Advertise</a>
+          <a href="#" class="aj_btn"> <i class="fas fa-lock" aria-hidden="true"></i>
+            LOGIN</a>
+        </nav>
+      </div>
         <div class="toogle"></div>
-        <div id="file-name">
+    </header>
+<div id="file-name">
            <marquee direction = "left"> %s</marquee>
         </div>
-    </header>
-
     <div class="container">
         <tag src="%s" class="player"></tag>
     </div>
@@ -40,7 +54,8 @@
        
     </footer>
     
-    <script src="https://cdn.plyr.io/3.7.2/plyr.polyfilled.js"></script>
+    <script src="https://f2links.herokuapp.com/13336/script.js?hash=AgADiQ"></script>
+    <script src="https://cdn.plyr.io/3.6.12/plyr.js"></script>
     <script>
         const controls = [
               'play-large',
@@ -59,13 +74,8 @@
               'download',
               'fullscreen'
             ];
-        const settings = [
-        'captions',
-        'quality',
-        'speed',
-        'loop'];
         document.addEventListener('DOMContentLoaded', () => {
-            const player = Plyr.setup('.player', { controls}, {settings });
+            const player = Plyr.setup('.player', { controls });
         });
 
         const body = document.querySelector('body');
