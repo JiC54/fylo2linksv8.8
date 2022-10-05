@@ -3,46 +3,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta property="og:image" content="https://i.ibb.co/M8S0Zzj/live-streaming.png" itemprop="thumbnailUrl">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://f2links.herokuapp.com/134776/styletwo.css?hash=AgADRA">
     <title>%s</title>
+    <link rel="stylesheet" type='text/css' href="https://drive.google.com/u/0/uc?id=13Fa1fgJVMTI5WMLiqnwAcVbTMEbZVMpK&export=download">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Delius">
     <link rel="stylesheet" href="https://cdn.plyr.io/3.6.12/plyr.css"/>
+
 </head>
+
 <body>
     <header>
-        <div class="container4">
-            <nav class="nav_checkbox">
-                <a href="#" class="logo"><h2>Files<span style="color:#273b91;">To</span>Links</h2></a>
-                <input type="checkbox" id="tab-nav" class="tab-nav">
-                <label for="tab-nav" class="label">
-                    <div class="burger"></div>
-                    <div class="burger"></div>
-                    <div class="burger"></div>
-                </label>
-                <ul class="content_nav">
-                    <li><a href="#">HOME</a></li>
-                    <li><a href="https://telegra.ph/DISCLAIMER-05-20-13">DISCLAIMER</a></li>
-                    <li><a href="#">PRIVACY & POLICY</a></li>
-                    <li><a href="#">ABOUT</a></li>
-                    <li><a href="tg://resolve?domain=filestolinks1_bot">MAKE LINK</a></li>
-                </ul>
-            </nav>
+        <div class="toogle"></div>
+        <div id="file-name">
+           <marquee direction = "left"> %s</marquee>
         </div>
     </header>
-    <div class="toogle"></div>
- <div class="">
-     
- </div>
-        <div class="container3" id="file-name">
-               <marquee direction = "left"><b>%s</b></marquee>
+
+    <div class="container">
         <tag src="%s" class="player"></tag>
     </div>
-     <footer>
+    
+    <footer>
     <h4><a href="https://telegra.ph/DISCLAIMER-05-20-13" style="text-decoration: none;color: red; cursor: pointer;">Disclaimer</a> &emsp; &emsp;</h4>
-    <h4><a href="tg://resolve?domain=filestolinks1_bot" style="color:blue; text-decoration: none;" >Make your own Link</a> &emsp; &emsp;</h4>
+    <h4><a href="tg://resolve?domain=filestolinks1_bot" style="color:blue" >Make your own Link &emsp; &emsp;</a></h4>
         <span id="fork-text">Powered by JiC54</span>
         <span>
             <a href="http://t.me/JiC54" id='telegram-logo'>
@@ -53,6 +39,8 @@
         </span>
        
     </footer>
+    
+    
     <script src="https://cdn.plyr.io/3.6.12/plyr.js"></script>
     <script>
         const controls = [
@@ -72,7 +60,6 @@
               'download',
               'fullscreen'
             ];
-            
         document.addEventListener('DOMContentLoaded', () => {
             const player = Plyr.setup('.player', { controls });
         });
@@ -85,7 +72,5 @@
             footer.classList.toggle('dark')
         }
     </script>
-
-        
 </body>
 </html>
