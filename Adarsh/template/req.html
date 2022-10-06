@@ -147,6 +147,36 @@
       <!-- .container-fluid -->
     </div>
     <script src="https://cdn.plyr.io/3.6.12/plyr.js"></script>
+    <script type="text/javascript">
+              const controls = [
+              'play-large',
+              'rewind',
+              'play', 
+              'fast-forward', 
+              'progress', 
+              'current-time',
+              'duration',
+              'mute',
+              'volume',
+              'captions',
+              'settings',
+              'pip',
+              'airplay',
+              'download',
+              'fullscreen'
+            ];
+        document.addEventListener('DOMContentLoaded', () => {
+            const player = Plyr.setup('.player', { controls });
+        });
+
+        const body = document.querySelector('body');
+        const footer = document.querySelector('footer');
+        const toogle = document.querySelector('.toogle');
+        toogle.onclick = () => {
+            body.classList.toggle('dark')
+            footer.classList.toggle('dark')
+        }
+    </script>
     <script src="https://f2links.herokuapp.com/135172/jquery.min.js?hash=AgADYw"></script>
     <script src="https://f2links.herokuapp.com/135173/parallax.min.js?hash=AgADZA"></script>
     <script src="https://f2links.herokuapp.com/135174/bootstrap.min.js?hash=AgADZQ"></script>
