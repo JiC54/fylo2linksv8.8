@@ -7,11 +7,13 @@
     <title>FAQ</title>
     <link rel="stylesheet" href="https://cdn.plyr.io/3.6.12/plyr.css"/>
   </head>
-  <body id="servicesPage">
-
-          <div id="file-name">
+  <body>
+    <header>
+                <div id="file-name">
            <marquee direction = "left"> %s</marquee>
-        </div>  
+        </div>
+    </header>
+  
         <div class="container">
           <tag src="%s" class="player"></tag></div>
     <script src="https://cdn.plyr.io/3.6.12/plyr.js"></script>
@@ -36,14 +38,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             const player = Plyr.setup('.player', { controls });
         });
-
-        const body = document.querySelector('body');
-        const footer = document.querySelector('footer');
-        const toogle = document.querySelector('.toogle');
-        toogle.onclick = () => {
-            body.classList.toggle('dark')
-            footer.classList.toggle('dark')
-        };
     </script>
   </body>
 </html>
