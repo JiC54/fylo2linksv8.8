@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="keywords" content="FilesToLinks" />
     <title>FAQ</title>
     <link rel="stylesheet" href="https://cdn.plyr.io/3.6.12/plyr.css"/>
   </head>
@@ -14,15 +13,7 @@
            <marquee direction = "left"> %s</marquee>
         </div>  
         <div class="container">
-          <tag src="%s" class="player">
-            
-          </tag></div>
-        <!-- Page footer -->
-        <footer class="row">
-          <p class="col-12 text-white text-center tm-copyright-text">
-            Copyright &copy; 2022 FilesToLinks. 
-          </p>
-        </footer>
+          <tag src="%s" class="player"></tag></div>
     <script src="https://cdn.plyr.io/3.6.12/plyr.js"></script>
     <script type="text/javascript">
               const controls = [
@@ -52,7 +43,7 @@
         toogle.onclick = () => {
             body.classList.toggle('dark')
             footer.classList.toggle('dark')
-        }
+        };
     </script>
   </body>
 </html>
