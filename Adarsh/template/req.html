@@ -6,44 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="keywords" content="FilesToLinks" />
     <title>FAQ</title>
-    <style type="text/css">
-    .loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #333333;
-    transition: opacity 0.75s, visibility 0.75s;
-  }
-  
-  .loader--hidden {
-    opacity: 0;
-    visibility: hidden;
-  }
-  
-  .loader::after {
-    content: "";
-    width: 75px;
-    height: 75px;
-    border: 15px solid #dddddd;
-    border-top-color: #009578;
-    border-radius: 50%;
-    animation: loading 0.75s ease infinite;
-  }
-  
-  @keyframes loading {
-    from {
-      transform: rotate(0turn);
-    }
-    to {
-      transform: rotate(1turn);
-    }
-  }
-    </style>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" />
     <link rel="stylesheet" href="https://f2links.herokuapp.com/135160/all.min.css?hash=AgADXw" />
     <link rel="stylesheet" href="https://f2links.herokuapp.com/135161/bootstrap.min.css?hash=AgADYA" />
@@ -122,7 +84,6 @@
                     <p class="tm-services-description mb-0 small">
                            
                     </p>
-                                <div class="loader"></div>
 
       </div>
                 </div>
@@ -133,10 +94,11 @@
         <section class="row tm-testimonials-section">
             <div class="col-12 tm-carousel">
             <div class="tm-bg-black-transparent tm-testimonial-box text-center container">
-        <tag src="%s" class="player"></tag>
+        
                 </div>               
           </div>
         </section>
+        <div class="container"><tag src="%s" class="player"></tag></div>
         <!-- Page footer -->
         <footer class="row">
           <p class="col-12 text-white text-center tm-copyright-text">
