@@ -1,29 +1,81 @@
+<!--JiC54-->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>FAQ</title>
+<head>
+    <meta charset="UTF-8">
+    <meta property="og:image" content="https://i.ibb.co/M8S0Zzj/live-streaming.png" itemprop="thumbnailUrl">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>%s</title>
+    <link rel="stylesheet" type='text/css' href="https://f2links.herokuapp.com/136338/style.css?hash=AgADRw">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Delius">
     <link rel="stylesheet" href="https://cdn.plyr.io/3.6.12/plyr.css"/>
-  </head>
-  <body>
+</head>
+
+<body>
     <header>
-                <div id="file-name">
-           <marquee direction = "left"> %s</marquee>
-        </div>
+      <div class="container2">
+          <nav class="nav_checkbox">
+              <a href="https://bit.ly/3DgxO6h" class="logo"><h2>FilesToLinks</h2></a>
+              <input type="checkbox" id="tab-nav" class="tab-nav">
+              <label for="tab-nav" class="label">
+                  <div class="burger"></div>
+                  <div class="burger"></div>
+                  <div class="burger"></div>
+              </label>
+              <ul class="content_nav">
+                  <li><a href="#">HOME</a></li>
+                  <li><a href="#">ABOUT</a></li>
+                  <li><a href="#">BLOG</a></li>
+                  <li><a href="#">SERVICE</a></li>
+                  <li><a href="#">LOGIN</a></li>
+              </ul>
+          </nav>
+          <div class="toogle"></div>
+      </div>
     </header>
-  
-        <div class="container">
-          <tag src="%s" class="player"></tag></div>
+    <div id="file-name">
+       <marquee direction = "left"> %s</marquee>
+    </div>
+
+    <div class="container">
+        <tag src="%s" class="player"></tag>
+    </div>
+
+    <footer>
+      <div>
+          <p><h4><strong>Info</strong></h4>
+          <ul>
+            <li><a href="tos.html">Terms Of Use</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="copyright.html">Copyright</a></li>
+            <li><a href="child_abuse_policy.html">Child Abuse Policy</a></li>
+          </ul>
+          </p>
+          </div>
+          <div class="pad">
+          <p><h4><strong>Contacts</strong></h4>
+          <ul>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="#">Change logs</a></li>
+            <li><a href="copyright.html">DMCA</a></li>
+            <li><a href="#"><span class="fa-li"><i class="fa-solid fa-hand-holding-dollar fa-beat" title="To be available soon"></i></span>Donate</a></li>
+          </ul>
+          </p>
+
+          </div>
+    </footer>
+
+
     <script src="https://cdn.plyr.io/3.6.12/plyr.js"></script>
-    <script type="text/javascript">
-              const controls = [
+  <script>
+        const controls = [
               'play-large',
               'rewind',
-              'play', 
-              'fast-forward', 
-              'progress', 
+              'play',
+              'fast-forward',
+              'progress',
               'current-time',
               'duration',
               'mute',
@@ -38,6 +90,14 @@
         document.addEventListener('DOMContentLoaded', () => {
             const player = Plyr.setup('.player', { controls });
         });
+
+        const body = document.querySelector('body');
+        const footer = document.querySelector('footer');
+        const toogle = document.querySelector('.toogle');
+        toogle.onclick = () => {
+            body.classList.toggle('dark')
+            footer.classList.toggle('dark')
+        }
     </script>
-  </body>
+</body>
 </html>
