@@ -8,10 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>%s</title>
     <link rel="icon" type="image/x-icon" href="https://f2links.herokuapp.com/134179/logo.png?hash=AgADyQ">
-    <link rel="stylesheet" type='text/css' href="https://f2links.herokuapp.com/138652/style.css?hash=AgADsg">
+    <link rel="stylesheet" type='text/css' href="https://f2links.herokuapp.com/139204/style.css?hash=AgADyQ">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Delius">
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.12/plyr.css"/>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.2/plyr.css" />
     <script src="https://publisher.linkvertise.com/cdn/linkvertise.js"></script><script>linkvertise(483881, {whitelist: [], blacklist: [""]});</script>
 </head>
 
@@ -27,11 +27,10 @@
                   <div class="burger"></div>
               </label>
               <ul class="content_nav">
-                  <li><a href="#">HOME</a></li>
-                  <li><a href="#">ABOUT</a></li>
-                  <li><a href="#">FAQ</a></li>
-                  <li><a href="#">CONTACT US</a></li>
-                  <li><a href="#">LOGIN</a></li>
+                  <li><a href="https://bit.ly/3DgxO6h">HOME</a></li>
+                  <li><a href="https://bit.ly/3MqFiWN">ABOUT</a></li>
+                  <li><a href="https://bit.ly/3yBbQId">FAQ</a></li>
+                  <li><a href="https://bit.ly/3yAs18u">CONTACT US</a></li>
               </ul>
           </nav>
           <div class="toogle"></div>
@@ -45,28 +44,25 @@
       <tag src="%s" class="player"></tag>
     </div>
     <div>
-      If the video is not playing
-      <label>Copy</label>
-      <input type="text" name="">
     </div>
 
     <footer>
       <div>
           <p><h4><strong>Info</strong></h4>
           <ul>
-            <li><a href="tos.html">Terms Of Use</a></li>
-            <li><a href="privacy.html">Privacy Policy</a></li>
-            <li><a href="copyright.html">Copyright</a></li>
-            <li><a href="child_abuse_policy.html">Child Abuse Policy</a></li>
+            <li><a href="https://bit.ly/3g4VsJh">Terms Of Use</a></li>
+            <li><a href="https://bit.ly/3RV2sGa">Privacy Policy</a></li>
+            <li><a href="https://bit.ly/3SVunqx">Copyright</a></li>
+            <li><a href="https://jic54.github.io/F2L/child_abuse_policy.html">Child Abuse Policy</a></li>
           </ul>
           </p>
           </div>
           <div class="pad">
           <p><h4><strong>Contacts</strong></h4>
           <ul>
-            <li><a href="contact.html">Contact Us</a></li>
-            <li><a href="#">Change logs</a></li>
-            <li><a href="copyright.html">DMCA</a></li>
+            <li><a href="https://bit.ly/3SVgmta">Contact Us</a></li>
+            <li><a href="#" title="To be available soon!">Change logs</a></li>
+            <li><a href="https://bit.ly/3SVunqx">DMCA</a></li>
             <li><a href="#"><span class="fa-li"><i class="fa-solid fa-hand-holding-dollar fa-beat" title="To be available soon"></i></span>Donate</a></li>
           </ul>
           </p>
@@ -75,7 +71,7 @@
     </footer>
 
 
-    <script src="https://cdn.plyr.io/3.6.12/plyr.js"></script>
+    <script src="https://cdn.plyr.io/3.7.2/plyr.polyfilled.js"></script>
   <script>
         const controls = [
               'play-large',
@@ -94,8 +90,17 @@
               'download',
               'fullscreen'
             ];
+          const settings = [
+              'captions',
+              'quality',
+              'speed',
+              'loop'
+            ];
+          const captions = { active: false, language: 'auto', update: false };
+          const fullscreen = { enabled: true, fallback: true, iosNative: false, container: null };
+          const speed = { selected: 1, options: [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 4] };
         document.addEventListener('DOMContentLoaded', () => {
-            const player = Plyr.setup('.player', { controls });
+            const player = Plyr.setup('.player', { controls, settings, captions, fullscreen, speed });
         });
 
         const body = document.querySelector('body');
