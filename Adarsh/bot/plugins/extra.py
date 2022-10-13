@@ -502,10 +502,10 @@ async def short(link):
         return error
 
 @StreamBot.on_message(filters.command(["tgmedia", "tgraph", "telegraph"]))
-async def telegraph(client, message):
+async def telegraph(bot, update):
     replied = message.reply_to_message
     if not replied:
-        await message.reply("Reply to a supported media file")
+        await update.reply("Reply to a supported media file")
         return
     if not (
         (replied.photo and replied.photo.file_size <= 5242880)
@@ -523,18 +523,18 @@ async def telegraph(client, message):
             and replied.document.file_size <= 5242880
         )
     ):
-        await message.reply("Not supported!")
+        await update.reply("Not supported!")
         return
-    download_location = await client.download_media(
+    download_location = await bot.download_media(
         message=message.reply_to_message,
         file_name="root/downloads/",
     )
     try:
         response = upload_file(download_location)
     except Exception as document:
-        await message.reply(message, text=document)
+        await update.reply(message, text=document)
     else:
-        await message.reply(
+        await update.reply(
             f"<b>Link:-</b>\n\n <code>https://telegra.ph{response[0]}</code>",
             quote=True,
             reply_markup=InlineKeyboardMarkup(
