@@ -96,7 +96,12 @@
           const fullscreen = { enabled: true, fallback: true, iosNative: false, container: null };
           const speed = { selected: 1, options: [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 4] };
         document.addEventListener('DOMContentLoaded', () => {
-            const player = Plyr.setup('.player', { controls, settings, captions, fullscreen, speed });
+            const player = Plyr.setup('.player', { controls, settings: [
+              'captions',
+              'quality',
+              'speed',
+              'loop'
+            ], captions: { active: false, language: 'auto', update: false }, fullscreen: { enabled: true, fallback: true, iosNative: false, container: null }, speed: { selected: 1, options: [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 4] } });
         });
 
         const body = document.querySelector('body');
