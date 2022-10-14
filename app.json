@@ -1,6 +1,6 @@
 {
-  "name": "Adarsh-FileStreamBot",
-  "description": "A Pyrogram Telegram bot to Stream Telegram files to web. @adarshgoel",
+  "name": "FilesToLinks",
+  "description": "A Pyrogram Telegram bot to Stream Telegram files to web.",
   "keywords": [
       "telegram",
       "stream",
@@ -13,10 +13,10 @@
       "media",
       "bot"
     ],
-  "repository": "https://github.com/adarsh-goel/FileStreamBot-pro/",
+  "repository": "https://t.me/JiC54_Official",
   "success_url": "/",
   "logo": "https://i.ibb.co/MnMZ1Sy/download-1.jpg",
-  "website": "http://adarsh.eu.org",
+  "website": "http://t.me/JiC54_Official",
   "env": {
       "ENV": {
           "description": "Set this to True if you don't want to crash the bot",
@@ -55,7 +55,7 @@
           
       },
       "OWNER_USERNAME": {
-          "description": "Enter your username without @  example  adarsh."
+          "description": "Enter your username without @  example  joomamw."
       },
       "SLEEP_THRESHOLD": {
           "description": "Floodwait Sleep timer. Read the readme for more info about this var",
@@ -94,7 +94,7 @@
           "required": false
       },
       "SESSION_NAME": {
-          "description": " Session Name for Bot [ Add adarsh-goel]",
+          "description": " Session Name for Bot [ Add JiC54]",
           "value": "File-To-Link",
           "required": false
       }
