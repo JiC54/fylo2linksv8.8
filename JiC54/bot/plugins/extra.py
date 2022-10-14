@@ -363,8 +363,7 @@ async def inline_short(bot, update):
             input_message_content=InputTextMessageContent(
                 message_text=shorten_urls,
                 disable_web_page_preview=True
-            ),
-            reply_markup=reply_markup
+            )
         )
     ]
     await bot.answer_inline_query(
