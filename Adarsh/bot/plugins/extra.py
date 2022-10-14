@@ -15,7 +15,7 @@ from urllib.parse import quote
 BITLY_API = os.environ.get("BITLY_API", "8df1df8c23f719e5cf97788cc2d40321ea30092b")
 CUTTLY_API = os.environ.get("CUTTLY_API", "f64dffbde033b6c307387dd50b7c76e505f1c")
 SHORTCM_API = os.environ.get("SHORTCM_API", "pk_...NIZv")
-GPLINKS_API = os.environ.get("GPLINKS_API", "008ccaedd6061ad1948838f410947603de9007a7")
+GPLINKS_API = os.environ.get("GPLINKS_API", "3f84819e8fd9f234b0150fb6d39e7ab9b6bf370c")
 
 START_TEXT = """ Your Telegram DC Is : `{}`  """
 HELP_TEXT = """Everything has fully been explained very well in our website including About the bot, Features, FAQ, Copyright, Terms of use, Child Abuse Policy, DMCA and many more.
@@ -73,7 +73,7 @@ ABOUT_BUTTONS = InlineKeyboardMarkup(
         InlineKeyboardButton('BACK', callback_data='menu'),
         InlineKeyboardButton('CLOSE', callback_data='close')
         ]]
-)        
+)
 START_BUTTONS = InlineKeyboardMarkup(
         [[
         InlineKeyboardButton('♻️ Update Channel', url='https://telegram.me/tellybots_4u'),
@@ -140,7 +140,7 @@ async def maintainers(b,m):
                 await b.send_message(
                     chat_id=m.chat.id,
                     text="This Bot was Coded and being maintained By [JiC54](https://t.me/jic54_official)",
-                    
+
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
@@ -148,10 +148,10 @@ async def maintainers(b,m):
                             ]
                         ]
                     ),
-                    
+
                     disable_web_page_preview=True)
-            
-         
+
+
 @StreamBot.on_message(filters.command("donate") | filters.regex("DONATE❤️"))
 async def follow_user(b,m):
     try:
@@ -160,10 +160,10 @@ async def follow_user(b,m):
                 donate = DONATE_TEXT.format(m.from_user.mention)
                 await b.send_message(
                     chat_id=m.chat.id,
-                    text=donate,   
-                    reply_markup=DONATE_BUTTONS, 
+                    text=donate,
+                    reply_markup=DONATE_BUTTONS,
                     disable_web_page_preview=True)
-        
+
 
 @StreamBot.on_message(filters.regex("DC"))
 async def start(bot, update):
@@ -175,13 +175,13 @@ async def start(bot, update):
     )
 
 
-    
+
 @StreamBot.on_message(filters.command("menu") | filters.regex("MENU📊"))
 async def list(l, m):
     await l.send_message(chat_id = m.chat.id,
         text = MENU_TEXT, reply_markup=MENU_BUTTONS)
-    
-    
+
+
 @StreamBot.on_message(filters.command("ping") | filters.regex("ping📡"))
 async def ping(b, m):
     start_t = time.time()
@@ -189,7 +189,7 @@ async def ping(b, m):
     end_t = time.time()
     time_taken_s = (end_t - start_t) * 1000
     await ag.edit(f"Pong!\n{time_taken_s:.3f} ms")
-  
+
 @StreamBot.on_message(filters.private & filters.regex("status📊"))
 async def stats(bot, update):
   currentTime = readable_time((time.time() - StartTime))
@@ -218,7 +218,7 @@ async def gist(g, m):
 
     LIST_MSG = "Hi! {} Here is a list of all my commands \n \n 1 . `start⚡️` \n 2. `help📚` \n 3. `login🔑` \n 4.`follow❤️` \n 5. `ping📡` \n 6. `status📊` \n 7. `DC` this tells your telegram dc \n 8. `maintainers😎` "
     await g.send_message(chat_id = m.chat.id,
-        text = LIST_MSG.format(m.from_user.mention(style="md")),               
+        text = LIST_MSG.format(m.from_user.mention(style="md")),
                     reply_markup=HELP_BUTTONS)
 @StreamBot.on_message(filters.command("id"))
 async def id(j, m):
@@ -227,7 +227,7 @@ async def id(j, m):
 
 @StreamBot.on_message(filters.command("verified"))
 async def verified(v, m):
-    verified = "You are a verified Telegram user: <b>{}</b>"  
+    verified = "You are a verified Telegram user: <b>{}</b>"
     await v.send_message(chat_id = m.chat.id,
         text = verified.format(m.from_user.is_verified))
 
@@ -337,4 +337,3 @@ async def cb_data(bot, update):
         await update.answer(text=hi, show_alert=True)
     else:
         await update.message.delete()
-
