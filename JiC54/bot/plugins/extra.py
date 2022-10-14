@@ -337,7 +337,7 @@ async def cb_data(bot, update):
         await update.answer(text=hi, show_alert=True)
     else:
         await update.message.delete()
-@Client.on_message(filters.command(["short"]) & filters.regex(r'https?://[^\s]+'))
+@StreamBot.on_message(filters.command(["short"]) & filters.regex(r'https?://[^\s]+'))
 async def reply_shortens(bot, update):
     message = await update.reply_text(
         text="`Analysing your link...`",
@@ -352,7 +352,7 @@ async def reply_shortens(bot, update):
         disable_web_page_preview=True
     )
 
-@Client.on_inline_query(filters.regex(r'https?://[^\s]+'))
+@StreamBot.on_inline_query(filters.regex(r'https?://[^\s]+'))
 async def inline_short(bot, update):
     link = update.matches[0].group(0),
     shorten_urls = await short(link)
