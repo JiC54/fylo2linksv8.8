@@ -348,7 +348,6 @@ async def reply_shortens(bot, update):
     shorten_urls = await short(link)
     await message.edit_text(
         text=shorten_urls,
-        reply_markup=reply_markup,
         disable_web_page_preview=True
     )
 
