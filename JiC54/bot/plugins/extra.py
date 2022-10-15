@@ -78,8 +78,8 @@ Just type /short command along with the link you want to shorten
 For example;
 
 <code>/short https://www.twosix5.blogspot.com</code>"""
-EXTRA_TEXT = """The following are extra features. They have been made for donors as an apreciation and a reward for their contribution, for now all users can access these extras but not for so long.
-so /donate now to be added on a list of our donors, there are more features coming for donors!"""
+EXTRA_TEXT = """Extra features are listed below. For the time being, all users may access these bonuses because they were created as a thank-you and a reward for supporters (donors).
+However, this access will soon expire to all users who haven'nt made any donation. Therefore, /donate right now to be added to our donor list; further benefits are on the way for donors!"""
 TELEGRAPH_BUTTONS = InlineKeyboardMarkup(
         [[
         InlineKeyboardButton('BACK', callback_data='menu'),
@@ -111,7 +111,7 @@ ABOUT_BUTTONS = InlineKeyboardMarkup(
 DONATE_BUTTONS = InlineKeyboardMarkup(
         [[
         InlineKeyboardButton('PAYPAL', callback_data='paypal'),
-        InlineKeyboardButton('BUY ME A COFFEE', url='coffee')
+        InlineKeyboardButton('BUY ME A COFFEE', callback_data='coffee')
         ],[
         InlineKeyboardButton('CRYPTO', callback_data='crypto'),
         InlineKeyboardButton('CLOSE', callback_data='close')
@@ -160,7 +160,7 @@ ETHEREUM_BUTTONS = InlineKeyboardMarkup(
 MENU_BUTTONS = InlineKeyboardMarkup(
         [[
         InlineKeyboardButton("COMMANDS", callback_data="command"),
-        InlineKeyboardButton("TOOLS", callback_data="tools")
+        InlineKeyboardButton("EXTRA", callback_data="extra")
         ],
         [
         InlineKeyboardButton("ABOUT", callback_data="about"),      
@@ -424,6 +424,12 @@ async def cb_data(bot, update):
             text=SHORTENER_TEXT,
             disable_web_page_preview=True,
             reply_markup=SHORTENER_BUTTONS
+            )
+    elif update.data=="extra":
+        await update.message.edit_text(
+            text=EXTRA_TEXT,
+            disable_web_page_preview=True,
+            reply_markup=EXTRA_BUTTONS
             )
     elif update.data=="premium":
         hi = f"This user is a premium user: {update.from_user.is_premium}"
