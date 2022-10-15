@@ -54,10 +54,44 @@ ETHEREUM_TEXT = """<b>Use the following address to deposit ONLY Ethereum (ETH):<
 TETHER_TEXT = """<b>Use the following address to deposit ONLY Tether (USDT):</b>
 
 <code>TVekMwDh42vjXy5NbNrQPAKdBgzypDLRk6</code>"""
-CRYPTO_TEXT = """<b>Please select a crypto currency.</b>"""
-ID_MSG = """Your Telegram Id is <code>{}</code>"""
-VERIFIED_TEXT = """You are a verified Telegram user"""
-NOTVERIFIED_TEXT = """You are not a verified Telegram user"""
+CRYPTO_TEXT = """Choose a cryptocurrency from the list below, and then use the address that appears. If the transaction was successful, snap a screenshot and send it to @jumahmw. We will add you to our donors list as a reward and way of saying "thank you" for your generosity, giving you access to extra services.
+
+If you run across any problems while donating crypto, contact @jooma265 immediately."""
+PAYPAL_TEXT = """To make a donation, please use the button below. If the transaction was successful, snap a screenshot and send it to @jumahmw. We'll add you to our contributors list, where you'll be able to enjoy additional services as a reward and a 'thank you' for your support
+
+Contact @jooma265 if you experience any difficulties while making a donation via PayPal."""
+BUYMEACOFFEE_TEXT = """To donate, click the button below. Take a screenshot and send it to @jumahmw if the transaction was successful. As a reward and way of saying "thank you" for your donation, we will add you to our donors list, where you will have access to additional services.
+
+Contact @jooma265 if you experience any difficulties while buying me a coffee"""
+ID_MSG = """Your Telegram ID is <code>{}</code>"""
+TELEGRAPH_TEXT = """This feature, allows you to upload media on telegraph.
+
+Just reply with /telegraph command to a media and the telegraph link will be generated and sent to you
+
+<b>NOTE</b>
+- Only videos and pictures can be uploaded to telegraph
+- Maximum size of media that can be uploaded to telegraph is 5mb"""
+SHORTENER_TEXT = """This feature enables you to shorten links.
+
+Just type /short command along with the link you want to shorten
+
+For example;
+
+<code>/short https://www.twosix5.blogspot.com</code>"""
+EXTRA_TEXT = """The following are extra features. They have been made for donors as an apreciation and a reward for their contribution, for now all users can access these extras but not for so long.
+so /donate now to be added on a list of our donors, there are more features coming for donors!"""
+TELEGRAPH_BUTTONS = InlineKeyboardMarkup(
+        [[
+        InlineKeyboardButton('BACK', callback_data='menu'),
+        InlineKeyboardButton('CLOSE', callback_data='close')
+        ]]
+)
+SHORTENER_BUTTONS = InlineKeyboardMarkup(
+        [[
+        InlineKeyboardButton('BACK', callback_data='menu'),
+        InlineKeyboardButton('CLOSE', callback_data='close')
+        ]]
+)
 HELP_BUTTONS = InlineKeyboardMarkup(
         [[
         InlineKeyboardButton('VISIT WEBSITE', url='https://bit.ly/3DgxO6h')
@@ -74,21 +108,28 @@ ABOUT_BUTTONS = InlineKeyboardMarkup(
         InlineKeyboardButton('CLOSE', callback_data='close')
         ]]
 )
-START_BUTTONS = InlineKeyboardMarkup(
-        [[
-        InlineKeyboardButton('♻️ Update Channel', url='https://telegram.me/tellybots_4u'),
-        InlineKeyboardButton('💬 Support Group', url='https://telegram.me/tellybots_support')
-        ],[
-        InlineKeyboardButton('♨️ Help', callback_data='help'),
-        InlineKeyboardButton('🗑️ Close', callback_data='close')
-        ]]
-)
 DONATE_BUTTONS = InlineKeyboardMarkup(
         [[
-        InlineKeyboardButton('PAYPAL', url='https://bit.ly/3BNvGAv'),
-        InlineKeyboardButton('BUY ME A COFFEE', url='https://bit.ly/3SkoItT')
+        InlineKeyboardButton('PAYPAL', callback_data='paypal'),
+        InlineKeyboardButton('BUY ME A COFFEE', url='coffee')
         ],[
         InlineKeyboardButton('CRYPTO', callback_data='crypto'),
+        InlineKeyboardButton('CLOSE', callback_data='close')
+        ]]
+)
+PAYPAL_BUTTONS = InlineKeyboardMarkup(
+        [[
+        InlineKeyboardButton('DONATE VIA PAYPAL', url='https://bit.ly/3BNvGAv')
+        ],[
+        InlineKeyboardButton('CRYPTO', callback_data='crypto'),
+        InlineKeyboardButton('CLOSE', callback_data='close')
+        ]]
+)
+BUYMEACOFFEE_BUTTONS = InlineKeyboardMarkup(
+        [[
+        InlineKeyboardButton('BUY ME A COFFEE', url='https://bit.ly/3SkoItT')
+        ],[
+        InlineKeyboardButton('BACK', callback_data='donate'),
         InlineKeyboardButton('CLOSE', callback_data='close')
         ]]
 )
@@ -118,10 +159,14 @@ ETHEREUM_BUTTONS = InlineKeyboardMarkup(
 )
 MENU_BUTTONS = InlineKeyboardMarkup(
         [[
-        InlineKeyboardButton("HELP", callback_data="help"),
-        InlineKeyboardButton("ABOUT", callback_data="about")
-        ],[
         InlineKeyboardButton("COMMANDS", callback_data="command"),
+        InlineKeyboardButton("TOOLS", callback_data="tools")
+        ],
+        [
+        InlineKeyboardButton("ABOUT", callback_data="about"),      
+        InlineKeyboardButton("HELP", callback_data="help")
+        ],
+        [
         InlineKeyboardButton("CLOSE", callback_data="close")
         ]]
 )
@@ -129,6 +174,12 @@ COMMAND_BUTTONS = InlineKeyboardMarkup(
         [[
         InlineKeyboardButton("BACK", callback_data="menu"),
         InlineKeyboardButton("CLOSE", callback_data="close")
+        ]]
+)
+EXTRA_BUTTONS = InlineKeyboardMarkup(
+        [[
+        InlineKeyboardButton("TELEGRAPH", callback_data="telegraph"),
+        InlineKeyboardButton("SHORTENER", callback_data="shortener")
         ]]
 )
 
@@ -241,8 +292,8 @@ async def is_premium(p, m):
 async def info(i, m):
     info = """<b><u>Bot Info</u></b>
 
-Version:              9.8.0
-Updated on:      Oct 03, 2022
+Version:              10.0.0
+Updated on:      Oct 15, 2022
 Offered By:        JiC54
 Released on:     Feb 21, 2022"""
     await i.send_message(chat_id = m.chat.id,
@@ -303,22 +354,40 @@ async def cb_data(bot, update):
             reply_markup=CRYPTO_BUTTONS
             )
     elif update.data=="bitcoin":
-        await update.message.edit_text(
+        close_bitcoin = await update.message.edit_text(
             text=BITCOIN_TEXT,
             disable_web_page_preview=True,
             reply_markup=BITCOIN_BUTTONS
             )
+        await asyncio.sleep(150)
+        await close_bitcoin.edit(
+            text=DONATE_TEXT.format(update.from_user.mention),
+            disable_web_page_preview=True,
+            reply_markup=DONATE_BUTTONS
+            )
     elif update.data=="ethereum":
-        await update.message.edit_text(
+        close_ethereum = await update.message.edit_text(
             text=ETHEREUM_TEXT,
             disable_web_page_preview=True,
             reply_markup=ETHEREUM_BUTTONS
             )
+        await asyncio.sleep(150)
+        await close_ethereum.edit(
+            text=DONATE_TEXT.format(update.from_user.mention),
+            disable_web_page_preview=True,
+            reply_markup=DONATE_BUTTONS
+            )
     elif update.data=="tether":
-        await update.message.edit_text(
+        close_tether = await update.message.edit_text(
             text=TETHER_TEXT,
             disable_web_page_preview=True,
             reply_markup=TETHER_BUTTONS
+            )
+        await asyncio.sleep(150)
+        await close_tether.edit(
+            text=DONATE_TEXT.format(update.from_user.mention),
+            disable_web_page_preview=True,
+            reply_markup=DONATE_BUTTONS
             )
     elif update.data=="menu":
         await update.message.edit_text(
@@ -331,6 +400,30 @@ async def cb_data(bot, update):
             text=COMMAND_TEXT,
             disable_web_page_preview=True,
             reply_markup=COMMAND_BUTTONS
+            )
+    elif update.data=="paypal":
+        await update.message.edit_text(
+            text=PAYPAL_TEXT,
+            disable_web_page_preview=True,
+            reply_markup=PAYPAL_BUTTONS
+            )
+    elif update.data=="coffee":
+        await update.message.edit_text(
+            text=BUYMEACOFFEE_TEXT,
+            disable_web_page_preview=True,
+            reply_markup=BUYMEACOFFEE_BUTTONS
+            )
+    elif update.data=="telegraph":
+        await update.message.edit_text(
+            text=TELEGRAPH_TEXT,
+            disable_web_page_preview=True,
+            reply_markup=TELEGRAPH_BUTTONS
+            )
+    elif update.data=="shortener":
+        await update.message.edit_text(
+            text=SHORTENER_TEXT,
+            disable_web_page_preview=True,
+            reply_markup=SHORTENER_BUTTONS
             )
     elif update.data=="premium":
         hi = f"This user is a premium user: {update.from_user.is_premium}"
@@ -371,14 +464,14 @@ async def inline_short(bot, update):
     )
 
 async def short(link):
-    shorten_urls = "**--Shorted URLs--**\n"
+    shorten_urls = "**--SHORTENED URLs--**\n"
     
     # Bit.ly shorten
     if BITLY_API:
         try:
             s = Shortener(api_key=BITLY_API)
             url = s.bitly.short(link)
-            shorten_urls += f"\n**Bit.ly :-** {url}"
+            shorten_urls += f"\n**Bitly : ** {url}"
         except Exception as error:
             print(f"Bit.ly error :- {error}")
     
@@ -386,24 +479,16 @@ async def short(link):
     try:
         s = Shortener()
         url = s.chilpit.short(link)
-        shorten_urls += f"\n**Chilp.it :-** {url}"
+        shorten_urls += f"\n**Chilpit : ** {url}"
     except Exception as error:
         print(f"Chilp.it error :- {error}")
-    
-    # Clck.ru shorten
-    try:
-        s = Shortener()
-        url = s.clckru.short(link)
-        shorten_urls += f"\n**Clck.ru :-** {url}"
-    except Exception as error:
-        print(f"Click.ru error :- {error}")
     
     # Cutt.ly shorten
     if CUTTLY_API:
         try:
             s = Shortener(api_key=CUTTLY_API)
             url = s.cuttly.short(link)
-            shorten_urls += f"\n**Cutt.ly :-** {url}"
+            shorten_urls += f"\n**Cuttly : ** {url}"
         except Exception as error:
             print(f"Cutt.ly error :- {error}")
     
@@ -411,7 +496,7 @@ async def short(link):
     try:
         s = Shortener()
         url = s.dagd.short(link)
-        shorten_urls += f"\n**Da.gd :-** {url}"
+        shorten_urls += f"\n**Dagd : ** {url}"
     except Exception as error:
         print(f"Da.gd error :- {error}")
     
@@ -420,7 +505,7 @@ async def short(link):
     try:
         s = Shortener()
         url = s.osdb.short(link)
-        shorten_urls += f"\n**Osdb.link :-** {url}"
+        shorten_urls += f"\n**Osdblink : ** {url}"
     except Exception as error:
         print(f"Osdb.link error :- {error}")
     
