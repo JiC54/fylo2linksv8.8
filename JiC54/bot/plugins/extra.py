@@ -25,11 +25,9 @@ ABOUT_TEXT = """With this service, you may post files to the internet by simply 
 Learn more about this service by visiting its website, click below."""
 DONATE_TEXT = """ Dear {},
 
-Right now, we're facing struggles to pay for servers to keep this service alive as well as to buy resources such as a domain for this services. We need just $10 a month to meet our goal whereby only $7 lets us run this bot a whole month on heroku and the reamining $3 is spent on databases.
+I, the service's developer, am struggling to pay for servers in order to keep the service online. Running this service for a month costs $10. Whereby Only $7 is spent on Heroku, with the remaining $3 spent on databases. You can help keep this service alive today by donating any amount. Just click below and select a method.
 
-Please donate <b>any little amount</b> today to ensure this service stays alive. Just click below and select a method.
-
-Thank you for everything you do. We couldn’t do this without you.
+Thank you for everything you do. I couldn’t do this without you.
 
 All the best,
 
