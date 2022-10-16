@@ -81,14 +81,14 @@ EXTRA_TEXT = """Extra features are listed below. For the time being, all users m
 However, this access will soon expire to all users who haven'nt made any donation. Therefore, /donate right now to be added to our donor list; further benefits are on the way for donors!"""
 TELEGRAPH_BUTTONS = InlineKeyboardMarkup(
         [[
-        InlineKeyboardButton('BACK', callback_data='telegraph'),
+        InlineKeyboardButton('BACK', callback_data='extra'),
         InlineKeyboardButton('MENU', callback_data='menu'),
         InlineKeyboardButton('CLOSE', callback_data='close')
         ]]
 )
 SHORTENER_BUTTONS = InlineKeyboardMarkup(
         [[
-        InlineKeyboardButton('BACK', callback_data='shortener'),
+        InlineKeyboardButton('BACK', callback_data='extra'),
         InlineKeyboardButton('MENU', callback_data='menu'),
         InlineKeyboardButton('CLOSE', callback_data='close')
         ]]
