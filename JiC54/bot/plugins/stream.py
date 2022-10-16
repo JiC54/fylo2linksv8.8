@@ -102,71 +102,78 @@ async def private_receive_handler(c: Client, m: Message):
             return
     try:
         
-        uploading_text0 = """
+        uploading_text0 = """🗂: -/-
+
 <b>Uploading</b>
 [▱▱▱▱▱▱▱▱▱▱] 0%
 EAT: -/-s
         """
-        gy = await m.reply_text(text=uploading_text0, quote=True)
+        gy = await m.reply_text(text=uploading_text0)
         await asyncio.sleep(2)
-        uploading_text1 = """
+        log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
+        uploading_text1 = """🗂: {}
+
 <b>Uploading</b>
 [▰▱▱▱▱▱▱▱▱▱] 10%
 EAT: 8s
         """
-        gy1 = await gy.edit(text=uploading_text1)
-        uploading_text2 = """
+        gy1 = await gy.edit(text=uploading_text1.format(get_name(log_msg)))
+        uploading_text2 = """🗂: {}
+
 <b>Uploading</b>
 [▰▰▱▱▱▱▱▱▱▱] 20%
 EAT: 8s
         """
-        gy2 = await gy1.edit(text=uploading_text2)
-        uploading_text3 = """
+        gy2 = await gy1.edit(text=uploading_text2.format(get_name(log_msg)))
+        uploading_text3 = """🗂: {}
+
 <b>Uploading</b>
 [▰▰▰▱▱▱▱▱▱▱] 30%
 EAT: 7s
         """
-        gy11 = await gy2.edit(text=uploading_text3)
-        await asyncio.sleep(2)
-        log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
-        await asyncio.sleep(2)
-        uploading_text5 = """
+        gy11 = await gy2.edit(text=uploading_text3.format(get_name(log_msg)))
+        uploading_text5 = """🗂: {}
+
 <b>Uploading</b>
 [▰▰▰▰▰▱▱▱▱▱] 50%
 EAT: 3s
         """
-        gy12 = await gy11.edit(text=uploading_text5)
-        uploading_text6 = """
+        gy12 = await gy11.edit(text=uploading_text5.format(get_name(log_msg)))
+        uploading_text6 = """🗂: {}
+
 <b>Uploading</b>
 [▰▰▰▰▰▰▱▱▱▱] 60%
 EAT: 3s
         """
-        gy13 = await gy12.edit(text=uploading_text6)
-        uploading_text7 = """
+        gy13 = await gy12.edit(text=uploading_text6.format(get_name(log_msg)))
+        uploading_text7 = """🗂: {}
+
 <b>Uploading</b>
 [▰▰▰▰▰▰▰▱▱▱] 70%
 EAT: 2s
         """
-        gy14 = await gy13.edit(text=uploading_text7)
-        uploading_text8 = """
+        gy14 = await gy13.edit(text=uploading_text7.format(get_name(log_msg)))
+        uploading_text8 = """🗂: {}
+
 <b>Uploading</b>
 [▰▰▰▰▰▰▰▰▱▱] 80%
 EAT: 2s
         """
-        gy15 = await gy14.edit(text=uploading_text8)
-        uploading_text9 = """
+        gy15 = await gy14.edit(text=uploading_text8.format(get_name(log_msg)))
+        uploading_text9 = """🗂: {}
+
 <b>Uploading</b>
 [▰▰▰▰▰▰▰▰▰▱] 90%
 EAT: 1s
         """
-        gy16 = await gy15.edit(text=uploading_text9)
-        uploading_text10 = """
+        gy16 = await gy15.edit(text=uploading_text9.format(get_name(log_msg)))
+        uploading_text10 = """🗂: {}
+
 <b>Uploading</b>
 [▰▰▰▰▰▰▰▰▰▰] 99%
 EAT: 1s
         """
-        gy17 = await gy16.edit(text=uploading_text10)
-        await asyncio.sleep(2)
+        gy17 = await gy16.edit(text=uploading_text10.format(get_name(log_msg)))
         uploading_textup = """
 <b>Sending...</b>
         """
