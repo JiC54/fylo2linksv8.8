@@ -364,24 +364,18 @@ async def cb_data(bot, update):
             disable_web_page_preview=True,
             reply_markup=BITCOIN_BUTTONS
             )
-        await asyncio.sleep(300)
-        await close_bitcoin.delete()
     elif update.data=="ethereum":
         close_ethereum = await update.message.edit_text(
             text=ETHEREUM_TEXT,
             disable_web_page_preview=True,
             reply_markup=ETHEREUM_BUTTONS
             )
-        await asyncio.sleep(300)
-        await close_ethereum.delete()
     elif update.data=="tether":
         close_tether = await update.message.edit_text(
             text=TETHER_TEXT,
             disable_web_page_preview=True,
             reply_markup=TETHER_BUTTONS
             )
-        await asyncio.sleep(300)
-        await close_tether.delete()
     elif update.data=="menu":
         await update.message.edit_text(
             text=MENU_TEXT,
@@ -400,8 +394,6 @@ async def cb_data(bot, update):
             disable_web_page_preview=True,
             reply_markup=PAYPAL_BUTTONS
             )
-        await asyncio.sleep(300)
-        await close_paypal.delete()
     elif update.data=="coffee":
         await update.message.edit_text(
             text=BUYMEACOFFEE_TEXT,
