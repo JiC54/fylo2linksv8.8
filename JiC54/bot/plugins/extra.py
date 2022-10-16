@@ -1,5 +1,6 @@
 # JiC54
 import os
+import asyncio
 import aiohttp
 from JiC54.bot import StreamBot
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, InlineQueryResultArticle, InputTextMessageContent
@@ -42,7 +43,7 @@ COMMAND_TEXT = """Here's a list of commands
 /feedback Send feedback to the developers
 /dc Your Telegram Data Centre
 """
-MENU_TEXT = """Here is a list of all my commands."""
+MENU_TEXT = """Here is a menu for this bot"""
 BITCOIN_TEXT = """<b>Use the following address to deposit ONLY Bitcoin (BTC):</b>
 
 <code>38mRQgsPoRTZvcMUFpXGMf9HjL8MxjjUzE</code>"""
@@ -68,9 +69,9 @@ Just reply with /telegraph command to a media and the telegraph link will be gen
 
 <b>NOTE</b>
 - Only videos and pictures can be uploaded to telegraph
-- Maximum size of media that can be uploaded to telegraph is 5mb"""
+- Maximum size of media that can be uploaded to telegraph is 5mb
+- Supported media formats; .jpg, .jpeg, .png, .gif, .mp4"""
 SHORTENER_TEXT = """This feature enables you to shorten links.
-
 Just type /short command along with the link you want to shorten
 
 For example;
@@ -80,13 +81,15 @@ EXTRA_TEXT = """Extra features are listed below. For the time being, all users m
 However, this access will soon expire to all users who haven'nt made any donation. Therefore, /donate right now to be added to our donor list; further benefits are on the way for donors!"""
 TELEGRAPH_BUTTONS = InlineKeyboardMarkup(
         [[
-        InlineKeyboardButton('BACK', callback_data='menu'),
+        InlineKeyboardButton('BACK', callback_data='telegraph'),
+        InlineKeyboardButton('MENU', callback_data='menu'),
         InlineKeyboardButton('CLOSE', callback_data='close')
         ]]
 )
 SHORTENER_BUTTONS = InlineKeyboardMarkup(
         [[
-        InlineKeyboardButton('BACK', callback_data='menu'),
+        InlineKeyboardButton('BACK', callback_data='shortener'),
+        InlineKeyboardButton('MENU', callback_data='menu')
         InlineKeyboardButton('CLOSE', callback_data='close')
         ]]
 )
@@ -119,13 +122,13 @@ PAYPAL_BUTTONS = InlineKeyboardMarkup(
         [[
         InlineKeyboardButton('DONATE VIA PAYPAL', url='https://bit.ly/3BNvGAv')
         ],[
-        InlineKeyboardButton('CRYPTO', callback_data='crypto'),
+        InlineKeyboardButton('BACK', callback_data='donate'),
         InlineKeyboardButton('CLOSE', callback_data='close')
         ]]
 )
 BUYMEACOFFEE_BUTTONS = InlineKeyboardMarkup(
         [[
-        InlineKeyboardButton('BUY ME A COFFEE', url='https://bit.ly/3SkoItT')
+        InlineKeyboardButton('BUY ME A COFFEE☕️', url='https://bit.ly/3SkoItT')
         ],[
         InlineKeyboardButton('BACK', callback_data='donate'),
         InlineKeyboardButton('CLOSE', callback_data='close')
@@ -178,6 +181,10 @@ EXTRA_BUTTONS = InlineKeyboardMarkup(
         [[
         InlineKeyboardButton("TELEGRAPH", callback_data="telegraph"),
         InlineKeyboardButton("SHORTENER", callback_data="shortener")
+        ],
+        [
+        InlineKeyboardButton("BACK", callback_data="menu"),
+        InlineKeyboardButton("CLOSE", callback_data="close")
         ]]
 )
 
@@ -400,10 +407,16 @@ async def cb_data(bot, update):
             reply_markup=COMMAND_BUTTONS
             )
     elif update.data=="paypal":
-        await update.message.edit_text(
+        close_paypal = await update.message.edit_text(
             text=PAYPAL_TEXT,
             disable_web_page_preview=True,
             reply_markup=PAYPAL_BUTTONS
+            )
+        await asyncio.sleep(300)
+        await close_paypal.edit(
+            text=DONATE_TEXT.format(update.from_user.mention),
+            disable_web_page_preview=True,
+            reply_markup=DONATE_BUTTONS
             )
     elif update.data=="coffee":
         await update.message.edit_text(
