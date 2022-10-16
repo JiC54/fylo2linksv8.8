@@ -526,16 +526,6 @@ async def short(link):
     except Exception as error:
         print(f"Osdb.link error :- {error}")
     
-    
-    # Short.cm shorten
-    if SHORTCM_API:
-        try:
-            s = Shortener(api_key=SHORTCM_API)
-            url = s.shortcm.short(link)
-            shorten_urls += f"\n**Shortcm : ** {url}"
-        except Exception as error:
-            print(f"Short.cm error :- {error}")
-    
     # TinyURL.com shorten
     try:
         s = Shortener()
