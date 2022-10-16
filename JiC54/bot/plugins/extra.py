@@ -298,7 +298,7 @@ async def info(i, m):
     info = """<b><u>Bot Info</u></b>
 
 Version:              10.0.0
-Updated on:      Oct 15, 2022
+Updated on:      Oct 16, 2022
 Offered By:        JiC54
 Released on:     Feb 21, 2022"""
     await i.send_message(chat_id = m.chat.id,
@@ -364,36 +364,24 @@ async def cb_data(bot, update):
             disable_web_page_preview=True,
             reply_markup=BITCOIN_BUTTONS
             )
-        await asyncio.sleep(150)
-        await close_bitcoin.edit(
-            text=DONATE_TEXT.format(update.from_user.mention),
-            disable_web_page_preview=True,
-            reply_markup=DONATE_BUTTONS
-            )
+        await asyncio.sleep(300)
+        await close_bitcoin.delete()
     elif update.data=="ethereum":
         close_ethereum = await update.message.edit_text(
             text=ETHEREUM_TEXT,
             disable_web_page_preview=True,
             reply_markup=ETHEREUM_BUTTONS
             )
-        await asyncio.sleep(150)
-        await close_ethereum.edit(
-            text=DONATE_TEXT.format(update.from_user.mention),
-            disable_web_page_preview=True,
-            reply_markup=DONATE_BUTTONS
-            )
+        await asyncio.sleep(300)
+        await close_ethereum.delete()
     elif update.data=="tether":
         close_tether = await update.message.edit_text(
             text=TETHER_TEXT,
             disable_web_page_preview=True,
             reply_markup=TETHER_BUTTONS
             )
-        await asyncio.sleep(150)
-        await close_tether.edit(
-            text=DONATE_TEXT.format(update.from_user.mention),
-            disable_web_page_preview=True,
-            reply_markup=DONATE_BUTTONS
-            )
+        await asyncio.sleep(300)
+        await close_tether.delete()
     elif update.data=="menu":
         await update.message.edit_text(
             text=MENU_TEXT,
@@ -413,11 +401,7 @@ async def cb_data(bot, update):
             reply_markup=PAYPAL_BUTTONS
             )
         await asyncio.sleep(300)
-        await close_paypal.edit(
-            text=DONATE_TEXT.format(update.from_user.mention),
-            disable_web_page_preview=True,
-            reply_markup=DONATE_BUTTONS
-            )
+        await close_paypal.delete()
     elif update.data=="coffee":
         await update.message.edit_text(
             text=BUYMEACOFFEE_TEXT,
