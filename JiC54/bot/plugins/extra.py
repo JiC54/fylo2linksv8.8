@@ -89,7 +89,7 @@ TELEGRAPH_BUTTONS = InlineKeyboardMarkup(
 SHORTENER_BUTTONS = InlineKeyboardMarkup(
         [[
         InlineKeyboardButton('BACK', callback_data='shortener'),
-        InlineKeyboardButton('MENU', callback_data='menu')
+        InlineKeyboardButton('MENU', callback_data='menu'),
         InlineKeyboardButton('CLOSE', callback_data='close')
         ]]
 )
