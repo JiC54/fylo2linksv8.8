@@ -115,21 +115,21 @@ EAT: -/-s
 
 <b>Uploading</b>
 [▰▱▱▱▱▱▱▱▱▱] 10%
-EAT: 8s
+EAT: 3s
         """
         gy1 = await gy.edit(text=uploading_text1.format(get_name(log_msg)))
         uploading_text2 = """🗂: {}
 
 <b>Uploading</b>
 [▰▰▱▱▱▱▱▱▱▱] 20%
-EAT: 8s
+EAT: 3s
         """
         gy2 = await gy1.edit(text=uploading_text2.format(get_name(log_msg)))
         uploading_text3 = """🗂: {}
 
 <b>Uploading</b>
 [▰▰▰▱▱▱▱▱▱▱] 30%
-EAT: 7s
+EAT: 3s
         """
         gy11 = await gy2.edit(text=uploading_text3.format(get_name(log_msg)))
         uploading_text5 = """🗂: {}
@@ -143,7 +143,7 @@ EAT: 3s
 
 <b>Uploading</b>
 [▰▰▰▰▰▰▱▱▱▱] 60%
-EAT: 3s
+EAT: 2s
         """
         gy13 = await gy12.edit(text=uploading_text6.format(get_name(log_msg)))
         uploading_text7 = """🗂: {}
