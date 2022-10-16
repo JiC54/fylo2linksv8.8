@@ -43,7 +43,7 @@ COMMAND_TEXT = """Here's a list of commands
 /feedback Send feedback to the developers
 /dc Your Telegram Data Centre
 """
-MENU_TEXT = """Here is a menu for this bot"""
+MENU_TEXT = """<b>Here is the menu for File To Links</b>"""
 BITCOIN_TEXT = """<b>Use the following address to deposit ONLY Bitcoin (BTC):</b>
 
 <code>38mRQgsPoRTZvcMUFpXGMf9HjL8MxjjUzE</code>"""
