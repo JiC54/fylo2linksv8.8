@@ -2,10 +2,10 @@ import os
 from JiC54.bot import StreamBot
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from PIL import Image
 from pyzbar.pyzbar import decode
 import pyqrcode
 from JiC54.utilitiess.database import db
+from PIL import Image
 
 
 QR_BUTTONS = InlineKeyboardMarkup(
