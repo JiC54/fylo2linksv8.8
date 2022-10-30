@@ -61,21 +61,6 @@ async def start(b, m):
                     disable_web_page_preview=True
                 )
                 return
-        except UserNotParticipant:
-             await StreamBot.send_photo(
-                chat_id=m.chat.id,
-                photo="https://telegra.ph/file/24b99b621dbab6d3be62d.jpg",
-                caption="<i>𝙹𝙾𝙸𝙽 CHANNEL 𝚃𝙾 𝚄𝚂𝙴 𝙼𝙴🔐</i>",
-                reply_markup=InlineKeyboardMarkup(
-                    [
-                        [
-                            InlineKeyboardButton("Jᴏɪɴ ɴᴏᴡ 🔓", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
-                        ]
-                    ]
-                ),
-                
-            )
-             return
         except Exception:
             await b.send_message(
                 chat_id=m.chat.id,
