@@ -21,7 +21,6 @@ lxml
 wget
 gtts
 beautifulsoup4
-requests
 python-telegram-bot==13.10.0
 SQLAlchemy==1.4.29
 psycopg2-binary
@@ -30,15 +29,12 @@ faker
 hachoir
 pykeyboard
 pynewtonmath
-aiofiles
 ffmpeg-python
 spongemock
 zalgo-text
 geopy
 nltk
-psutil
 aiohttp
-Pillow
 CurrencyConverter
 google_images_download
 google-api-python-client
