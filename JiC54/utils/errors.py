@@ -5,6 +5,7 @@ from functools import wraps
 from pyrogram.errors.exceptions.forbidden_403 import ChatWriteForbidden
 
 from SiestaRobot import LOGGER, pbot as app
+from JiC54.bot import LOGGER, StreamBot as app
 
 
 def split_limits(text):
