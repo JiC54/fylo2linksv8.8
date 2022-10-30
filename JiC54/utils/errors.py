@@ -4,7 +4,9 @@ from functools import wraps
 
 from pyrogram.errors.exceptions.forbidden_403 import ChatWriteForbidden
 
-from JiC54.bot import LOGGER, StreamBot as app
+from JiC54.bot import StreamBot as app
+import logging
+LOGGER = logging.getLogger(__name__)
 
 
 def split_limits(text):
