@@ -11,3 +11,7 @@ psutil
 pyromod
 pyshorteners
 telegraph
+pyqrcode
+pypng
+pyzbar
+pillow 
