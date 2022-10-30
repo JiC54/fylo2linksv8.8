@@ -14,4 +14,4 @@ telegraph
 pyqrcode
 pypng
 pyzbar
-pillow 
+Pillow
