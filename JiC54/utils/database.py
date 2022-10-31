@@ -1,6 +1,7 @@
 # JiC54
 import datetime
 import motor.motor_asyncio
+from JiC54.confing import get_int_key, get_str_key
 
 MONGO_PORT = get_int_key("27017")
 MONGO_DB_URI = "mongodb+srv://jic54autofilter:jic54autofilter@cluster0.nbp6y.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
