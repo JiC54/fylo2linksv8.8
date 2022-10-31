@@ -1,5 +1,5 @@
 from telethon import TelegramClient, events
-from download_from_url import download_file, get_size
+from JiC54.utilities.download_from_url import download_file, get_size
 from JiC54.utils.file_handler import send_to_transfersh_async, progress
 import os
 import time
@@ -16,7 +16,7 @@ download_path = "Downloads/"
 bot = TelegramClient('Uploader bot', api_id, api_hash).start(bot_token=bot_token)
 
 
-@bot.on(events.NewMessage(pattern='/start'))
+@bot.on(events.NewMessage(pattern='/transfersh'))
 async def start(event):
     """Send a message when the command /start is issued."""
     await event.respond('Hi!\nMy Name Is Transfer Uploader Bot Sent any file or direct download link to upload and get the transfer.sh download link Bot Made by @AmiFutami')
