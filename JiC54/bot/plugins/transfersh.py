@@ -46,7 +46,7 @@ def humanbytes(size):
         raised_to_pow += 1
     return str(round(size, 2)) + " " + dict_power_n[raised_to_pow] + "B"
 
-    
+
 
 async def send_to_transfersh_async(file):
 
@@ -70,12 +70,18 @@ async def send_to_transfersh_async(file):
     )
     return download_link, final_date, size_of_file
 
-@StreamBot.on(events.NewMessage(pattern="/transfersh"))
-async def tsh(event):
-    if event.reply_to_msg_id:
+
+    @StreamBot.on_message(filters.command("transfersh"))
+    async def telegraph(client, message):
+    replied = message.reply_to_message
+    if not replied:
+        await message.reply("Reply to a supported media file")
+        return
+    if replied:
         start = time.time()
-        url = await event.get_reply_message()
-        ilk = await event.respond("Downloading...")
+        url = await message.get_reply_message()
+        ilk = await message.reply("Downloading...")
+
         try:
             file_path = await url.download_media(
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
@@ -85,12 +91,12 @@ async def tsh(event):
         except Exception as e:
             traceback.print_exc()
             print(e)
-            await event.respond(f"Downloading Failed\n\n**Error:** {e}")
+            await message.reply(f"Downloading Failed\n\n**Error:** {e}")
 
         await ilk.delete()
 
         try:
-            orta = await event.respond("Uploading to TransferSh...")
+            orta = await message.reply("Uploading to TransferSh...")
             download_link, final_date, size = await send_to_transfersh_async(file_path)
 
             str(time.time() - start)
@@ -100,7 +106,8 @@ async def tsh(event):
         except Exception as e:
             traceback.print_exc()
             print(e)
-            await event.respond(f"Uploading Failed\n\n**Error:** {e}")
+            await message.reply(f"Uploading Failed\n\n**Error:** {e}")
 
-    raise events.StopPropagation
+    raise message.StopPropagation
+        
 
