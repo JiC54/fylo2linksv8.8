@@ -1,23 +1,7 @@
 # JiC54
 import datetime
 import motor.motor_asyncio
-from JiC54.confing import get_int_key, get_str_key
-import asyncio
-import sys
-from motor import motor_asyncio
-from pymongo import MongoClient
-from pymongo.errors import ServerSelectionTimeoutError
 
-MONGO_PORT = get_int_key("27017")
-MONGO_DB_URI = "mongodb+srv://jic54autofilter:jic54autofilter@cluster0.nbp6y.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-MONGO_DB = "JiC54"
-
-
-client = MongoClient()
-client = MongoClient(MONGO_DB_URI, MONGO_PORT)[MONGO_DB]
-motor = motor_asyncio.AsyncIOMotorClient(MONGO_DB_URI, MONGO_PORT)
-db = motor[MONGO_DB]
-db = client["VainBot"]
 
 class Database:
     def __init__(self, uri, database_name):
