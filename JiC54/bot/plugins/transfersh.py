@@ -76,8 +76,8 @@ async def send_to_transfersh_async(file):
     return download_link, final_date, size_of_file
 
 
-    @bot.on(events.NewMessage(pattern="/transfersh"))
-    async def tsh(event):
+@bot.on(events.NewMessage(pattern="/transfersh"))
+async def tsh(event):
     if event.reply_to_msg_id:
         start = time.time()
         url = await event.get_reply_message()
@@ -109,5 +109,3 @@ async def send_to_transfersh_async(file):
             await event.respond(f"Uploading Failed\n\n**Error:** {e}")
 
     raise events.StopPropagation
-        
-
