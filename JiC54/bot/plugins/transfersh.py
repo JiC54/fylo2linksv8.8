@@ -72,11 +72,12 @@ async def send_to_transfersh_async(file):
 
 
     @StreamBot.on_message(filters.command("transfersh"))
-    async def telegraph(client, message):
+    async def tsh(client, message):
     replied = message.reply_to_message
     if not replied:
         await message.reply("Reply to a supported media file")
         return
+    replied = message.reply_to_message
     if replied:
         start = time.time()
         url = await message.get_reply_message()
