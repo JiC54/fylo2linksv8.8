@@ -10,7 +10,7 @@ from pathlib import Path
 from pyrogram import idle
 from .bot import StreamBot
 from .vars import Var
-from aiohttp import web
+from aiohttp import web, ClientSession
 from .server import web_server
 from .utils.keepalive import ping_server
 from JiC54.bot.clients import initialize_clients
@@ -27,6 +27,7 @@ ppath = "JiC54/bot/plugins/*.py"
 files = glob.glob(ppath)
 StreamBot.start()
 loop = asyncio.get_event_loop()
+aiohttpsession = ClientSession()
 
 
 async def start_services():
