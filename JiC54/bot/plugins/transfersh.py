@@ -78,6 +78,7 @@ async def send_to_transfersh_async(file):
 
 @bot.on(events.NewMessage(pattern="/transfersh"))
 async def tsh(event):
+    
     if event.reply_to_msg_id:
         start = time.time()
         url = await event.get_reply_message()
