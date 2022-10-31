@@ -6,8 +6,13 @@ import traceback
 import math
 import aiohttp
 from telethon import events
-from JiC54.bot import StreamBot
+from telethon import TelegramClient
+from telethon.sessions import MemorySession
 
+API_ID = 19328466
+API_HASH = "b2f81c541c4e66e7d167393c5dcd48ef"
+telethn = TelegramClient(MemorySession(), API_ID, API_HASH)
+bot = telethn
 
 
 async def progress(current, total, event, start, type_of_ps):
@@ -71,7 +76,7 @@ async def send_to_transfersh_async(file):
     return download_link, final_date, size_of_file
 
 
-    @StreamBot.on_message(filters.command("transfersh"))
+    @bot.on(events.NewMessage(pattern="/transfersh"))
     async def tsh(event):
     if event.reply_to_msg_id:
         start = time.time()
