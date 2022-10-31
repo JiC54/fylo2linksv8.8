@@ -22,6 +22,7 @@ logging.basicConfig(
 logging.getLogger("aiohttp").setLevel(logging.ERROR)
 logging.getLogger("pyrogram").setLevel(logging.ERROR)
 logging.getLogger("aiohttp.web").setLevel(logging.ERROR)
+LOGGER = logging.getLogger('[JiC54]')
 
 ppath = "JiC54/bot/plugins/*.py"
 files = glob.glob(ppath)
