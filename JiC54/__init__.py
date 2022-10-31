@@ -5,6 +5,7 @@ from os import getenv, environ
 from dotenv import load_dotenv
 from aiohttp import ClientSession
 from telethon.sessions import MemorySession
+from telethon import TelegramClient
 import time
 StartTime = time.time()
 __version__ = 1.1
