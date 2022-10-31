@@ -1,59 +1,106 @@
-from telethon import TelegramClient, events
-from JiC54.utilities.download_from_url import download_file, get_size
-from JiC54.utils.file_handler import send_to_transfersh_async, progress
+import asyncio
+import datetime
 import os
 import time
-import datetime
+import traceback
+import math
 import aiohttp
-import asyncio
-
-api_id = int(os.environ.get("API_ID"))
-api_hash = os.environ.get("API_HASH")
-bot_token =os.environ.get("BOT_TOKEN")
-                          
-download_path = "Downloads/"
-
-bot = TelegramClient('Uploader bot', api_id, api_hash).start(bot_token=bot_token)
+from telethon import events
+from JiC54.bot import StreamBot
 
 
-@bot.on(events.NewMessage(pattern='/transfersh'))
-async def start(event):
-    """Send a message when the command /start is issued."""
-    await event.respond('Hi!\nMy Name Is Transfer Uploader Bot Sent any file or direct download link to upload and get the transfer.sh download link Bot Made by @AmiFutami')
+
+async def progress(current, total, event, start, type_of_ps):
+    """Generic progress_callback for both
+    upload.py and download.py"""
+    now = time.time()
+    diff = now - start
+    if round(diff % 10.00) == 0 or current == total:
+        percentage = current * 100 / total
+        speed = current / diff
+        elapsed_time = round(diff) * 1000
+        time_to_completion = round((total - current) / speed) * 1000
+        estimated_total_time = elapsed_time + time_to_completion
+        progress_str = "[{0}{1}]\nPercent: {2}%\n".format(
+            "".join(["█" for i in range(math.floor(percentage / 5))]),
+            "".join(["░" for i in range(20 - math.floor(percentage / 5))]),
+            round(percentage, 2),
+        )
+        tmp = progress_str + "{0} of {1}\nETA: {2}".format(
+            humanbytes(current), humanbytes(total), time_formatter(estimated_total_time)
+        )
+        await event.edit("{}\n {}".format(type_of_ps, tmp))
+
+def humanbytes(size):
+    """Input size in bytes,
+    outputs in a human readable format"""
+    # https://stackoverflow.com/a/49361727/4723940
+    if not size:
+        return ""
+    # 2 ** 10 = 1024
+    power = 2 ** 10
+    raised_to_pow = 0
+    dict_power_n = {0: "", 1: "Ki", 2: "Mi", 3: "Gi", 4: "Ti"}
+    while size > power:
+        size /= power
+        raised_to_pow += 1
+    return str(round(size, 2)) + " " + dict_power_n[raised_to_pow] + "B"
+
+    
+
+async def send_to_transfersh_async(file):
+
+    size = os.path.getsize(file)
+    size_of_file = humanbytes(size)
+    final_date = get_date_in_two_weeks()
+    file_name = os.path.basename(file)
+
+    print("\nUploading file: {} (size of the file: {})".format(file_name, size_of_file))
+    url = "https://transfer.sh/"
+
+    with open(file, "rb") as f:
+        async with aiohttp.ClientSession() as session:
+            async with session.post(url, data={str(file): f}) as response:
+                download_link = await response.text()
+
+    print(
+        "Link to download file(will be saved till {}):\n{}".format(
+            final_date, download_link
+        )
+    )
+    return download_link, final_date, size_of_file
+
+@StreamBot.on(events.NewMessage(pattern="/transfersh"))
+async def tsh(event):
+    if event.reply_to_msg_id:
+        start = time.time()
+        url = await event.get_reply_message()
+        ilk = await event.respond("Downloading...")
+        try:
+            file_path = await url.download_media(
+                progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                    progress(d, t, ilk, start, "Downloading...")
+                )
+            )
+        except Exception as e:
+            traceback.print_exc()
+            print(e)
+            await event.respond(f"Downloading Failed\n\n**Error:** {e}")
+
+        await ilk.delete()
+
+        try:
+            orta = await event.respond("Uploading to TransferSh...")
+            download_link, final_date, size = await send_to_transfersh_async(file_path)
+
+            str(time.time() - start)
+            await orta.edit(
+                f"File Successfully Uploaded to TransferSh.\n\nLink 👉 {download_link}\nExpired Date 👉 {final_date}\n\nUploaded by *AsunaRobot*"
+            )
+        except Exception as e:
+            traceback.print_exc()
+            print(e)
+            await event.respond(f"Uploading Failed\n\n**Error:** {e}")
+
     raise events.StopPropagation
 
-@bot.on(events.NewMessage)
-async def echo(update):
-    """Echo the user message."""
-    msg = await update.respond("Processing...")
-    
-    try:
-        if not os.path.isdir(download_path):
-            os.mkdir(download_path)
-            
-        start = time.time()
-        
-        if not update.message.message.startswith("/") and not update.message.message.startswith("http") and update.message.media:
-            await msg.edit("**Downloading start...**")
-            file_path = await bot.download_media(update.message, download_path, progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                progress(d, t, msg, start)))
-        else:
-            url = update.text
-            filename = os.path.join(download_path, os.path.basename(url))
-            file_path = await download_file(update.text, filename, msg, start, bot)
-            
-        print(f"file downloaded to {file_path}")
-        try:
-            await msg.edit("Download finish!\n\n**Now uploading...**")
-            download_link, final_date, size = await send_to_transfersh_async(file_path, msg)
-            name = os.path.basename(file_path)
-            await msg.edit(f"**Name: **`{name}`\n**Size:** `{size}`\n**Link:** {download_link}")
-        except Exception as e:
-            print(e)
-            await msg.edit(f"Uploading Failed\n\n**Error:** {e}")
-        finally:
-            os.remove(file_path)
-            print("Deleted file :", file_path)
-    except Exception as e:
-        print(e)
-        await msg.edit(f"Download link is invalid or not accessable\n\n**Error:** {e}")
