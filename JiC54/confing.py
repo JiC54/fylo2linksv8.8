@@ -1,5 +1,5 @@
 from envparse import env
-from JiC54.__main__ import LOGGER
+from JiC54 import LOGGER
 
 DEFAULTS = {
     "LOAD_MODULES": True,
