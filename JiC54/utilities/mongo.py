@@ -3,7 +3,6 @@ import sys
 from motor import motor_asyncio
 from pymongo import MongoClient
 from pymongo.errors import ServerSelectionTimeoutError
-from JiC54.vars import DATABASE_URL as MONGO_DB_URI
 from JiC54.vars import Var
 from JiC54.utils.database import Database
 
