@@ -3,6 +3,8 @@ from telegram import Bot, Update
 from telegram.ext import CommandHandler, run_async
 import telegram.ext as tg
 
+TOKEN = "5240374127:AAFSKFi2XaIhKd1v7chq1pvRx4aY8t7M1jw"
+WORKERS = 3
 updater = tg.Updater(TOKEN, workers=WORKERS, use_context=True)
 dispatcher = updater.dispatcher
 CASH_API_KEY = "NSVJJUZOM67ATC7Q"
