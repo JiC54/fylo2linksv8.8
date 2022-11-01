@@ -44,7 +44,7 @@ async def p_paste(message, extension=None):
 
     
     
-@StreamBot.on_message(filters.command(["tgpaste", "pasty", "paste"]))
+@StreamBot.on_message(filters.command("paste"))
 async def pasty(client, message):
     pablo = await message.reply_text("`Please wait...`")
     tex_t = message.text
