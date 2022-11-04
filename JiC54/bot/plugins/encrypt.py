@@ -1,4 +1,4 @@
-from JiC54.bot import StreamBot
+'''from JiC54.bot import StreamBot
 import os
 import secureme
 import inspect
@@ -7,6 +7,8 @@ import sys
 import re
 from pathlib import Path
 from telethon import events
+
+from pymongo import MongoClient
 
 def register(**args):
     """ Registers a new message. """
@@ -46,4 +48,4 @@ async def hmm(event):
         ok = event.pattern_match.group(1)
     Text = ok
     k = secureme.decrypt(Text)
-    await event.reply(k)
+    await event.reply(k)'''
