@@ -8,7 +8,7 @@ from pyrogram.types import (
     InlineKeyboardMarkup,
     Message,
 )
-
+'''
 # By @TroJanzHEX
 from JiC54.bot.plugins.ImageEditor.edit_1 import (  # pylint:disable=import-error
     black_white,
@@ -451,3 +451,4 @@ async def cb_handler(client: pbot, query: CallbackQuery):
 
 
 __mod_name__ = "Img Editor​"
+'''
