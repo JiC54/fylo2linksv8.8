@@ -1,4 +1,4 @@
-from JiC54.bot import StreamBot as telethn
+from JiC54.bot import StreamBot
 import os
 import secureme
 import inspect
@@ -20,7 +20,7 @@ def register(**args):
     args["pattern"] = pattern.replace("^/", r_pattern, 1)
 
     def decorator(func):
-        telethn.add_event_handler(func, events.NewMessage(**args))
+        StreamBot.add_event_handler(func, events.NewMessage(**args))
         return func
 
     return decorator
