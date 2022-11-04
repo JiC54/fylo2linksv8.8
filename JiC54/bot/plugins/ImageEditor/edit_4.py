@@ -1,4 +1,4 @@
-# By @TroJanzHEX
+'''# By @TroJanzHEX
 import io
 import os
 import shutil
@@ -409,4 +409,4 @@ async def removebg_sticker(client, message):
                     "Something went wrong!", quote=True
                 )
             except Exception:
-                return
+                return'''

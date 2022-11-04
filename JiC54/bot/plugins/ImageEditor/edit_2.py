@@ -1,4 +1,4 @@
-# By @TroJanzHEX
+'''# By @TroJanzHEX
 import os
 import shutil
 
@@ -397,3 +397,4 @@ async def cartoon(client, message):
                 )
             except Exception:
                 return
+'''

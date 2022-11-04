@@ -1,4 +1,4 @@
-# By @TroJanzHEX
+'''# By @TroJanzHEX
 import asyncio
 import os
 import shutil
@@ -422,3 +422,4 @@ async def scanlineglitch_5(client, message):
                 )
             except Exception:
                 return
+'''
