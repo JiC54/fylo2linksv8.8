@@ -215,7 +215,7 @@ EXTRA_BUTTONS = InlineKeyboardMarkup(
         InlineKeyboardButton("PASTE", callback_data="paste")
         ],
         [
-        InlineKeyboardButton("WEB SREENSHOT", callback_data="webscreenshot")
+        InlineKeyboardButton("WEB SCREENSHOT", callback_data="webscreenshot")
         ],
         [
         InlineKeyboardButton("BACK", callback_data="menu"),
