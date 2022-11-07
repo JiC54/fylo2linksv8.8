@@ -24,7 +24,7 @@ So, please consider visiting our website."""
 ABOUT_TEXT = """With this service, you may post files to the internet by simply uploading or forwarding files to this bot and receive both a direct download link and a streamable URL for the contents.
 
 Learn more about this service by visiting its website, click below."""
-DONATE_TEXT = """ Dear {},
+DONATE_TEXT = """Dear {},
 
 I, the service's developer, am struggling to pay for servers in order to keep the service online. Running this service for a month costs $10. Whereby Only $7 is spent on Heroku, with the remaining $3 spent on databases. You can help keep this service alive today by donating any amount. Just click below and select a method.
 
@@ -77,8 +77,36 @@ Just type /short command along with the link you want to shorten
 For example;
 
 <code>/short https://www.twosix5.blogspot.com</code>"""
+PASTE_TEXT = """This feature allows to paste your text to Pasty
+
+For Example;
+
+<code>/paste Hello, this is FilesToLinks</code>"""
+WEBSCREENSHOT_TEXT = """This feature allows you to have a look of the specified website without opening the url, the bot does that for you, it opens the website and gives you the screenshot"""
+IMAGETOPDF_TEXT = """This feature allows you to convert images to pdf. Simply just send an image as a document then reply it with /pdf"""
 EXTRA_TEXT = """Extra features are listed below. For the time being, all users may access these bonuses because they were created as a thank-you and a reward for supporters (donors).
 However, this access will soon expire to all users who haven'nt made any donation. Therefore, /donate right now to be added to our donor list; further benefits are on the way for donors!"""
+IMAGETOPDF_BUTTONS = InlineKeyboardMarkup(
+        [[
+        InlineKeyboardButton('BACK', callback_data='extra'),
+        InlineKeyboardButton('MENU', callback_data='menu'),
+        InlineKeyboardButton('CLOSE', callback_data='close')
+        ]]
+)
+WEBSCREENSHOT_BUTTONS = InlineKeyboardMarkup(
+        [[
+        InlineKeyboardButton('BACK', callback_data='extra'),
+        InlineKeyboardButton('MENU', callback_data='menu'),
+        InlineKeyboardButton('CLOSE', callback_data='close')
+        ]]
+)
+PASTE_BUTTONS = InlineKeyboardMarkup(
+        [[
+        InlineKeyboardButton('BACK', callback_data='extra'),
+        InlineKeyboardButton('MENU', callback_data='menu'),
+        InlineKeyboardButton('CLOSE', callback_data='close')
+        ]]
+)
 TELEGRAPH_BUTTONS = InlineKeyboardMarkup(
         [[
         InlineKeyboardButton('BACK', callback_data='extra'),
@@ -181,6 +209,13 @@ EXTRA_BUTTONS = InlineKeyboardMarkup(
         [[
         InlineKeyboardButton("TELEGRAPH", callback_data="telegraph"),
         InlineKeyboardButton("SHORTENER", callback_data="shortener")
+        ],
+        [
+        InlineKeyboardButton("IMG TO PDF", callback_data="pdf"),
+        InlineKeyboardButton("PASTE", callback_data="paste")
+        ],
+        [
+        InlineKeyboardButton("WEB SREENSHOT", callback_data="webscreenshot")
         ],
         [
         InlineKeyboardButton("BACK", callback_data="menu"),
@@ -297,8 +332,8 @@ async def is_premium(p, m):
 async def info(i, m):
     info = """<b><u>Bot Info</u></b>
 
-Version:              10.0.0
-Updated on:      Oct 16, 2022
+Version:              10.2.0
+Updated on:      Nov 07, 2022
 Offered By:        JiC54
 Released on:     Feb 21, 2022"""
     await i.send_message(chat_id = m.chat.id,
@@ -417,6 +452,24 @@ async def cb_data(bot, update):
             text=EXTRA_TEXT,
             disable_web_page_preview=True,
             reply_markup=EXTRA_BUTTONS
+            )
+    elif update.data=="pdf":
+        await update.message.edit_text(
+            text=IMAGETOPDF_TEXT,
+            disable_web_page_preview=True,
+            reply_markup=IMAGETOPDF_BUTTONS
+            )
+    elif update.data=="paste":
+        await update.message.edit_text(
+            text=PASTE_TEXT,
+            disable_web_page_preview=True,
+            reply_markup=PASTE_BUTTONS
+            )
+    elif update.data=="webscreenshot":
+        await update.message.edit_text(
+            text=WEBSCREENSHOT_TEXT,
+            disable_web_page_preview=True,
+            reply_markup=WEBSCREENSHOT_BUTTONS
             )
     elif update.data=="premium":
         hi = f"This user is a premium user: {update.from_user.is_premium}"
