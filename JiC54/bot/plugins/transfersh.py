@@ -8,6 +8,7 @@ import aiohttp
 from telethon import events
 from telethon import TelegramClient
 from telethon.sessions import MemorySession
+from JiC54.bot import StreamBot
 
 API_ID = 19328466
 API_HASH = "b2f81c541c4e66e7d167393c5dcd48ef"
@@ -76,7 +77,7 @@ async def send_to_transfersh_async(file):
     return download_link, final_date, size_of_file
 
 
-@bot.on(events.NewMessage(pattern="/transfersh"))
+@StreamBot.on(events.NewMessage(pattern="/transfersh"))
 async def tsh(event):
 
     if event.reply_to_msg_id:
@@ -111,7 +112,7 @@ async def tsh(event):
 
     raise events.StopPropagation
 
-@bot.on(events.NewMessage(pattern="/tmpninja"))
+@StreamBot.on(events.NewMessage(pattern="/tmpninja"))
 async def tmp(event):
     if event.reply_to_msg_id:
         start = time.time()
