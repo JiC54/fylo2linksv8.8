@@ -10,7 +10,7 @@ def share_link(text: str) -> str:
 @StreamBot.on_message(filters.command(["sharetext", "st", "stxt", "shtxt", "shtext"]))
 async def share_text(client, message):
     reply = message.reply_to_message
-    reply_id = message.reply_to_message.message_id if message.reply_to_message else message.message_id
+    reply_id = message.reply_to_Message.id if message.reply_to_message else Message.id
     input_split = message.text.split(None, 1)
     if len(input_split) == 2:
         input_text = input_split[1]
