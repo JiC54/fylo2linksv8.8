@@ -10,10 +10,10 @@ import logging
 from JiC54.bot import StreamBot
 from JiC54.utils.ia_filterdb import unpack_new_file_id
 
-ADMINS =
-LOG_CHANNEL =
-FILE_STORE_CHANNEL =
-PUBLIC_FILE_STORE =
+ADMINS = 1324027496
+LOG_CHANNEL = -1001595933509
+FILE_STORE_CHANNEL = -1001595933509
+PUBLIC_FILE_STORE = True
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
