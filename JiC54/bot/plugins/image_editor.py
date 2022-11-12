@@ -113,7 +113,7 @@ async def photo(client: StreamBot, message: Message):
                     ],
                 ]
             ),
-            reply_to_message.id = message.reply_to_message.message.id
+            reply_to_message_id=message.reply_to_message.message.id,
         )
     except Exception as e:
         print("photomarkup error - " + str(e))
