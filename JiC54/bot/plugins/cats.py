@@ -1,4 +1,4 @@
-import asyncio
+"""import asyncio
 from JiC54.bot import StreamBot
 from pyrogram import Client, filters
 from pyrogram.types import Message
@@ -16,4 +16,4 @@ async def cat(c: Client, m: Message, strings):
     if rj[0]["url"].endswith(".gif"):
         await m.reply_animation(rj[0]["url"], caption=strings("meow"))
     else:
-        await m.reply_photo(rj[0]["url"], caption=strings("meow"))
+        await m.reply_photo(rj[0]["url"], caption=strings("meow"))"""
