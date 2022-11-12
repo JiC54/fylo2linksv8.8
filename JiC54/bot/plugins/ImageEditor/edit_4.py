@@ -1,4 +1,4 @@
-'''# By @TroJanzHEX
+# By @TroJanzHEX
 import io
 import os
 import shutil
@@ -8,9 +8,8 @@ import numpy as np
 import requests
 from PIL import Image, ImageDraw, ImageOps
 
-from SiestaRobot.confing import get_str_key
-
-RemoveBG_API = get_str_key("REM_BG_API_KEY", required=False)
+REM_BG_API_KEY = "xYCR1ZyK3ZsofjH7Y6hPcyzC"
+RemoveBG_API = REM_BG_API_KEY
 
 
 async def rotate_90(client, message):
@@ -409,4 +408,4 @@ async def removebg_sticker(client, message):
                     "Something went wrong!", quote=True
                 )
             except Exception:
-                return'''
+                return

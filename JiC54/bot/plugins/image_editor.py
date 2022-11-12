@@ -1,4 +1,4 @@
-'''# By @TroJanzHEX
+# By @TroJanzHEX
 # Improved by TeamDaisyX
 
 from pyrogram import filters
@@ -451,4 +451,3 @@ async def cb_handler(client: StreamBot, query: CallbackQuery):
 
 
 __mod_name__ = "Img Editor​"
-'''

@@ -56,12 +56,12 @@ from JiC54.bot.plugins.ImageEditor.edit_5 import (  # pylint:disable=import-erro
     scanlineglitch_4,
     scanlineglitch_5,
 )
-from JiC54.bot import StreamBot as pbot
+from JiC54.bot import StreamBot
 
 lel = 00000000
 # pylint:disable=import-error
-@pbot.on_message(filters.command(["edit", "editor"]))
-async def photo(client: pbot, message: Message):
+@StreamBot.on_message(filters.command(["edit", "editor"]))
+async def photo(client: StreamBot, message: Message):
     try:
         if not message.reply_to_message.photo:
             await client.send_message(message.chat.id, "Reply to an image man!ㅤㅤ")
@@ -126,8 +126,8 @@ async def photo(client: pbot, message: Message):
                 return
 
 
-@pbot.on_callback_query()
-async def cb_handler(client: pbot, query: CallbackQuery):
+@StreamBot.on_callback_query()
+async def cb_handler(client: StreamBot, query: CallbackQuery):
     user_id = query.from_user.id
     if lel == user_id:
         if query.data == "removebg":
