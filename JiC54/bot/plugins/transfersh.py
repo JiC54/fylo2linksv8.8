@@ -1,4 +1,4 @@
-import asyncio
+"""import asyncio
 import datetime
 import os
 import time
@@ -17,8 +17,8 @@ bot = telethn
 
 
 async def progress(current, total, event, start, type_of_ps):
-    """Generic progress_callback for both
-    upload.py and download.py"""
+    #Generic progress_callback for both
+    #upload.py and download.py
     now = time.time()
     diff = now - start
     if round(diff % 10.00) == 0 or current == total:
@@ -38,8 +38,8 @@ async def progress(current, total, event, start, type_of_ps):
         await event.edit("{}\n {}".format(type_of_ps, tmp))
 
 def humanbytes(size):
-    """Input size in bytes,
-    outputs in a human readable format"""
+    #Input size in bytes,
+    #outputs in a human readable format
     # https://stackoverflow.com/a/49361727/4723940
     if not size:
         return ""
@@ -198,3 +198,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+"""
