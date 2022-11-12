@@ -1,4 +1,4 @@
-import os
+"""import os
 from pyrogram import Client, filters
 from urllib.parse import quote
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
@@ -22,5 +22,5 @@ async def share_text(client, message):
             reply_to_message_id=reply_id
         )
         return
-    await message.reply_text(share_link(input_text), reply_to_message_id=reply_id)
+    await message.reply_text(share_link(input_text), reply_to_message_id=reply_id)"""
         
