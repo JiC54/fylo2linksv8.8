@@ -99,3 +99,4 @@ pyYAML>=5.1.2
 telegram
 ytthumb
 umongo==3.0.1
+marshmallow
