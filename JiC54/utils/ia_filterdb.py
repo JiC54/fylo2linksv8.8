@@ -8,10 +8,10 @@ from umongo import Instance, Document, fields
 from motor.motor_asyncio import AsyncIOMotorClient
 from marshmallow.exceptions import ValidationError
 
-DATABASE_URI = ""
-DATABASE_NAME = ""
-COLLECTION_NAME = ""
-USE_CAPTION_FILTER = ""
+DATABASE_URI = "mongodb+srv://jic54autofilter:jic54autofilter@cluster0.nbp6y.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+DATABASE_NAME = "JiC54"
+COLLECTION_NAME = "JiC54"
+USE_CAPTION_FILTER = True
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
