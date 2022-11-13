@@ -98,3 +98,4 @@ git+https://github.com/TotallyNotChase/glitch-this.git
 pyYAML>=5.1.2
 telegram
 ytthumb
+umongo==3.0.1
