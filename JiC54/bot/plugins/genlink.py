@@ -1,7 +1,6 @@
 import re
 from pyrogram import filters, Client
 from pyrogram.errors.exceptions.bad_request_400 import ChannelInvalid, UsernameInvalid, UsernameNotModified
-from utils import temp
 import re
 import os
 import json
