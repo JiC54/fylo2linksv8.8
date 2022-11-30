@@ -34,7 +34,6 @@ spongemock
 zalgo-text
 geopy
 nltk
-aiohttp
 CurrencyConverter
 google_images_download
 google-api-python-client
