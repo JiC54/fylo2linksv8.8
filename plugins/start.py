@@ -1,5 +1,8 @@
 import random
 import humanize
+import selenium
+from PIL import Image
+from telegraph import Telegraph
 from Script import script
 from pyrogram import Client, filters, enums
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery, ReplyKeyboardMarkup
@@ -9,6 +12,9 @@ from TechVJ.util.file_properties import get_name, get_hash, get_media_file_size
 from TechVJ.util.human_readable import humanbytes
 from database.users_chats_db import db
 from utils import temp, get_shortlink
+from pyshorteners import Shortener
+
+
 
 # Text Constants
 MENU_TEXT = """<b>Here is the menu for File To Links</b>"""
