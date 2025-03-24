@@ -10,8 +10,25 @@ from TechVJ.util.human_readable import humanbytes
 from database.users_chats_db import db
 from utils import temp, get_shortlink
 
+# Text Constants
+START_TEXT = """Your Telegram DC Is : `{}`"""
 HELP_TEXT = """Everything has fully been explained very well in our website including About the bot, Features, FAQ, Copyright, Terms of use, Child Abuse Policy, DMCA and many more.
 So, please consider visiting our website."""
+ABOUT_TEXT = """With this service, you may post files to the internet by simply uploading or forwarding files to this bot and receive both a direct download link and a streamable URL for the contents.
+
+Learn more about this service by visiting its website, click below."""
+# ...add other text constants...
+
+# Button Markups
+HELP_BUTTONS = InlineKeyboardMarkup(
+    [[
+        InlineKeyboardButton('VISIT WEBSITE', url='https://bit.ly/3DgxO6h')
+    ],[
+        InlineKeyboardButton('BACK', callback_data='menu'),
+        InlineKeyboardButton('CLOSE', callback_data='close')
+    ]]
+)
+# ...add other button markups...
 
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client, message):
@@ -97,12 +114,42 @@ async def help_command(client, message):
 @Client.on_callback_query()
 async def cb_handler(client, query: CallbackQuery):
     if query.data == "menu":
-        # Handle menu callback
         await query.message.edit_text(
-            script.START_TXT.format(query.from_user.mention, temp.U_NAME, temp.B_NAME),
-            reply_markup=InlineKeyboardMarkup([
-                ["MENU📊", "DONATE❤️"]
-            ])
+            text=MENU_TEXT,
+            reply_markup=MENU_BUTTONS
         )
+    elif query.data == "help":
+        await query.message.edit_text(
+            text=HELP_TEXT,
+            reply_markup=HELP_BUTTONS
+        )
+    elif query.data == "about":
+        await query.message.edit_text(
+            text=ABOUT_TEXT,
+            reply_markup=ABOUT_BUTTONS
+        )
+    # ...add other callback cases...
     elif query.data == "close":
         await query.message.delete()
+
+# Add after existing handlers
+
+@Client.on_message(filters.command("menu") | filters.regex("MENU📊"))
+async def menu(client, message):
+    await client.send_message(
+        chat_id=message.chat.id,
+        text=MENU_TEXT,
+        reply_markup=MENU_BUTTONS
+    )
+
+@Client.on_message(filters.command("donate") | filters.regex("DONATE❤️"))
+async def donate(client, message):
+    donate_text = DONATE_TEXT.format(message.from_user.mention)
+    await client.send_message(
+        chat_id=message.chat.id,
+        text=donate_text,
+        reply_markup=DONATE_BUTTONS,
+        disable_web_page_preview=True
+    )
+
+# ...add other command handlers...
