@@ -4,6 +4,7 @@ import aiohttp
 from typing import Dict, Optional
 from pyrogram import Client, filters
 from pyrogram.types import Message
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 # Headers for API requests
 HEADERS = {
@@ -77,14 +78,19 @@ async def paste_command(client: Client, message: Message) -> None:
             await progress_msg.edit(f"`Failed to paste: {result['error']}`")
             return
 
-        # Send success message
-        response_text = (
-            "**Successfully Pasted to Pasty**\n\n"
-            f"**Link:** '''{result['url']}'''\n"
-            f"**Raw Link:** '''{result['raw']}'''"
-        )
+        # Create inline buttons for URLs
+        buttons = InlineKeyboardMarkup([
+            [
+                InlineKeyboardButton("Open Link", url=result['url']),
+                InlineKeyboardButton("Raw", url=result['raw'])
+            ]
+        ])
+
+        # Send success message with buttons
+        response_text = "**Successfully Pasted to Pasty**"
         await progress_msg.edit(
             response_text,
+            reply_markup=buttons,
             disable_web_page_preview=True
         )
 
