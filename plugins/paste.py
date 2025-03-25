@@ -80,8 +80,8 @@ async def paste_command(client: Client, message: Message) -> None:
         # Send success message
         response_text = (
             "**Successfully Pasted to Pasty**\n\n"
-            f"**Link:** [Click Here]({result['url']})\n"
-            f"**Raw Link:** [Click Here]({result['raw']})"
+            f"**Link:** '''{result['url']}'''\n"
+            f"**Raw Link:** '''{result['raw']}'''"
         )
         await progress_msg.edit(
             response_text,
