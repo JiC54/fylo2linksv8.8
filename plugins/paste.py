@@ -87,7 +87,11 @@ async def paste_command(client: Client, message: Message) -> None:
         ])
 
         # Send success message with buttons
-        response_text = "**Successfully Pasted to Pasty**"
+        response_text = (
+            "**Successfully Pasted to Pasty**\n\n"
+            f"**Link:** <code>{result['url']}</code>\n"
+            f"**Raw Link:** ``` {result['raw']} ``` "
+        )
         await progress_msg.edit(
             response_text,
             reply_markup=buttons,
