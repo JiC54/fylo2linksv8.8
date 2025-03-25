@@ -20,7 +20,7 @@ async def paste_to_pasty(content: str, extension: Optional[str] = None) -> Dict:
     Returns:
         Dict containing URLs or error
     """
-    siteurl = "https://pasty.lus.pm/api/v1/pastes"
+    siteurl = "https://pasty.lus.pm/"
     data = {"content": content}
 
     async with aiohttp.ClientSession() as session:
