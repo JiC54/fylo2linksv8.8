@@ -11,6 +11,7 @@ from TechVJ.util.human_readable import humanbytes
 from database.users_chats_db import db
 from utils import temp, get_shortlink
 import os
+import asyncio
 
 # Text Constants in a dictionary for better organization
 TEXTS = {
@@ -126,23 +127,24 @@ BUTTONS = {
 
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client, message):
-    if not await db.is_user_exist(message.from_user.id):
-        await db.add_user(message.from_user.id, message.from_user.first_name)
-        await client.send_message(LOG_CHANNEL, script.LOG_TEXT_P.format(message.from_user.id, message.from_user.mention))
-    
-    await client.send_photo(
-        chat_id=message.from_user.id,
-        photo="https://telegra.ph/file/4c096367043285a1a28d6.jpg",
-        caption=script.START_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
-        reply_markup=ReplyKeyboardMarkup(
-            [
-                ["MENU📊", "DONATE❤️"]
-            ],
-            resize_keyboard=True
-        ),
-        parse_mode=enums.ParseMode.HTML
-    )
-    return
+    try:
+        if not await db.is_user_exist(message.from_user.id):
+            await db.add_user(message.from_user.id, message.from_user.first_name)
+            await client.send_message(LOG_CHANNEL, script.LOG_TEXT_P.format(
+                message.from_user.id, message.from_user.mention))
+        
+        await client.send_photo(
+            chat_id=message.from_user.id,
+            photo="https://telegra.ph/file/4c096367043285a1a28d6.jpg",
+            caption=script.START_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
+            reply_markup=ReplyKeyboardMarkup(
+                [["MENU📊", "DONATE❤️"]],
+                resize_keyboard=True
+            ),
+            parse_mode=enums.ParseMode.HTML
+        )
+    except Exception as e:
+        print(f"Start command error: {e}")
 
 @Client.on_message(filters.private & (filters.document | filters.video))
 async def stream_start(client, message):
@@ -219,44 +221,54 @@ async def help_command(client, message):
 
 @Client.on_callback_query()
 async def cb_handler(client, query: CallbackQuery):
-    data = query.data
-    
-    # Handle text updates
-    if data in TEXTS:
-        await query.message.edit_text(
-            text=TEXTS[data],
-            reply_markup=BUTTONS[data]
-        )
-        return
-    
-    # Handle special cases
-    actions = {
-        "close": lambda: query.message.delete(),
-        "donate": lambda: query.message.edit_text(
-            TEXTS["donate"].format(query.from_user.mention),
-            reply_markup=BUTTONS["donate"]
-        )
-        # ...other special handlers
-    }
-    
-    if data in actions:
-        await actions[data]()
+    try:
+        data = query.data
+        
+        # Handle text updates
+        if data in TEXTS:
+            await query.message.edit_text(
+                text=TEXTS[data],
+                reply_markup=BUTTONS.get(data),
+                disable_web_page_preview=True
+            )
+            return
+        
+        # Handle special cases
+        if data == "close":
+            await query.message.delete()
+        elif data == "donate":
+            await query.message.edit_text(
+                text=TEXTS["donate"].format(query.from_user.mention),
+                reply_markup=BUTTONS["donate"],
+                disable_web_page_preview=True
+            )
+        
+    except Exception as e:
+        print(f"Callback error: {e}")
+        await query.answer("An error occurred!", show_alert=True)
 
 # Add after existing handlers
 @Client.on_message(filters.command("menu") | filters.regex("MENU📊"))
 async def menu(client, message):
-    await client.send_message(
-        chat_id=message.chat.id,
-        text=TEXTS["menu"],
-        reply_markup=BUTTONS["menu"]
-    )
+    try:
+        await client.send_message(
+            chat_id=message.chat.id,
+            text=TEXTS["menu"],
+            reply_markup=BUTTONS["menu"],
+            disable_web_page_preview=True
+        )
+    except Exception as e:
+        print(f"Menu command error: {e}")
 
 @Client.on_message(filters.command("donate") | filters.regex("DONATE❤️"))
 async def donate(client, message):
-    donate_text = TEXTS["donate"].format(message.from_user.mention)
-    await client.send_message(
-        chat_id=message.chat.id,
-        text=donate_text,
-        reply_markup=BUTTONS["donate"],
-        disable_web_page_preview=True
-    )
+    try:
+        donate_text = TEXTS["donate"].format(message.from_user.mention)
+        await client.send_message(
+            chat_id=message.chat.id,
+            text=donate_text,
+            reply_markup=BUTTONS["donate"],
+            disable_web_page_preview=True
+        )
+    except Exception as e:
+        print(f"Donate command error: {e}")
