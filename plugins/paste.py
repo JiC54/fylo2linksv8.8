@@ -20,20 +20,26 @@ async def paste_to_pasty(content: str, extension: Optional[str] = None) -> Dict:
     Returns:
         Dict containing URLs or error
     """
-    siteurl = "https://pasty.lus.pm/"
+    siteurl = "https://pasty.lus.pm/api/v1/pastes"
     data = {"content": content}
 
     async with aiohttp.ClientSession() as session:
         try:
-            async with session.post(url=siteurl, json=data, headers=HEADERS) as response:
+            async with session.post(url=siteurl, data=json.dumps(data), headers=HEADERS) as response:
                 if response.status == 200:
-                    response_data = await response.json()
-                    ext = extension or "txt"
-                    return {
-                        "url": f"https://pasty.lus.pm/{response_data['id']}.{ext}",
-                        "raw": f"https://pasty.lus.pm/{response_data['id']}/raw",
-                        "bin": "Pasty"
-                    }
+                    try:
+                        response_text = await response.text()
+                        response_data = json.loads(response_text)
+                        ext = extension or "txt"
+                        return {
+                            "url": f"https://pasty.lus.pm/{response_data['id']}.{ext}",
+                            "raw": f"https://pasty.lus.pm/{response_data['id']}/raw",
+                            "bin": "Pasty"
+                        }
+                    except json.JSONDecodeError as e:
+                        return {"error": f"Failed to parse response: {str(e)}"}
+                else:
+                    return {"error": f"Server returned status code: {response.status}"}
         except Exception as e:
             return {"error": str(e)}
     
