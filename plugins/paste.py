@@ -82,7 +82,7 @@ async def paste_command(client: Client, message: Message) -> None:
         buttons = InlineKeyboardMarkup([
             [
                 InlineKeyboardButton("Open Link", url=result['url']),
-                InlineKeyboardButton("Raw", url=result['raw'])
+                InlineKeyboardButton("Open Raw", url=result['raw'])
             ]
         ])
 
