@@ -1,7 +1,7 @@
 import os
 import aiohttp
 from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message, CallbackQuery
 from pyshorteners import Shortener
 
 # API Keys
@@ -88,10 +88,13 @@ async def short_command(client: Client, message: Message) -> None:
 @Client.on_callback_query()
 async def cb_handler(client: Client, query: CallbackQuery):
     """Handle button callbacks"""
-    if query.data == "new_short":
-        await query.message.edit_text(
-            "Send a new link with /short command\n"
-            "Example: `/short https://example.com`"
-        )
-    elif query.data == "close":
-        await query.message.delete()
+    try:
+        if query.data == "new_short":
+            await query.message.edit_text(
+                "Send a new link with /short command\n"
+                "Example: `/short https://example.com`"
+            )
+        elif query.data == "close":
+            await query.message.delete()
+    except Exception as e:
+        await query.answer(f"Error: {str(e)}", show_alert=True)
