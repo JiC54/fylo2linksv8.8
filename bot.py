@@ -74,9 +74,11 @@ async def start():
     await idle()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
-        loop.run_until_complete(start())
-    except KeyboardInterrupt:
-        logging.info('Service Stopped Bye 👋')
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        TechVJBot.start()
+    except Exception as e:
+        print(f"Bot startup error: {e}")
 

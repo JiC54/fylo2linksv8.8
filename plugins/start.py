@@ -12,6 +12,8 @@ from database.users_chats_db import db
 from utils import temp, get_shortlink
 import os
 import asyncio
+from pyrogram.errors import FloodWait
+import time
 
 # Text Constants in a dictionary for better organization
 TEXTS = {
@@ -219,10 +221,22 @@ async def help_command(client, message):
     )
     return
 
+# At the start of any async function that uses event loop
+async def init_event_loop():
+    try:
+        loop = asyncio.get_running_loop()
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+    return loop
+
 @Client.on_callback_query()
 async def cb_handler(client, query: CallbackQuery):
     try:
         data = query.data
+        
+        # Add rate limiting
+        await asyncio.sleep(0.5)  # Add delay between callbacks
         
         # Handle text updates
         if data in TEXTS:
@@ -233,30 +247,52 @@ async def cb_handler(client, query: CallbackQuery):
             )
             return
         
-        # Handle special cases
+        # Handle special cases with FloodWait protection
         if data == "close":
-            await query.message.delete()
+            try:
+                await query.message.delete()
+            except FloodWait as e:
+                await asyncio.sleep(e.value)
+                await query.message.delete()
         elif data == "donate":
-            await query.message.edit_text(
-                text=TEXTS["donate"].format(query.from_user.mention),
-                reply_markup=BUTTONS["donate"],
-                disable_web_page_preview=True
-            )
-        
+            try:
+                await query.message.edit_text(
+                    text=TEXTS["donate"].format(query.from_user.mention),
+                    reply_markup=BUTTONS["donate"],
+                    disable_web_page_preview=True
+                )
+            except FloodWait as e:
+                await asyncio.sleep(e.value)
+                await query.message.edit_text(
+                    text=TEXTS["donate"].format(query.from_user.mention),
+                    reply_markup=BUTTONS["donate"],
+                    disable_web_page_preview=True
+                )
+                
     except Exception as e:
         print(f"Callback error: {e}")
-        await query.answer("An error occurred!", show_alert=True)
+        await query.answer("An error occurred! Please try again later.", show_alert=True)
 
-# Add after existing handlers
+# Message handlers with FloodWait protection
 @Client.on_message(filters.command("menu") | filters.regex("MENU📊"))
 async def menu(client, message):
     try:
-        await client.send_message(
-            chat_id=message.chat.id,
-            text=TEXTS["menu"],
-            reply_markup=BUTTONS["menu"],
-            disable_web_page_preview=True
-        )
+        await init_event_loop()
+        try:
+            await client.send_message(
+                chat_id=message.chat.id,
+                text=TEXTS["menu"],
+                reply_markup=BUTTONS["menu"],
+                disable_web_page_preview=True
+            )
+        except FloodWait as e:
+            await asyncio.sleep(e.value)
+            await client.send_message(
+                chat_id=message.chat.id,
+                text=TEXTS["menu"],
+                reply_markup=BUTTONS["menu"],
+                disable_web_page_preview=True
+            )
     except Exception as e:
         print(f"Menu command error: {e}")
 
