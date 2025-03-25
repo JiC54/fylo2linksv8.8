@@ -5,7 +5,6 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message, 
 from pyshorteners import Shortener
 
 # API Keys
-BITLY_API = os.environ.get("BITLY_API", "8df1df8c23f719e5cf97788cc2d40321ea30092b")
 CUTTLY_API = os.environ.get("CUTTLY_API", "8cb59cbecc2d349e4a0f31f05a8b020655b83")
 
 async def shorten_url(url: str) -> str:
@@ -21,15 +20,6 @@ async def shorten_url(url: str) -> str:
         shortened_urls.append(f"\n**TinyURL:** {tiny_url}")
     except Exception as e:
         print(f"TinyURL error: {e}")
-    
-    # Bitly
-    if BITLY_API:
-        try:
-            s = Shortener(api_key=BITLY_API)
-            bitly_url = s.bitly.short(url)
-            shortened_urls.append(f"\n**Bitly:** {bitly_url}")
-        except Exception as e:
-            print(f"Bitly error: {e}")
     
     # Cuttly
     if CUTTLY_API:
