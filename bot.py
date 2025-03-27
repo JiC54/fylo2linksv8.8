@@ -1,9 +1,4 @@
-# Don't Remove Credit @VJ_Botz
-# Subscribe YouTube Channel For Amazing Bot @Tech_VJ
-# Ask Doubt on telegram @KingVJ01
-
-# Clone Code Credit : YT - @Tech_VJ / TG - @VJ_Bots / GitHub - @VJBots
-
+# This file is the main file of the bot. It will start the bot and load all the plugins.
 import sys, glob, importlib, logging, logging.config, pytz, asyncio
 from pathlib import Path
 

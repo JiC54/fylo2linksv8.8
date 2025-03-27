@@ -17,7 +17,7 @@ async def start(client, message):
         await client.send_message(LOG_CHANNEL, script.LOG_TEXT_P.format(message.from_user.id, message.from_user.mention))
     rm = InlineKeyboardMarkup(
         [[
-            InlineKeyboardButton("✨ Update Channel", url="https://t.me/vj_botz")
+            InlineKeyboardButton("Updates Channel🔔", url="https://t.me/jic54_official")
         ]] 
     )
     await client.send_message(
@@ -54,8 +54,8 @@ async def stream_start(client, message):
         text=f"•• ʟɪɴᴋ ɢᴇɴᴇʀᴀᴛᴇᴅ ꜰᴏʀ ɪᴅ #{user_id} \n•• ᴜꜱᴇʀɴᴀᴍᴇ : {username} \n\n•• ᖴᎥᒪᗴ Nᗩᗰᗴ : {fileName}",
         quote=True,
         disable_web_page_preview=True,
-        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🚀 Fast Download 🚀", url=download),  # we download Link
-                                            InlineKeyboardButton('🖥️ Watch online 🖥️', url=stream)]])  # web stream Link
+        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Download", url=download),  # download Link
+                                            InlineKeyboardButton('Watch', url=stream)]])  # web stream Link
     )
     rm=InlineKeyboardMarkup(
         [
