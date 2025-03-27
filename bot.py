@@ -49,26 +49,25 @@ class Bot(Client):
             bot_token=BOT_TOKEN,
             workers=50,
             plugins={"root": "plugins"},
-            sleep_threshold=5,
+            sleep_threshold=10
         )
 
     async def start(self):
         await super().start()
         me = await self.get_me()
-        print(f"Bot {me.first_name} started")
+        logging.info(f"Bot {me.first_name} started")
 
     async def stop(self, *args):
         await super().stop()
-        print("Bot stopped")
+        logging.info("Bot stopped")
 
 async def main():
     bot = Bot()
     try:
         await bot.start()
-        print("Bot is running...")
-        await asyncio.Event().wait()  # Keep the bot running
+        await asyncio.Event().wait()
     except Exception as e:
-        print(f"Error starting bot: {e}")
+        logging.error(f"Error starting bot: {e}")
     finally:
         await bot.stop()
 
@@ -76,5 +75,7 @@ if __name__ == "__main__":
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
-        print("Bot stopped by user")
+        logging.info("Bot stopped by user")
+    except Exception as e:
+        logging.error(f"Fatal error: {e}")
 

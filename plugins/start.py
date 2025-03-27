@@ -15,13 +15,34 @@ import asyncio
 from pyrogram.errors import FloodWait
 import time
 import logging
+from functools import wraps
+from typing import Callable, Any
 
 # Set up logging
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(),
+        logging.FileHandler('bot.log')
+    ]
 )
 logger = logging.getLogger(__name__)
+
+# Enhanced rate limiting decorator
+def rate_limit(seconds: float = 1.0):
+    def decorator(func: Callable) -> Callable:
+        @wraps(func)
+        async def wrapper(*args, **kwargs) -> Any:
+            try:
+                await asyncio.sleep(seconds)
+                return await func(*args, **kwargs)
+            except FloodWait as e:
+                logger.warning(f"FloodWait: Waiting for {e.value} seconds")
+                await asyncio.sleep(e.value)
+                return await func(*args, **kwargs)
+        return wrapper
+    return decorator
 
 # Text Constants in a dictionary for better organization
 TEXTS = {
@@ -157,6 +178,7 @@ async def start(client, message):
         print(f"Start command error: {e}")
 
 @Client.on_message(filters.private & (filters.document | filters.video))
+@rate_limit(1.0)  # 1 second delay between messages
 async def stream_start(client, message):
     try:
         file = getattr(message, message.media.value)
@@ -166,58 +188,53 @@ async def stream_start(client, message):
         user_id = message.from_user.id
         username = message.from_user.mention
 
-        # Add rate limiting
-        await asyncio.sleep(1)  # Prevent flood
+        # Send media with retry logic
+        async def send_cached_media():
+            try:
+                return await client.send_cached_media(
+                    chat_id=LOG_CHANNEL,
+                    file_id=fileid
+                )
+            except FloodWait as e:
+                logger.warning(f"FloodWait in send_cached_media: {e.value}s")
+                await asyncio.sleep(e.value)
+                return await client.send_cached_media(
+                    chat_id=LOG_CHANNEL,
+                    file_id=fileid
+                )
 
-        try:
-            log_msg = await client.send_cached_media(
-                chat_id=LOG_CHANNEL,
-                file_id=fileid,
-            )
-        except FloodWait as e:
-            print(f"FloodWait: Waiting for {e.value} seconds")
-            await asyncio.sleep(e.value)
-            log_msg = await client.send_cached_media(
-                chat_id=LOG_CHANNEL,
-                file_id=fileid,
-            )
-
-        fileName = quote_plus(get_name(log_msg))
+        log_msg = await send_cached_media()
         
-        # Generate links
-        if not SHORTLINK:
-            stream = f"{URL}watch/{str(log_msg.id)}/{fileName}?hash={get_hash(log_msg)}"
-            download = f"{URL}{str(log_msg.id)}/{fileName}?hash={get_hash(log_msg)}"
-        else:
-            stream = await get_shortlink(f"{URL}watch/{str(log_msg.id)}/{fileName}?hash={get_hash(log_msg)}")
-            download = await get_shortlink(f"{URL}{str(log_msg.id)}/{fileName}?hash={get_hash(log_msg)}")
-
-        # Send response with retry logic
+        # Generate links with better error handling
         try:
-            await log_msg.reply_text(
-                text=f"•• ʟɪɴᴋ ɢᴇɴᴇʀᴀᴛᴇᴅ ꜰᴏʀ ɪᴅ #{user_id} \n•• ᴜꜱᴇʀɴᴀᴍᴇ : {username} \n\n•• ᖴᎥᒪᗴ Nᗩᴍᴇ : {filename}",
-                quote=True,
-                disable_web_page_preview=True,
-                reply_markup=InlineKeyboardMarkup([[
-                    InlineKeyboardButton("🚀 Download 🚀", url=download),
-                    InlineKeyboardButton('🖥️ Watch 🖥️', url=stream)
-                ]])
-            )
-        except FloodWait as e:
-            await asyncio.sleep(e.value)
-            await log_msg.reply_text(
-                text=f"•• ʟɪɴᴋ ɢᴇɴᴇʀᴀᴛᴇᴅ ꜰᴏʀ ɪᴅ #{user_id} \n•• ᴜꜱᴇʀɴᴀᴍᴇ : {username} \n\n•• ᖴᎥᒪᗴ Nᗩᴍᴇ : {filename}",
-                quote=True,
-                disable_web_page_preview=True,
-                reply_markup=InlineKeyboardMarkup([[
-                    InlineKeyboardButton("🚀 Download 🚀", url=download),
-                    InlineKeyboardButton('🖥️ Watch 🖥️', url=stream)
-                ]])
-            )
+            fileName = quote_plus(get_name(log_msg))
+            stream_url = f"{URL}watch/{str(log_msg.id)}/{fileName}?hash={get_hash(log_msg)}"
+            download_url = f"{URL}{str(log_msg.id)}/{fileName}?hash={get_hash(log_msg)}"
             
+            if SHORTLINK:
+                stream_url = await get_shortlink(stream_url)
+                download_url = await get_shortlink(download_url)
+
+            # Send response
+            await log_msg.reply_text(
+                text=f"•• ʟɪɴᴋ ɢᴇɴᴇʀᴀᴛᴇᴅ ꜰᴏʀ ɪᴅ #{user_id}\n"
+                     f"•• ᴜꜱᴇʀɴᴀᴍᴇ : {username}\n\n"
+                     f"•• ᖴᎥᒪᗴ Nᗩᴍᴇ : {filename}",
+                quote=True,
+                disable_web_page_preview=True,
+                reply_markup=InlineKeyboardMarkup([[
+                    InlineKeyboardButton("🚀 Download 🚀", url=download_url),
+                    InlineKeyboardButton('🖥️ Watch 🖥️', url=stream_url)
+                ]])
+            )
+        except Exception as e:
+            logger.error(f"Error generating links: {e}")
+            raise
+
     except Exception as e:
-        print(f"Error in stream_start: {e}")
-        await message.reply_text("Sorry, an error occurred. Please try again later.")
+        logger.error(f"Error in stream_start: {e}")
+        error_msg = "Sorry, an error occurred. Please try again later."
+        await message.reply_text(error_msg)
 
 @Client.on_message(filters.command("help") & filters.incoming)
 async def help_command(client, message):
