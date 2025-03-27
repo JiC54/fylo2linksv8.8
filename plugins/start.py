@@ -1,5 +1,6 @@
 import random
 import humanize
+import asyncio
 from Script import script
 from pyrogram import Client, filters, enums
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ForceReply, CallbackQuery
@@ -12,6 +13,10 @@ from utils import temp, get_shortlink
 
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client, message):
+    # Set event loop policy for Windows if needed
+    if asyncio.get_event_loop_policy()._local._loop is None:
+        asyncio.set_event_loop(asyncio.new_event_loop())
+        
     if not await db.is_user_exist(message.from_user.id):
         await db.add_user(message.from_user.id, message.from_user.first_name)
         await client.send_message(LOG_CHANNEL, script.LOG_TEXT_P.format(message.from_user.id, message.from_user.mention))
