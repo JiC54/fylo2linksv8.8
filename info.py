@@ -15,7 +15,7 @@ PORT = environ.get("PORT", "8080")
 # Online Stream and Download
 MULTI_CLIENT = False
 SLEEP_THRESHOLD = int(environ.get('SLEEP_THRESHOLD', '60'))
-PING_INTERVAL = int(environ.get("PING_INTERVAL", "500"))  # 20 minutes
+PING_INTERVAL = int(environ.get("PING_INTERVAL", "1200"))  # 20 minutes
 if 'DYNO' in environ:
     ON_HEROKU = True
 else:
@@ -31,6 +31,6 @@ DATABASE_URI = environ.get('DATABASE_URI', "mongodb+srv://jic54autofilter:jic54a
 DATABASE_NAME = environ.get('DATABASE_NAME', "jic54autofilter")
 
 # Shortlink Info
-SHORTLINK = bool(environ.get('SHORTLINK', True)) # Set True Or False
+SHORTLINK = bool(environ.get('SHORTLINK', False)) # Set True Or False
 SHORTLINK_URL = environ.get('SHORTLINK_URL', 'api.shareus.io')
 SHORTLINK_API = environ.get('SHORTLINK_API', 'hRPS5vvZc0OGOEUQJMJzPiojoVK2')

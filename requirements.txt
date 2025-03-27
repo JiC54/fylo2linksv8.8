@@ -12,9 +12,3 @@ shortzy
 jinja2
 humanize
 pytz
-pyshorteners
-urllib3
-telegraph
-selenium
-pillow
-pymongo
