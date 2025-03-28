@@ -1,25 +1,42 @@
-# Updated main file of the bot
+# This file is the main file of the bot. It will start the bot and load all the plugins.
 import sys, glob, importlib, logging, logging.config, pytz, asyncio
 from pathlib import Path
-from pyrogram import Client, idle
+
+# Get logging configurations
+logging.config.fileConfig('logging.conf')
+logging.getLogger().setLevel(logging.INFO)
+logging.getLogger("pyrogram").setLevel(logging.ERROR)
+logging.getLogger("imdbpy").setLevel(logging.ERROR)
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
+logging.getLogger("aiohttp").setLevel(logging.ERROR)
+logging.getLogger("aiohttp.web").setLevel(logging.ERROR)
+
+from pyrogram import Client, idle 
 from database.users_chats_db import db
 from info import *
 from utils import temp
 from typing import Union, Optional, AsyncGenerator
-from Script import script
-from datetime import date, datetime
+from Script import script 
+from datetime import date, datetime 
 from aiohttp import web
 from plugins import web_server
+
 from TechVJ.bot import TechVJBot
 from TechVJ.util.keepalive import ping_server
 from TechVJ.bot.clients import initialize_clients
 
 ppath = "plugins/*.py"
 files = glob.glob(ppath)
+TechVJBot.start()
+loop = asyncio.get_event_loop()
+
 
 async def start():
     print('\n')
-    print('Initializing Your Bot')
+    print('Initalizing Your Bot')
     bot_info = await TechVJBot.get_me()
     await initialize_clients()
     for name in files:
@@ -27,12 +44,12 @@ async def start():
             patt = Path(a.name)
             plugin_name = patt.stem.replace(".py", "")
             plugins_dir = Path(f"plugins/{plugin_name}.py")
-            import_path = f"plugins.{plugin_name}"
+            import_path = "plugins.{}".format(plugin_name)
             spec = importlib.util.spec_from_file_location(import_path, plugins_dir)
             load = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(load)
-            sys.modules[f"plugins.{plugin_name}"] = load
-            print(f"Tech VJ Imported => {plugin_name}")
+            sys.modules["plugins." + plugin_name] = load
+            print("Tech VJ Imported => " + plugin_name)
     if ON_HEROKU:
         asyncio.create_task(ping_server())
     me = await TechVJBot.get_me()
@@ -51,11 +68,10 @@ async def start():
     await web.TCPSite(app, bind_address, PORT).start()
     await idle()
 
+
 if __name__ == '__main__':
     try:
-        asyncio.run(start())  # Use asyncio.run() instead of loop.run_until_complete()
+        loop.run_until_complete(start())
     except KeyboardInterrupt:
-        logging.info('Service Stopped. Bye 👋')
-    except Exception as e:
-        logging.error(f"Fatal error: {e}")
+        logging.info('Service Stopped Bye 👋')
 
