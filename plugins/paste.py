@@ -3,7 +3,7 @@ import os
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
-PASTY_API_URL = "https://pasty.lus.pm/api/v1/pastes"  # Pasty API URL
+PASTY_API_URL = "https://pasty.lus.pm/api/v1/pastes"
 
 @Client.on_message(filters.command("paste") & filters.private)
 async def paste_text(client: Client, message: Message):
@@ -15,8 +15,13 @@ async def paste_text(client: Client, message: Message):
             text_to_paste = message.reply_to_message.text
         elif message.reply_to_message.document:
             file_path = await message.reply_to_message.download()
-            with open(file_path, "r") as file:
-                text_to_paste = file.read()
+            try:
+                with open(file_path, "r") as file:
+                    text_to_paste = file.read()
+            except Exception as e:
+                await pablo.edit(f"❌ Error reading file: {str(e)}")
+                os.remove(file_path)
+                return
             os.remove(file_path)
         else:
             await pablo.edit("`Only text and documents are supported.`")
@@ -26,20 +31,32 @@ async def paste_text(client: Client, message: Message):
         return
 
     # Send the text to Pasty
+    headers = {
+        "Content-Type": "application/json",
+    }
+    
     try:
         async with aiohttp.ClientSession() as session:
-            async with session.post(PASTY_API_URL, json={"content": text_to_paste}) as response:
-                if response.status in [200, 201]:  # Accept both 200 and 201 as success
+            async with session.post(
+                PASTY_API_URL,
+                json={"content": text_to_paste},
+                headers=headers
+            ) as response:
+                if response.status == 200:
                     paste_data = await response.json()
-                    paste_url = paste_data.get("url")
-                    if paste_url:
+                    paste_id = paste_data.get("id")
+                    if paste_id:
+                        paste_url = f"https://pasty.lus.pm/{paste_id}"
+                        raw_url = f"https://pasty.lus.pm/{paste_id}/raw"
                         await pablo.edit(
-                            f"✅ **Successfully pasted to Pasty!**\n\n🔗 [View Paste]({paste_url})",
+                            f"**✅ Successfully pasted to Pasty!**\n\n"
+                            f"**📎 View Link:** [Click Here]({paste_url})\n"
+                            f"**📄 Raw Link:** [Click Here]({raw_url})",
                             disable_web_page_preview=True
                         )
                     else:
-                        await pablo.edit("❌ Failed to retrieve the paste URL from the server response.")
+                        await pablo.edit("❌ Failed to get paste ID from response")
                 else:
-                    await pablo.edit(f"❌ Failed to paste text. Server responded with status code {response.status}.")
+                    await pablo.edit(f"❌ API request failed with status {response.status}")
     except Exception as e:
-        await pablo.edit(f"❌ An error occurred while pasting the text: {e}")
+        await pablo.edit(f"❌ Error: {str(e)}")
