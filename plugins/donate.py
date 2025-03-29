@@ -94,7 +94,7 @@ async def donate(client: Client, message: Message):
 
 # Callback Query Handler
 @Client.on_callback_query()
-async def handle_donate_callback(client: Client, callback_query: CallbackQuery):_query: CallbackQuery):
+async def handle_donate_callback(client: Client, callback_query: CallbackQuery):
     data = callback_query.data
     if data == "paypal":
         await callback_query.message.edit_text(
