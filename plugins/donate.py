@@ -14,13 +14,13 @@ FilesToLinks"""
 
 BITCOIN_TEXT = """<b>Use the following address to deposit ONLY Bitcoin (BTC):</b>
 
-<code>38mRQgsPoRTZvcMUFpXGMf9HjL8MxjjUzE</code>"""
+<code>1Hahm7m65tsv6NMdrKJmyvsFFrE6orjUA9</code>"""
 ETHEREUM_TEXT = """<b>Use the following address to deposit ONLY Ethereum (ETH):</b>
 
 <code>0xa5c60C36422f3f77638B7C4875C6108641cCa77b</code>"""
 TETHER_TEXT = """<b>Use the following address to deposit ONLY Tether (USDT):</b>
 
-<code>TVekMwDh42vjXy5NbNrQPAKdBgzypDLRk6</code>"""
+<code>TYmPURwxpFUV8s7SS7qM2Wzujex2XK4CzA</code>"""
 CRYPTO_TEXT = """Choose a cryptocurrency from the list below, and then use the address that appears. If the transaction was successful, snap a screenshot and send it to @jumahmw. We will add you to our donors list as a reward and way of saying "thank you" for your generosity, giving you access to extra services.
 
 If you run across any problems while donating crypto, contact @jooma265 immediately."""
