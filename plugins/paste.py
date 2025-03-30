@@ -36,19 +36,28 @@ async def paste_text(client: Client, message: Message):
                 PASTY_API_URL,
                 json={"content": text_to_paste}
             ) as response:
-                if response.status == 200:
-                    paste_data = await response.json()
-                    if "id" in paste_data:
-                        paste_id = paste_data["id"]
-                        paste_url = f"https://pasty.lus.pm/{paste_id}"
-                        await pablo.edit(
-                            f"**✅ Successfully pasted!**\n\n"
-                            f"**🔗 Link:** [Click Here]({paste_url})",
-                            disable_web_page_preview=True
-                        )
-                    else:
-                        await pablo.edit("❌ Failed to get paste ID from response")
+                paste_data = await response.json()
+                
+                # Check if we have the required fields
+                if response.status == 200 and "id" in paste_data:
+                    paste_id = paste_data["id"]
+                    paste_url = f"https://pasty.lus.pm/{paste_id}"
+                    raw_url = f"{paste_url}/raw"
+                    
+                    # Format the success message
+                    success_msg = (
+                        "**✅ Successfully pasted to Pasty!**\n\n"
+                        f"**📎 View Link:** [Click Here]({paste_url})\n"
+                        f"**📄 Raw Link:** [Click Here]({raw_url})"
+                    )
+                    
+                    await pablo.edit(
+                        success_msg,
+                        disable_web_page_preview=True
+                    )
                 else:
-                    await pablo.edit(f"❌ Failed to paste text: {response.status}")
+                    error_msg = f"❌ Failed to create paste. Status: {response.status}"
+                    await pablo.edit(error_msg)
+                    
     except Exception as e:
         await pablo.edit(f"❌ Error: {str(e)}")
