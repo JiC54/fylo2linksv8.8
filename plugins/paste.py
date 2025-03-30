@@ -31,31 +31,32 @@ async def paste_text(client: Client, message: Message):
         return
 
     # Send the text to Pasty
-    headers = {
-        "Content-Type": "application/json",
-    }
-    
     try:
         async with aiohttp.ClientSession() as session:
             async with session.post(
                 PASTY_API_URL,
-                json={"content": text_to_paste},
-                headers=headers
+                json={"content": text_to_paste}
             ) as response:
-                if response.status == 200:
+                response_text = await response.text()
+                try:
                     paste_data = await response.json()
-                    paste_id = paste_data.get("id")
-                    if paste_id:
+                except:
+                    await pablo.edit(f"❌ Invalid JSON response: {response_text}")
+                    return
+                
+                if response.status == 200:
+                    if "id" in paste_data:
+                        paste_id = paste_data["id"]
                         paste_url = f"https://pasty.lus.pm/{paste_id}"
                         raw_url = f"https://pasty.lus.pm/{paste_id}/raw"
                         await pablo.edit(
-                            f"**✅ Successfully pasted to Pasty!**\n\n"
+                            "**✅ Successfully pasted to Pasty!**\n\n"
                             f"**📎 View Link:** [Click Here]({paste_url})\n"
                             f"**📄 Raw Link:** [Click Here]({raw_url})",
                             disable_web_page_preview=True
                         )
                     else:
-                        await pablo.edit("❌ Failed to get paste ID from response")
+                        await pablo.edit(f"❌ No paste ID in response: {paste_data}")
                 else:
                     await pablo.edit(f"❌ API request failed with status {response.status}")
     except Exception as e:
