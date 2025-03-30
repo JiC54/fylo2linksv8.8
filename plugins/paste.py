@@ -30,34 +30,25 @@ async def paste_text(client: Client, message: Message):
         await pablo.edit("Reply to a message containing text or a document to paste it to Pasty.")
         return
 
-    # Send the text to Pasty
     try:
         async with aiohttp.ClientSession() as session:
             async with session.post(
                 PASTY_API_URL,
                 json={"content": text_to_paste}
             ) as response:
-                response_text = await response.text()
-                try:
-                    paste_data = await response.json()
-                except:
-                    await pablo.edit(f"❌ Invalid JSON response: {response_text}")
-                    return
-                
                 if response.status == 200:
+                    paste_data = await response.json()
                     if "id" in paste_data:
                         paste_id = paste_data["id"]
                         paste_url = f"https://pasty.lus.pm/{paste_id}"
-                        raw_url = f"https://pasty.lus.pm/{paste_id}/raw"
                         await pablo.edit(
-                            "**✅ Successfully pasted to Pasty!**\n\n"
-                            f"**📎 View Link:** [Click Here]({paste_url})\n"
-                            f"**📄 Raw Link:** [Click Here]({raw_url})",
+                            f"**✅ Successfully pasted!**\n\n"
+                            f"**🔗 Link:** [Click Here]({paste_url})",
                             disable_web_page_preview=True
                         )
                     else:
-                        await pablo.edit(f"❌ No paste ID in response: {paste_data}")
+                        await pablo.edit("❌ Failed to get paste ID from response")
                 else:
-                    await pablo.edit(f"❌ API request failed with status {response.status}")
+                    await pablo.edit(f"❌ Failed to paste text: {response.status}")
     except Exception as e:
         await pablo.edit(f"❌ Error: {str(e)}")
