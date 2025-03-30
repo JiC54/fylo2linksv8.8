@@ -3,23 +3,56 @@ import os
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
-# API endpoints based on https://github.com/lus/pasty/blob/master/API.md
+# API endpoints
 PASTY_BASE_URL = "https://pasty.lus.pm"
-PASTY_API_URL = f"{PASTY_BASE_URL}/api/v1/pastes"
+PASTY_API_URL = PASTY_BASE_URL  # Using base URL
+
+# Headers
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36",
+    "Content-Type": "application/json",
+}
+
+async def p_paste(text, extension=None):
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.post(f"{PASTY_API_URL}/api/v1/pastes", json={"content": text}, headers=headers) as response:
+                if response.status == 200:
+                    data = await response.json()
+                    paste_id = data.get("id")
+                    if paste_id:
+                        purl = f"{PASTY_BASE_URL}/{paste_id}"
+                        raw_url = f"{purl}/raw"
+                        return {
+                            "url": purl,
+                            "raw": raw_url,
+                            "bin": "Pasty",
+                        }
+                    else:
+                        return {"error": "Unable to retrieve paste ID"}
+                else:
+                    return {"error": f"API request failed with status {response.status}"}
+    except Exception as e:
+        return {"error": str(e)}
 
 @Client.on_message(filters.command("paste") & filters.private)
-async def paste_text(client: Client, message: Message):
+async def pasty(client: Client, message: Message):
     pablo = await message.reply_text("`Please wait...`")
+    text = message.text
+    message_s = text
 
-    # Determine the text to paste
-    if message.reply_to_message:
+    if not text:
+        if not message.reply_to_message:
+            await pablo.edit("`Only text and documents are supported.`")
+            return
+
         if message.reply_to_message.text:
-            text_to_paste = message.reply_to_message.text
+            message_s = message.reply_to_message.text
         elif message.reply_to_message.document:
             file_path = await message.reply_to_message.download()
             try:
                 with open(file_path, "r") as file:
-                    text_to_paste = file.read()
+                    message_s = file.read()
             except Exception as e:
                 await pablo.edit(f"❌ Error reading file: {str(e)}")
                 os.remove(file_path)
@@ -28,32 +61,14 @@ async def paste_text(client: Client, message: Message):
         else:
             await pablo.edit("`Only text and documents are supported.`")
             return
-    else:
-        await pablo.edit("Reply to a message containing text or a document to paste it to Pasty.")
-        return
 
-    try:
-        payload = {
-            "content": text_to_paste
-        }
-        
-        async with aiohttp.ClientSession() as session:
-            async with session.post(PASTY_API_URL, json=payload) as response:
-                paste_data = await response.json()
-                
-                # The API always returns the paste ID in successful response
-                paste_id = paste_data.get("id")
-                if paste_id:
-                    # Construct URLs as per API documentation
-                    paste_url = f"{PASTY_BASE_URL}/{paste_id}"
-                    
-                    await pablo.edit(
-                        f"**✅ Successfully Created Paste!**\n\n"
-                        f"**🔗 Link:** [Click Here]({paste_url})",
-                        disable_web_page_preview=True
-                    )
-                else:
-                    await pablo.edit(f"❌ Failed to create paste: No ID in response")
-                    
-    except Exception as e:
-        await pablo.edit(f"❌ Error: {str(e)}")
+    ext = "py"
+    result = await p_paste(message_s, ext)
+
+    if "error" in result:
+        await pablo.edit(f"❌ Error: {result['error']}")
+    else:
+        p_link = result["url"]
+        p_raw = result["raw"]
+        pasted = f"**✅ Successfully Pasted to Pasty!**\n\n**🔗 Link:** [Click here]({p_link})\n\n**📄 Raw Link:** [Click here]({p_raw})"
+        await pablo.edit(pasted, disable_web_page_preview=True)
