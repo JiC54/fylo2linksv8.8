@@ -33,39 +33,27 @@ async def paste_text(client: Client, message: Message):
         return
 
     try:
-        # Create paste with proper JSON structure
         payload = {
-            "content": text_to_paste,
-            "title": "Untitled Paste"  # Optional title
+            "content": text_to_paste
         }
         
         async with aiohttp.ClientSession() as session:
             async with session.post(PASTY_API_URL, json=payload) as response:
-                if response.status == 200:
-                    paste_data = await response.json()
+                paste_data = await response.json()
+                
+                # The API always returns the paste ID in successful response
+                paste_id = paste_data.get("id")
+                if paste_id:
+                    # Construct URLs as per API documentation
+                    paste_url = f"{PASTY_BASE_URL}/{paste_id}"
                     
-                    # Extract paste ID and create URLs according to API docs
-                    paste_id = paste_data.get("id")
-                    if paste_id:
-                        view_url = f"{PASTY_BASE_URL}/{paste_id}"
-                        raw_url = f"{PASTY_BASE_URL}/{paste_id}/raw"
-                        
-                        success_msg = (
-                            "**✅ Successfully created paste!**\n\n"
-                            f"**📎 View:** [Click Here]({view_url})\n"
-                            f"**📄 Raw:** [Click Here]({raw_url})\n\n"
-                            f"**🆔 Paste ID:** `{paste_id}`"
-                        )
-                        
-                        await pablo.edit(
-                            success_msg,
-                            disable_web_page_preview=True
-                        )
-                    else:
-                        await pablo.edit("❌ Failed to get paste ID from response")
+                    await pablo.edit(
+                        f"**✅ Successfully Created Paste!**\n\n"
+                        f"**🔗 Link:** [Click Here]({paste_url})",
+                        disable_web_page_preview=True
+                    )
                 else:
-                    error_response = await response.text()
-                    await pablo.edit(f"❌ API Error: {response.status}\n{error_response}")
+                    await pablo.edit(f"❌ Failed to create paste: No ID in response")
                     
     except Exception as e:
         await pablo.edit(f"❌ Error: {str(e)}")
