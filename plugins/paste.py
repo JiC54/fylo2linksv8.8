@@ -1,11 +1,12 @@
-import aiohttp
 import os
+import aiohttp
+import json
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
 # API endpoints
 PASTY_BASE_URL = "https://pasty.lus.pm"
-PASTY_API_URL = PASTY_BASE_URL  # Using base URL
+PASTY_API_URL = f"{PASTY_BASE_URL}/api/v1/pastes"
 
 # Headers
 headers = {
@@ -13,10 +14,10 @@ headers = {
     "Content-Type": "application/json",
 }
 
-async def p_paste(text, extension=None):
+async def p_paste(text):
     try:
         async with aiohttp.ClientSession() as session:
-            async with session.post(f"{PASTY_API_URL}/api/v1/pastes", json={"content": text}, headers=headers) as response:
+            async with session.post(PASTY_API_URL, json={"content": text}, headers=headers) as response:
                 if response.status == 200:
                     data = await response.json()
                     paste_id = data.get("id")
@@ -26,7 +27,6 @@ async def p_paste(text, extension=None):
                         return {
                             "url": purl,
                             "raw": raw_url,
-                            "bin": "Pasty",
                         }
                     else:
                         return {"error": "Unable to retrieve paste ID"}
@@ -38,14 +38,8 @@ async def p_paste(text, extension=None):
 @Client.on_message(filters.command("paste") & filters.private)
 async def pasty(client: Client, message: Message):
     pablo = await message.reply_text("`Please wait...`")
-    text = message.text
-    message_s = text
-
-    if not text:
-        if not message.reply_to_message:
-            await pablo.edit("`Only text and documents are supported.`")
-            return
-
+    
+    if message.reply_to_message:
         if message.reply_to_message.text:
             message_s = message.reply_to_message.text
         elif message.reply_to_message.document:
@@ -61,9 +55,11 @@ async def pasty(client: Client, message: Message):
         else:
             await pablo.edit("`Only text and documents are supported.`")
             return
+    else:
+        await pablo.edit("Reply to a message containing text or a document to paste.")
+        return
 
-    ext = "py"
-    result = await p_paste(message_s, ext)
+    result = await p_paste(message_s)
 
     if "error" in result:
         await pablo.edit(f"❌ Error: {result['error']}")
