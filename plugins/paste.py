@@ -3,7 +3,9 @@ import os
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
-PASTY_API_URL = "https://pasty.lus.pm/api/v1/pastes"
+# API endpoints based on https://github.com/lus/pasty/blob/master/API.md
+PASTY_BASE_URL = "https://pasty.lus.pm"
+PASTY_API_URL = f"{PASTY_BASE_URL}/api/v1/pastes"
 
 @Client.on_message(filters.command("paste") & filters.private)
 async def paste_text(client: Client, message: Message):
@@ -31,33 +33,39 @@ async def paste_text(client: Client, message: Message):
         return
 
     try:
+        # Create paste with proper JSON structure
+        payload = {
+            "content": text_to_paste,
+            "title": "Untitled Paste"  # Optional title
+        }
+        
         async with aiohttp.ClientSession() as session:
-            async with session.post(
-                PASTY_API_URL,
-                json={"content": text_to_paste}
-            ) as response:
-                paste_data = await response.json()
-                
-                # Check if we have the required fields
-                if response.status == 200 and "id" in paste_data:
-                    paste_id = paste_data["id"]
-                    paste_url = f"https://pasty.lus.pm/{paste_id}"
-                    raw_url = f"{paste_url}/raw"
+            async with session.post(PASTY_API_URL, json=payload) as response:
+                if response.status == 200:
+                    paste_data = await response.json()
                     
-                    # Format the success message
-                    success_msg = (
-                        "**✅ Successfully pasted to Pasty!**\n\n"
-                        f"**📎 View Link:** [Click Here]({paste_url})\n"
-                        f"**📄 Raw Link:** [Click Here]({raw_url})"
-                    )
-                    
-                    await pablo.edit(
-                        success_msg,
-                        disable_web_page_preview=True
-                    )
+                    # Extract paste ID and create URLs according to API docs
+                    paste_id = paste_data.get("id")
+                    if paste_id:
+                        view_url = f"{PASTY_BASE_URL}/{paste_id}"
+                        raw_url = f"{PASTY_BASE_URL}/{paste_id}/raw"
+                        
+                        success_msg = (
+                            "**✅ Successfully created paste!**\n\n"
+                            f"**📎 View:** [Click Here]({view_url})\n"
+                            f"**📄 Raw:** [Click Here]({raw_url})\n\n"
+                            f"**🆔 Paste ID:** `{paste_id}`"
+                        )
+                        
+                        await pablo.edit(
+                            success_msg,
+                            disable_web_page_preview=True
+                        )
+                    else:
+                        await pablo.edit("❌ Failed to get paste ID from response")
                 else:
-                    error_msg = f"❌ Failed to create paste. Status: {response.status}"
-                    await pablo.edit(error_msg)
+                    error_response = await response.text()
+                    await pablo.edit(f"❌ API Error: {response.status}\n{error_response}")
                     
     except Exception as e:
         await pablo.edit(f"❌ Error: {str(e)}")
